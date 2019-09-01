@@ -11,18 +11,29 @@
     <title>About</title>
     <link href="~/Content/bootstrap.css" rel="stylesheet">
     <link href="~/Content/site.css" rel="stylesheet">
+    <style>
+        p {
+            font-size : 16px;
+        }
+    </style>
 </head>
 <body>
     @{
         Html.RenderPartial("NavigationBar");
     }
-    <div>
-        <p>
-            Cp-editorial is a platform for competitive programmers.
-        </p>
-        <p>
-            Here programmers can post an editorial of a problem they have solved and earn reputation points.
-        </p>
+    <div style="padding-top : 20px">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <p>
+                Cp-Editorial is a platform for programmers who are interested in competitive programming.
+            </p>
+            <p>
+                Our aim is to help the competitive programmers through this platform. In this platform
+                anyone can post editorail of a problem they have solved. So, the person who has failed
+                to solve that problem can be benefitted by reading that post.
+            </p>
+        </div>
+        <div class="col-md-3" />
     </div>
 </body>
 </html>
