@@ -1,6 +1,18 @@
-﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
+﻿/* :: Import Fonts */
+@import url("https://fonts.googleapis.com/css?family=Ubuntu:300,400,500,700|Work+Sans:300,400,500,600,700");
+/* :: Import All CSS */
+@import url(bootstrap.min.css);
+@import url(animate.css);
+@import url(owl.carousel.css);
+@import url(magnific-popup.css);
+@import url(font-awesome.min.css);
+@import url(themify-icons.css);
+@import url(style.css);
+
+
+body {
+    /*padding-top: 50px;
+    padding-bottom: 20px;*/
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -17,8 +29,8 @@
 }
 
 /* Set width on the form input elements since they're 100% wide by default */
-input,
+/*input,
 select,
 textarea {
     max-width: 280px;
-}
+}*/

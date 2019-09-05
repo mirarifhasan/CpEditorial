@@ -1,7 +1,46 @@
-﻿@{
-    ViewBag.Title = "About";
+﻿
+@{
+    Layout = null;
 }
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
 
-<p>Use this area to provide additional information.</p>
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>About</title>
+    <link href="~/Content/bootstrap.css" rel="stylesheet">
+    <link href="~/Content/site.css" rel="stylesheet">
+    <style>
+        p {
+            font-size : 16px;
+        }
+    </style>
+</head>
+<body>
+    @{
+        Html.RenderPartial("NavigationBar");
+    }
+
+    <div class="container" style="margin-top:100px;">
+        <div class="row">
+            <div class="col-md-10" style="margin:auto;">
+                <p>
+                    Cp-Editorial is a platform for programmers who are interested in competitive programming.
+                </p>
+                <p>
+                    Our aim is to help the competitive programmers through this platform. In this platform
+                    anyone can post editorail of a problem they have solved. So, the person who has failed
+                    to solve that problem can be benefitted by reading that post.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    @*Footer*@
+    @{
+        Html.RenderPartial("Footer");
+    }
+
+</body>
+</html>

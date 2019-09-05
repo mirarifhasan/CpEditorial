@@ -1,19 +1,44 @@
-﻿<nav class="navbar navbar-inverse">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="#">Cp-Editorial</a>
-        </div>
-        <ul class="nav navbar-nav">
-            <li><a href="/HomePage/Index">Home</a></li>
-            <li><a href="">Post</a></li>
-            <li><a href="#">Group</a></li>
-            <li><a href="#">Account</a></li>
-            <li><a href="/HomePage/About">About</a></li>
-            <li><a href="/HomePage/Contact">Contact</a></li>
-        </ul>
-        <div style="padding : 10px 0px 10px 50px">
-            <input type="text" class="form-control" placeholder="search" />
+﻿<!-- ***** Header Area Start ***** -->
+<header class="header-area sticky">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <nav class="navbar navbar-expand-lg">
+                    <!-- Logo -->
+                    <a class="navbar-brand" href="/Home/Index"><img src="~/Image/logo.png" alt="CP-Editorial"></a>
+                    <!-- Navbar Toggler -->
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#worldNav" aria-controls="worldNav" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                    <!-- Navbar -->
+                    <div class="collapse navbar-collapse" id="worldNav">
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" href="~/Home/Index">Home <span class="sr-only">(current)</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Post</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Group</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Account</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="~/Home/Contact">Contact</a>
+                            </li>
+                        </ul>
+                        <!-- Search Form  -->
+                        <div id="search-wrapper">
+                            <form action="#">
+                                <input type="text" id="search" placeholder="Search something...">
+                                <div id="close-icon"></div>
+                                <input class="d-none" type="submit" value="">
+                            </form>
+                        </div>
+                    </div>
+                </nav>
+            </div>
         </div>
     </div>
-</nav>
-
+</header>
+<!-- ***** Header Area End ***** -->
