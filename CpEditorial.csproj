@@ -141,7 +141,6 @@
     <Content Include="Content\magnific-popup.css" />
     <Content Include="Content\owl.carousel.css" />
     <Content Include="Content\signup.css" />
-    <Content Include="Content\style.css" />
     <Content Include="Content\themify-icons.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
