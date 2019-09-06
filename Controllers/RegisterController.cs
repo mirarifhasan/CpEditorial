@@ -6,24 +6,23 @@ using System.Web.Mvc;
 
 namespace CpEditorial.Controllers
 {
-    public class HomeController : Controller
+    public class RegisterController : Controller
     {
-        // GET: HomePage
+        // GET: Register
         public ActionResult Index()
         {
             return View();
         }
-
-        public ActionResult About()
+        public ActionResult LogIn()
         {
             return View();
         }
 
-        public ActionResult Contact()
+        public ActionResult SignUp()
         {
             return View();
         }
 
-     
+
     }
 }
