@@ -8,32 +8,69 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>Post an item</title>
-    <link href="/Content/bootstrap.css" rel="stylesheet">
-    <link href="/Content/site.css" rel="stylesheet">
-
+    <title>Post an editorial</title>
+    <link href="~/Content/bootstrap.css" rel="stylesheet">
+    <link href="~/Content/Site.css" rel="stylesheet">
+    <style>
+        
+    </style>
 </head>
 <body>
-    <div class="container"> 
-        <div class="col-md-3">
-            Add the left column here
-        </div>
+    @{
+        Html.RenderPartial("NavigationBar");
+        /* Note to myself: header font: 40px, text font: 21px*/
+    }
+    <div class="row" style="margin-top: 50px;">
+        <!--
+        Each post has three parts 
+            1) rephrasing the question: optional part. users will state the question in their own language.
+            2) quick explanation: main and compulsory part. user will give a summary of their solution
+            3) detailed explanation: optional part. for more complicated problems, user will add a detailed explanation of the solution.
+        -->
+        <div class="col-md-3"></div>
         <div class="col-md-6">
+            <h2>
+                Post an editorial
+            </h2>
+            <p>
+                <b>We are glad to see you here!</b>
+                Posting a good editorial can increase your karma point.
+                However, if you are confused about how you can write a great editorial,
+                you can follow
+                <a href="https://discuss.codechef.com/t/what-makes-a-good-codechef-editorial/2774">this blog</a>.
+            </p>
             <form>
                 <div class="form-group">
-                    <label for="rephrase-quesiton">Please rephrase the question (optional)</label>
-                    <textarea class="form-control input-lg" rows="5" id="rephrased_question"></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="quick-explanaiton">Provide a quick explanation of the solution (mendatory)</label>
-                    <textarea class="form-control input-lg" rows="5" id="quick_explanation"></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="detailed-explanation">Provide more details of your explanation (optional)</label>
-                    <textarea class="form-control input-lg" rows="5" id="detailed_explanation"></textarea>
+                    <p>
+                        <b>Would you like to rephrase the question? </b>
+                        Problem statements often contains some tricky lines that can confuse
+                        anyone and also some minor requirements that many people miss. And so it will be
+                        much easier for readers to understand your solution if you state the problem statement
+                        in simpler and straightforward language and/or point out the minor requirements that
+                        people can miss. You can skip this part if the question is already simple enough.
+                    </p>
+                    <textarea class="form-control" id="rephrasedQuestion" rows="5"></textarea>
+
+                    <p>
+                        <b>Give a quick explanation of your solution</b>
+                        It is always nice to see the entire solution at one stretch.
+                        It gives reader an overview of what to do, where they might have failed,
+                        how to get the whole thing, all in one picture. However, if the solution
+                        is small enough, you can write just the solution in this section.
+                    </p>
+                    <textarea class="form-control" id="quickExplanation" rows="7"></textarea>
+
+                    <p>
+                        <b>Give a detailed explanation if necessary</b>
+                        If quick explanation of the solution is not enough, use this section
+                        to provide the detailed explanation of your solution.
+                    </p>
+                    <textarea class="form-control" id="detailedExplanation" rows="9"></textarea>
+                    <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
             </form>
         </div>
+        <div class="col-md-3"></div>
     </div>
 </body>
 </html>
