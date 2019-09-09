@@ -39,8 +39,8 @@ h6 {
 
 p {
     color: #8d8d8d;
-    font-size: 14px;
-    line-height: 1.4;
+    /*font-size: 14px;*/
+    /*line-height: 1.4;*/
 }
 
 a {
@@ -756,7 +756,7 @@ img {
     margin-bottom: 30px;
 }
 
-.contact-form button.world-btn,
+.contact-form button.world-btn, .postEditorialForm button.world-btn,
 .post-a-comment-area button.world-btn {
     border-color: #ffffff;
     background-color: #8d8d8d;
@@ -822,8 +822,8 @@ img {
 /* Form Active State */
 input:focus ~ label,
 textarea:focus ~ label,
-input:valid ~ label,
-textarea:valid ~ label {
+input:valid ~ label/*,
+textarea:valid ~ label*/ {
     top: -15px;
     font-size: 12px;
 }
@@ -868,6 +868,17 @@ textarea:focus ~ .highlight {
     }
 }
 /*Animation End*/
+
+
+.postEditorial p a{
+    color:rebeccapurple;
+}
+
+.postEditorialForm label {
+    color:#8d8d8d;
+    font-weight:600;
+    margin-top:40px;
+}
 
 
 /* Footer Area CSS Start*/
