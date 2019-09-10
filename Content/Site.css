@@ -104,6 +104,10 @@ img {
     max-width: 100%;
 }
 
+.pl-0 {
+    padding-left: 0px;
+}
+
 .mt-15 {
     margin-top: 15px;
 }
@@ -760,6 +764,14 @@ img {
 .post-a-comment-area button.world-btn {
     border-color: #ffffff;
     background-color: #8d8d8d;
+    color: #ffffff;
+    margin-top: 40px;
+}
+
+.contact-form button.world-btn:hover, .postEditorialForm button.world-btn:hover,
+.post-a-comment-area button.world-btn:hover {
+    border-color: #ffffff;
+    background-color: #000000;
     color: #ffffff;
     margin-top: 40px;
 }

@@ -11,8 +11,9 @@
     <title>Post an editorial</title>
     <link href="~/Content/bootstrap.css" rel="stylesheet">
     <link href="~/Content/Site.css" rel="stylesheet">
+    <script src="https://cdn.ckeditor.com/4.12.1/standard/ckeditor.js"></script>
+
     <style>
-        
     </style>
 </head>
 <body>
@@ -43,7 +44,57 @@
                 <form>
                     <div class="postEditorialForm form-group">
 
-                        <label>Would you like to rephrase the question? </label>
+                        @*Problen Name & Online judge selection*@
+                        <div style="display:flex;">
+                            <div class="pl-0 col-md-6">
+                                <label for="problemName">Problem Name</label> <br />
+                                <input class="form-control" id="problemName" type="text" required>
+                            </div>
+
+                            <div class="pl-0 col-md-6">
+                                <label for="ojSite">Online Judge</label> <br />
+                                <select class="form-control" id="ojSite" name="OJSite">
+                                    <option value="" disabled selected>Select OJ Name</option>
+                                    <option value="volvo">UVa</option>
+                                    <option value="saab">Hacker Rank</option>
+                                    @*it will render from database*@
+                                </select>
+                            </div>
+                        </div>
+
+                        @* Problem URL & Tags *@
+                        <div style="display:flex;">
+                            <div class="pl-0 col-md-6">
+                                <label for="problemURL">Problem URL</label> <br />
+                                <input class="form-control" id="problemURL" type="text" required>
+                            </div>
+
+                            @* Tags *@
+                            <div style="display:flex;">
+                                <div class="pl-0 col-md-6">
+                                    <label for="tag1">Tag 1 (Required)</label> <br />
+                                    <select class="form-control" id="tag1" name="OJSite" required>
+                                        <option value="" disabled selected>Select problem type</option>
+                                        <option value="volvo">String</option>
+                                        <option value="saab">Tree</option>
+                                        @*it will render from database*@
+                                    </select>
+                                </div>
+
+                                <div class="pl-0 col-md-6">
+                                    <label for="tag2">Tag 2</label> <br />
+                                    <select class="form-control" id="tag2" name="OJSite">
+                                        <option value="" disabled selected>Select problem type</option>
+                                        <option value="volvo">String</option>
+                                        <option value="saab">Tree</option>
+                                        @*it will render from database*@
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        @* Rephrase Question *@
+                        <label for="QDetail">Would you like to rephrase the question? </label>
                         <p>
                             Problem statements often contains some tricky lines that can confuse
                             anyone and also some minor requirements that many people miss. And so it will be
@@ -53,6 +104,7 @@
                         </p>
                         <textarea class="form-control" id="rephrasedQuestion" rows="5"></textarea>
 
+                        @* Explanation of solution *@
                         <label>Give a quick explanation of your solution</label>
                         <p>
                             It is always nice to see the entire solution at one stretch.
@@ -62,12 +114,16 @@
                         </p>
                         <textarea class="form-control" id="quickExplanation" rows="7"></textarea>
 
+                        @* Extra details *@
                         <label>Give a detailed explanation if necessary</label>
                         <p>
                             If quick explanation of the solution is not enough, use this section
                             to provide the detailed explanation of your solution.
                         </p>
                         <textarea class="form-control" id="detailedExplanation" rows="9"></textarea>
+
+                        
+
                         <button type="submit" class="btn world-btn">Submit</button>
                     </div>
                 </form>
