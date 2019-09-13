@@ -95,18 +95,18 @@
 
                         @* Rephrase Question *@
                         <label for="rephrasedQuestion">Would you like to rephrase the question? </label>
-                        <p>
-                            Problem statements often contains some tricky lines that can confuse
-                            anyone and also some minor requirements that many people miss. And so it will be
-                            much easier for readers to understand your solution if you state the problem statement
-                            in simpler and straightforward language and/or point out the minor requirements that
+                        <a onclick="hideFunction('hideRQOption', 'hideRQ')" id="hideRQOption" href="#hideRQOption">[Details about question]</a>
+                        <p id="hideRQ" style="display:none;">
+                            Problem statements often contains some tricky lines that can confuse anyone and also some minor requirements that many people miss. And so it will be
+                            much easier for readers to understand your solution if you state the problem statement in simpler and straightforward language and/or point out the minor requirements that
                             people can miss. You can skip this part if the question is already simple enough.
                         </p>
                         <textarea class="form-control" id="rephrasedQuestion" rows="5"></textarea>
 
                         @* Explanation of solution *@
                         <label for="quickExplanation">Give a quick explanation of your solution</label>
-                        <p>
+                        <a onclick="hideFunction('hideESOption', 'hideES')" id="hideESOption" href="#hideESOption">[Details about question]</a>
+                        <p id="hideES" style="display:none;">
                             It is always nice to see the entire solution at one stretch.
                             It gives reader an overview of what to do, where they might have failed,
                             how to get the whole thing, all in one picture. However, if the solution
@@ -116,13 +116,12 @@
 
                         @* Extra details *@
                         <label for="detailedExplanation">Give a detailed explanation if necessary</label>
-                        <p>
+                        <a onclick="hideFunction('hideDEOption', 'hideDE')" id="hideDEOption" href="#hideDEOption">[Details about question]</a>
+                        <p id="hideDE" style="display:none;">
                             If quick explanation of the solution is not enough, use this section
                             to provide the detailed explanation of your solution.
                         </p>
                         <textarea class="form-control" id="detailedExplanation" rows="9"></textarea>
-
-                        
 
                         <button type="submit" class="btn world-btn">Submit</button>
                     </div>
@@ -135,6 +134,26 @@
     @{
         Html.RenderPartial("Footer");
     }
+
+
+    <script>
+        function hideFunction(IDOption, textID)
+        {
+            var x = document.getElementById(textID);
+
+            if (x.style.display === "none") {
+                x.style.display = "block";
+                document.getElementById(IDOption).textContent = "[Hide about question]";
+            }
+            else {
+                x.style.display = "none";
+                document.getElementById(IDOption).textContent = "[View about question]";
+            }
+            var x = document.getElementById(IDOption);
+            x.style.color = "#8d8d8d";
+        }
+
+    </script>
 
 </body>
 </html>

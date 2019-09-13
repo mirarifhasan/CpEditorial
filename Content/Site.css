@@ -890,8 +890,11 @@ textarea:focus ~ .highlight {
 /*Animation End*/
 
 
-.postEditorial p a{
-    color:rebeccapurple;
+.postEditorial p a {
+    color: #535554;
+}
+.postEditorialForm a:hover{
+    color: black;
 }
 
 .postEditorialForm label {
