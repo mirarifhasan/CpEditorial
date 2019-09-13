@@ -785,24 +785,30 @@ img {
     margin-bottom: 30px;
 }*/
 
-    .group input,
-    .group textarea {
-        font-size: 14px;
-        /*padding: 10px;*/
-        display: block;
-        width: 100%;
-        /*height: 35px;*/
-        border: none;
-        border-bottom: 2px solid;
-        border-color: #f1f1f1;
-    }
+.group input, .postEditorialForm input, .postEditorialForm textarea, .postEditorialForm select,
+.group textarea {
+    /*font-size: 14px;*/
+    padding: 5px;
+    display: block;
+    width: 100%;
+    /*height: 35px;*/
+    /*border: none;*/
+    border-radius: 5px;
+    border: 2px solid;
+    border-color: #f1f1f1;
+}
 
-        .group input:focus,
-        .group textarea:focus {
-            outline: none;
-            box-shadow: none;
-            border-color: #534B52;
-        }
+    .group input:focus,
+    .postEditorialForm input:focus,
+    .postEditorialForm textarea:focus,
+    .postEditorialForm select:focus,
+    .group textarea:focus {
+        outline: none;
+        box-shadow: none;
+        border-radius: 5px;
+        border: 2px solid;
+        border-color: #979B9A;
+    }
 
     .group label {
         color: #8d8d8d;
