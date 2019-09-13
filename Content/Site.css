@@ -779,19 +779,19 @@ img {
 
 
 /* Form CSS Start*/
-.group {
+/*.group {
     position: relative;
     z-index: 1;
     margin-bottom: 30px;
-}
+}*/
 
     .group input,
     .group textarea {
         font-size: 14px;
-        padding: 10px;
+        /*padding: 10px;*/
         display: block;
         width: 100%;
-        height: 35px;
+        /*height: 35px;*/
         border: none;
         border-bottom: 2px solid;
         border-color: #f1f1f1;
@@ -801,20 +801,22 @@ img {
         .group textarea:focus {
             outline: none;
             box-shadow: none;
+            border-color: #534B52;
         }
 
     .group label {
         color: #8d8d8d;
-        font-size: 14px;
+        margin-top:15px;
+        /*font-size: 14px;
         font-weight: normal;
         position: absolute;
         pointer-events: none;
         left: 0;
         top: 5px;
         transition: 0.5s ease all;
-        font-family: "Ubuntu", sans-serif;
+        font-family: "Ubuntu", sans-serif;*/
     }
-
+    /*
     .group .highlight {
         position: absolute;
         height: 60%;
@@ -824,21 +826,21 @@ img {
         pointer-events: none;
         opacity: 0.5;
     }
-
+    
     .group textarea {
         min-height: 90px;
-    }
+    }*/
 /* Form CSS End*/
 
 
 /* Form Active State */
-input:focus ~ label,
+/*input:focus ~ label,
 textarea:focus ~ label,
-input:valid ~ label/*,
-textarea:valid ~ label*/ {
+input:valid ~ label,
+textarea:valid ~ label {
     top: -15px;
     font-size: 12px;
-}
+}*/
 
 input:focus ~ .highlight,
 textarea:focus ~ .highlight {
@@ -849,7 +851,7 @@ textarea:focus ~ .highlight {
 /* Animations */
 @-webkit-keyframes inputHighlighter {
     from {
-        background-color: #0000ff;
+        background-color: #EFF2F1;
     }
 
     to {
@@ -860,7 +862,7 @@ textarea:focus ~ .highlight {
 
 @-moz-keyframes inputHighlighter {
     from {
-        background-color: #0000ff;
+        background-color: #EFF2F1;
     }
 
     to {
@@ -871,7 +873,7 @@ textarea:focus ~ .highlight {
 
 @keyframes inputHighlighter {
     from {
-        background-color: #0000ff;
+        background-color: #EFF2F1;
     }
 
     to {
