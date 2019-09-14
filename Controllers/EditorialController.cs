@@ -13,5 +13,10 @@ namespace CpEditorial.Controllers
         {
             return View();
         }
+
+        public ActionResult ViewEditorial()
+        {
+            return View();
+        }
     }
 }

@@ -145,6 +145,7 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Image\Logo\logo.png" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -216,10 +217,10 @@
     <Content Include="Views\Shared\Footer.cshtml" />
     <Content Include="Views\Register\LogIn.cshtml" />
     <Content Include="Views\Register\SignUp.cshtml" />
+    <Content Include="Views\Editorial\ViewEditorial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Image\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
