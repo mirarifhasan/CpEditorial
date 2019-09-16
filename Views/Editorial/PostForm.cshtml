@@ -1,0 +1,161 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Post an editorial</title>
+    <link href="~/Content/bootstrap.css" rel="stylesheet">
+    <link href="~/Content/Site.css" rel="stylesheet">
+    <script src="https://cdn.ckeditor.com/4.12.1/standard/ckeditor.js"></script>
+
+    <style>
+    </style>
+</head>
+<body>
+    @{
+        Html.RenderPartial("NavigationBar");
+        /* Note to myself: header font: 40px, text font: 21px*/
+    }
+
+    <div class="container">
+        <div class="row" style="margin: 90px 0;">
+            <!--
+            Each post has three parts
+                1) rephrasing the question: optional part. users will state the question in their own language.
+                2) quick explanation: main and compulsory part. user will give a summary of their solution
+                3) detailed explanation: optional part. for more complicated problems, user will add a detailed explanation of the solution.
+            -->
+            <div class="postEditorial col-md-10" style="margin:0 auto;">
+                <h2>
+                    Post an editorial
+                </h2>
+                <p>
+                    <b>We are glad to see you here!</b>
+                    Posting a good editorial can improve your rating.
+                    However, if you are confused about how you can write a great editorial,
+                    you can follow
+                    <a href="https://discuss.codechef.com/t/what-makes-a-good-codechef-editorial/2774">this blog</a>.
+                </p>
+                <form>
+                    <div class="postEditorialForm">
+
+                        @*Problen Name & Online judge selection*@
+                        <div style="display:flex;">
+                            <div class="pl-0 col-md-6">
+                                <label for="problemName">Problem Name</label> <br />
+                                <input class="form-control" id="problemName" type="text" required>
+                            </div>
+
+                            <div class="pl-0 col-md-6">
+                                <label for="ojSite">Online Judge</label> <br />
+                                <select class="form-control" id="ojSite" name="OJSite">
+                                    <option value="" disabled selected>Select OJ Name</option>
+                                    <option value="volvo">UVa</option>
+                                    <option value="saab">Hacker Rank</option>
+                                    @*it will render from database*@
+                                </select>
+                            </div>
+                        </div>
+
+                        @* Problem URL & Tags *@
+                        <div style="display:flex;">
+                            <div class="pl-0 col-md-6">
+                                <label for="problemURL">Problem URL</label> <br />
+                                <input class="form-control" id="problemURL" type="text" required>
+                            </div>
+
+                            @* Tags *@
+                            <div style="display:flex;">
+                                <div class="pl-0 col-md-6">
+                                    <label for="tag1">Tag 1 (Required)</label> <br />
+                                    <select class="form-control" id="tag1" name="OJSite" required>
+                                        <option value="" disabled selected>Select problem type</option>
+                                        <option value="volvo">String</option>
+                                        <option value="saab">Tree</option>
+                                        @*it will render from database*@
+                                    </select>
+                                </div>
+
+                                <div class="pl-0 col-md-6">
+                                    <label for="tag2">Tag 2</label> <br />
+                                    <select class="form-control" id="tag2" name="OJSite">
+                                        <option value="" disabled selected>Select problem type</option>
+                                        <option value="volvo">String</option>
+                                        <option value="saab">Tree</option>
+                                        @*it will render from database*@
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        @* Rephrase Question *@
+                        <label for="rephrasedQuestion">Would you like to rephrase the question? </label>
+                        <a onclick="hideFunction('hideRQOption', 'hideRQ')" id="hideRQOption" href="#hideRQOption">More details..</a>
+                        <p id="hideRQ" style="display:none;">
+                            Problem statements often contains some tricky lines that can confuse anyone and it can also have
+                            some minor requirements that many people can miss. And so it will be much easier for readers to 
+                            understand your solution if you state the problem statement in simpler and straightforward language 
+                            and/or point out the minor requirements that people can miss. You can skip this part if the question 
+                            is already simple enough.
+                        </p>
+                        <textarea class="form-control" id="rephrasedQuestion" rows="5"></textarea>
+
+                        @* Explanation of solution *@
+                        <label for="quickExplanation">Give a quick explanation of your solution</label>
+                        <a onclick="hideFunction('hideESOption', 'hideES')" id="hideESOption" href="#hideESOption">More details..</a>
+                        <p id="hideES" style="display:none;">
+                            It is always nice to see the entire solution at one stretch.
+                            It gives reader an overview of what to do, where they might have failed,
+                            how to get the whole thing, all in one picture. However, if the solution
+                            is small enough, you can write just the solution in this section.
+                        </p>
+                        <textarea class="form-control" id="quickExplanation" rows="7"></textarea>
+
+                        @* Extra details *@
+                        <label for="detailedExplanation">Give a detailed explanation if necessary</label>
+                        <a onclick="hideFunction('hideDEOption', 'hideDE')" id="hideDEOption" href="#hideDEOption">More details..</a>
+                        <p id="hideDE" style="display:none;">
+                            If your solution is quite large, use this section
+                            to provide the detailed explanation of your solution.
+                        </p>
+                        <textarea class="form-control" id="detailedExplanation" rows="9"></textarea>
+
+                        <button type="submit" class="btn world-btn">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    @*Footer*@
+    @{
+        Html.RenderPartial("Footer");
+    }
+
+
+    <script>
+        function hideFunction(IDOption, textID)
+        {
+            var x = document.getElementById(textID);
+
+            if (x.style.display === "none") {
+                x.style.display = "block";
+                document.getElementById(IDOption).textContent = "[Hide details..]";
+            }
+            else {
+                x.style.display = "none";
+                document.getElementById(IDOption).textContent = "[More details..]";
+            }
+            var x = document.getElementById(IDOption);
+            x.style.color = "#8d8d8d";
+        }
+
+    </script>
+
+</body>
+</html>

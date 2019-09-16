@@ -6,10 +6,15 @@ using System.Web.Mvc;
 
 namespace CpEditorial.Controllers
 {
-    public class PostController : Controller
+    public class EditorialController : Controller
     {
         // GET: Post
-        public ActionResult Index()
+        public ActionResult PostForm()
+        {
+            return View();
+        }
+
+        public ActionResult ViewEditorial()
         {
             return View();
         }
