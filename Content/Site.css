@@ -946,10 +946,9 @@ textarea:focus ~ .highlight {
             font-size: 14px;
             color: #959595;
         }
-/*footer area End*/
+/*Footer area End*/
 
-/*Sign in*/
-
+/* Sign in start */
 .main {
     background-color: #FFFFFF;
     width: 400px;
@@ -996,33 +995,13 @@ textarea:focus ~ .highlight {
     font-family: 'Ubuntu', sans-serif;
 }
 
-form.form1 {
+.form1 {
     padding-top: 40px;
 }
 
-.pass {
-    width: 76%;
-    color: rgb(38, 50, 56);
-    font-weight: 700;
-    font-size: 14px;
-    letter-spacing: 1px;
-    background: rgba(136, 126, 126, 0.04);
-    padding: 10px 20px;
-    border: none;
-    border-radius: 20px;
-    outline: none;
-    box-sizing: border-box;
-    border: 2px solid rgba(0, 0, 0, 0.02);
-    margin-bottom: 50px;
-    margin-left: 46px;
-    text-align: center;
-    margin-bottom: 27px;
-    font-family: 'Ubuntu', sans-serif;
+.un:focus {
+    border: 2px solid rgba(0, 0, 0, 0.18);
 }
-
-    .un:focus, .pass:focus {
-        border: 2px solid rgba(0, 0, 0, 0.18) !important;
-    }
 
 .submit {
     cursor: pointer;
@@ -1046,12 +1025,15 @@ form.form1 {
     padding-top: 15px;
 }
 
+.forgot a:hover{
+    color: black;
+}
+
 @media (max-width: 600px) {
     .mainSignUp {
         border-radius: 0px;
     }
 }
-
 
 @media (max-width: 600px) {
     .main {
