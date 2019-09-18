@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CpEditorial.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -24,6 +25,12 @@ namespace CpEditorial.Controllers
             return View();
         }
 
+
+        [HttpPost]
+        public ActionResult AddContact(ContactModel contactModel)
+        {
+            return RedirectToAction("Index", "Home");
+        }
      
     }
 }
