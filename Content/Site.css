@@ -8,7 +8,7 @@
 @import url(magnific-popup.css);
 @import url(font-awesome.min.css);
 @import url(themify-icons.css);
-
+@import url(bootstrap.css);
 
 /* :: Base CSS Start*/
 * {
@@ -60,7 +60,7 @@ a {
         outline: none;
         font-size: 14px;
         font-weight: 400;
-        color: #ffffff;
+        color: #000000;
     }
 
 @-webkit-keyframes world {
@@ -200,7 +200,7 @@ img {
     height: 800px !important;
 }
 
-.mfp-wrap {
+/*.mfp-wrap {
     z-index: 100000;
 }
 
@@ -215,7 +215,7 @@ img {
     text-align: center;
     border: 2px solid #ffffff;
     border-radius: 50%;
-}
+}*/
 
 #scrollUp {
     background-color: #232323;
@@ -303,24 +303,18 @@ img {
         background-color: rgba(0, 0, 0, 0.7);
     }
 
-.world-btn {
-    position: relative;
-    z-index: 1;
+/* Button style for contact page */
+/*.world-btn {
     padding: 0 25px;
-    width: auto;
-    height: 35px;
-    border: 1px solid;
-    border-color: #d7d7d7;
     font-size: 14px;
     border-radius: 50px;
-    line-height: 32px;
+    line-height: 35px;
 }
 
     .world-btn:hover, .world-btn:focus {
-        border-color: #ffffff;
-        background-color: #ffffff;
-        color: #ffffff;
-    }
+        background-color: #000000;
+        color: #000000;
+    }*/
 /* :: Base CSS End*/
 
 
@@ -751,31 +745,6 @@ img {
             width: 100%;
         }
 
-        .single-blog-post .post-thumbnail .video-btn {
-            width: 36px;
-            height: 36px;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            z-index: 5;
-            background-color: #ffffff;
-            -webkit-transform: translate(-50%, -50%);
-            transform: translate(-50%, -50%);
-            border-radius: 50%;
-            text-align: center;
-        }
-
-            .single-blog-post .post-thumbnail .video-btn i {
-                -webkit-transition-duration: 500ms;
-                transition-duration: 500ms;
-                line-height: 36px;
-            }
-
-            .single-blog-post .post-thumbnail .video-btn:hover i, .single-blog-post .post-thumbnail .video-btn:focus i {
-                color: #0000ff;
-            }
-
-
     .single-blog-post.post-style-2 {
         margin-bottom: 5px;
     }
@@ -865,24 +834,6 @@ img {
     bottom: 15px;
     z-index: 2;
 }
-
-    .single-blog-post.post-style-3 .post-content .post-tag a {
-        padding: 0 10px;
-        display: inline-block;
-        height: 20px;
-        background-color: #ffffff;
-        text-transform: uppercase;
-        font-size: 10px;
-        color: #0000ff;
-        font-weight: 500;
-        line-height: 20px;
-        letter-spacing: 0.75px;
-    }
-
-        .single-blog-post.post-style-3 .post-content .post-tag a:hover, .single-blog-post.post-style-3 .post-content .post-tag a:focus {
-            background-color: #0000ff;
-            color: #ffffff;
-        }
 
     .single-blog-post.post-style-3 .post-content .headline h5 {
         font-size: 18px;
@@ -1271,21 +1222,28 @@ img {
     margin-bottom: 30px;
 }
 
-.contact-form button.world-btn, .postEditorialForm button.world-btn,
-.post-a-comment-area button.world-btn {
-    border-color: #ffffff;
+.world-btn {
     background-color: #8d8d8d;
     color: #ffffff;
+    padding: 0 25px;
+    font-size: 14px;
+    border-radius: 50px;
+    line-height: 35px;
+}
+
+.contact-form button.world-btn, .postEditorialForm button.world-btn,
+.post-a-comment-area button.world-btn {
     margin-top: 40px;
 }
 
-.contact-form button.world-btn:hover, .postEditorialForm button.world-btn:hover,
-.post-a-comment-area button.world-btn:hover {
-    border-color: #ffffff;
-    background-color: #000000;
-    color: #ffffff;
-    margin-top: 40px;
-}
+    .world-btn:hover {
+        background-color: #000000;
+        color: #ffffff;
+    }
+    .contact-form button.world-btn:hover, .postEditorialForm button.world-btn:hover,
+    .post-a-comment-area button.world-btn:hover {
+        margin-top: 40px;
+    }
 /* Contact Area CSS End*/
 
 
@@ -1404,9 +1362,9 @@ textarea:focus ~ .highlight {
 .postEditorial p a {
     color: #535554;
 }
-.postEditorialForm a:hover{
+/*.postEditorialForm a:hover{
     color: black;
-}
+}*/
 
 .postEditorialForm label {
     color:#8d8d8d;
@@ -1516,7 +1474,7 @@ textarea:focus ~ .highlight {
 
 .sign {
     padding-top: 40px;
-    color: #8C55AA;
+    color: #8d8d8d;
     font-family: 'Ubuntu', sans-serif;
     font-weight: bold;
     font-size: 23px;

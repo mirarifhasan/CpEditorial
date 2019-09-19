@@ -18,4 +18,5 @@ namespace CpEditorial
             BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
     }
+
 }
