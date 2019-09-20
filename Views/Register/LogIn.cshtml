@@ -26,7 +26,8 @@
                     <div class="contact-form form-group">
                         <h4 style="text-align:center;">Login</h4>
                         <!-- Login Form -->
-                        <form>
+                        @using (Html.BeginForm("AddContact", "Home"))
+                        {
                             <div class="row">
                                 <div class="col-12 col-md-12">
                                     <div class="group">
@@ -45,7 +46,7 @@
                                     <button type="submit" class="btn world-btn">Login</button>
                                 </div>
                             </div>
-                        </form>
+                        }
                     </div>
                 </div>
             </div>

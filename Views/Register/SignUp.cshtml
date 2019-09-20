@@ -1,4 +1,4 @@
-﻿
+﻿@model CpEditorial.Models.SignupModel
 @{
     Layout = null;
 }
@@ -9,13 +9,7 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Sign Up</title>
-    <link href="~/Content/bootstrap.css" rel="stylesheet">
     <link href="~/Content/site.css" rel="stylesheet">
-    href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
-    <title>Sign in</title>
-
 
 </head>
 <body>
@@ -33,31 +27,34 @@
                     <div class="contact-form form-group">
                         <h4 style="text-align:center;">Sign Up</h4>
                         <!-- Signup Form -->
-                        @using (Html.BeginForm("AddContact", "Home"))
+                        @using (Html.BeginForm("AddUser", "Register"))
                         {
+                            @Html.AntiForgeryToken()
                             <div class="row">
+                                @Html.ValidationSummary(true, "", new { @class = "text-denger"})
                                 <div class="col-12 col-md-12">
                                     <div class="group">
                                         <label for="name">Name</label>
-                                        <input type="text" name="name" id="name" required>
+                                        @Html.TextBoxFor(m => m.name, new { @class = "form-control", @required = true })
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-12">
                                     <div class="group">
                                         <label for="email">Email</label>
-                                        <input type="email" name="email" id="email" required>
+                                        @Html.TextBoxFor(m => m.email, new { @class = "form-control", @required = true, @type = "email" })
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-12">
                                     <div class="group">
                                         <label for="password">Password</label>
-                                        <input type="password" name="password" id="password" required>
+                                        @Html.TextBoxFor(m => m.password, new { @class = "form-control", @required = true, @type = "password" })
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-12">
                                     <div class="group">
                                         <label for="cpassword">Confirm Password</label>
-                                        <input type="password" name="cpassword" id="cpassword" required>
+                                        @Html.TextBoxFor(m => m.confirmPassword, new { @class = "form-control", @required = true, @type = "password" })
+                                        @Html.ValidationMessageFor(m => m.confirmPassword, "", new { @class = "text-danger"})
                                     </div>
                                 </div>
 
@@ -77,6 +74,15 @@
     @{
         Html.RenderPartial("Footer");
     }
+
+
+    @if (ViewBag.Message != null)
+    {
+        <script>
+            alert("@ViewBag.Message");
+        </script>
+    }
+
 </body>
 </html>
 
