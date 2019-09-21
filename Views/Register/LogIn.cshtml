@@ -1,4 +1,5 @@
-﻿@{
+﻿@model CpEditorial.Models.UserModel
+@{
     Layout = null;
 }
 
@@ -26,19 +27,19 @@
                     <div class="contact-form form-group">
                         <h4 style="text-align:center;">Login</h4>
                         <!-- Login Form -->
-                        @using (Html.BeginForm("AddContact", "Home"))
+                        @using (Html.BeginForm("VerifyUser", "Register"))
                         {
                             <div class="row">
                                 <div class="col-12 col-md-12">
                                     <div class="group">
                                         <label for="email">Email</label>
-                                        <input type="email" name="email" id="email" required>
+                                        @Html.TextBoxFor(m => m.email, new { @class = "form-control", @required = true, @type = "email" })
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-12">
                                     <div class="group">
                                         <label for="password">Password</label>
-                                        <input type="password" name="password" id="password" required>
+                                        @Html.TextBoxFor(m => m.password, new { @class = "form-control", @required = true, @type = "password" })
                                     </div>
                                 </div>
 
@@ -58,6 +59,14 @@
     @{
         Html.RenderPartial("Footer");
     }
+
+    @if (ViewBag.Error != null)
+    {
+        <script>
+            alert("@ViewBag.Error");
+        </script>
+    }
+
 </body>
 </html>
 

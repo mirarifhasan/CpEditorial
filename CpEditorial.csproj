@@ -129,6 +129,7 @@
     <Compile Include="Models\ContactModel.cs" />
     <Compile Include="Models\DBHelper.cs" />
     <Compile Include="Models\SignupModel.cs" />
+    <Compile Include="Models\UserModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
