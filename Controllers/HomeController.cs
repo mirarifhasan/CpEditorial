@@ -10,6 +10,8 @@ namespace CpEditorial.Controllers
 {
     public class HomeController : Controller
     {
+        string connectionString = new DBHelper().getConnectionString();
+
         // GET: HomePage
         public ActionResult Index()
         {
@@ -25,13 +27,10 @@ namespace CpEditorial.Controllers
         {
             return View();
         }
-
-
+        
         [HttpPost]
         public ActionResult AddContact(ContactModel contactModel)
         {
-            string connectionString = new DBHelper().getConnectionString();
-
             using (var sqlCon = new SqlConnection(connectionString))
             {
                 sqlCon.Open();

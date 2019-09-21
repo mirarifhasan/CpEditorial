@@ -24,7 +24,16 @@ namespace CpEditorial.Controllers
 
         public ActionResult SignUp()
         {
+            if (TempData["message"] != null)
+                ViewBag.Error = TempData["message"].ToString();
             return View();
+        }
+
+        // It execute/call from AddUser method, when Password and ConfirmPassword will not match
+        public ActionResult Verify()
+        {
+            TempData["message"] = "Password not match";
+            return RedirectToAction("SignUp", "Register");
         }
 
         [HttpPost]
@@ -32,6 +41,9 @@ namespace CpEditorial.Controllers
         {
             using (var sqlCon = new SqlConnection(connectionString))
             {
+                if (signupModel.password != signupModel.confirmPassword)
+                    return RedirectToAction("Verify", "Register");
+
                 sqlCon.Open();
                 string query = "INSERT INTO [User] VALUES (@Name, @Email, @Password, '0', 'User')";
                 var sqlCmd = new SqlCommand(query, sqlCon);
@@ -40,7 +52,7 @@ namespace CpEditorial.Controllers
                 sqlCmd.Parameters.AddWithValue("@Password", signupModel.password);
                 sqlCmd.ExecuteNonQuery();
             }
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Home");            
         }
         
     }

@@ -52,9 +52,8 @@
                                 </div>
                                 <div class="col-12 col-md-12">
                                     <div class="group">
-                                        <label for="cpassword">Confirm Password</label>
+                                        <label for="confirmPassword">Confirm Password</label>
                                         @Html.TextBoxFor(m => m.confirmPassword, new { @class = "form-control", @required = true, @type = "password" })
-                                        @Html.ValidationMessageFor(m => m.confirmPassword, "", new { @class = "text-danger"})
                                     </div>
                                 </div>
 
@@ -76,10 +75,10 @@
     }
 
 
-    @if (ViewBag.Message != null)
+    @if (ViewBag.Error != null)
     {
         <script>
-            alert("@ViewBag.Message");
+            alert("@ViewBag.Error");
         </script>
     }
 
