@@ -23,13 +23,21 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="#">Account</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="~/Register/SignUp">SignUp</a>
-                            </li>
-
-                            <li class="nav-item">
-                                <a class="nav-link" href="~/Register/LogIn">Log In</a>
-                            </li>
+                            @if (Session["userID"] == null)
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link" href="~/Register/SignUp">SignUp</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="~/Register/LogIn">Login</a>
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link" href="~/Register/Logout">Logout</a>
+                                </li>
+                            }
                             <li class="nav-item">
                                 <a class="nav-link" href="~/Home/Contact">Contact</a>
                             </li>

@@ -26,8 +26,17 @@ namespace CpEditorial.Controllers
             return View();
         }
 
+        public ActionResult Logout()
+        {
+            Session.Remove("userID");
+            Session.Remove("name");
+            Session.Remove("point");
+            Session.Remove("type");
+            return RedirectToAction("Index", "Home");
+        }
+
         [HttpPost]
-        public ActionResult VerifyUser(UserModel userModel)
+        public ActionResult VerifyUser(LoginModel loginModel)
         {
             // Check email registered or not
             var dtblUser = new DataTable();
@@ -36,7 +45,7 @@ namespace CpEditorial.Controllers
                 sqlCon.Open();
                 string query = "select * from [User] where Email = @email";
                 var sqlDa = new SqlDataAdapter(query, sqlCon);
-                sqlDa.SelectCommand.Parameters.AddWithValue("@email", userModel.email);
+                sqlDa.SelectCommand.Parameters.AddWithValue("@email", loginModel.email);
                 sqlDa.Fill(dtblUser);
             }
             //Ture - Found email in database
@@ -48,21 +57,21 @@ namespace CpEditorial.Controllers
                     sqlCon.Open();
                     string query = "select * from [User] where Email = @email and Password = @password";
                     var sqlDa = new SqlDataAdapter(query, sqlCon);
-                    sqlDa.SelectCommand.Parameters.AddWithValue("@email", userModel.email);
-                    sqlDa.SelectCommand.Parameters.AddWithValue("@password", userModel.password);
+                    sqlDa.SelectCommand.Parameters.AddWithValue("@email", loginModel.email);
+                    sqlDa.SelectCommand.Parameters.AddWithValue("@password", loginModel.password);
                     sqlDa.Fill(dtblUser);
                 }
                 // If email and password both match
                 if (dtblUser.Rows.Count == 1)
                 {
-                    userModel.userID = dtblUser.Rows[0][0].ToString();
-                    userModel.name = dtblUser.Rows[0][1].ToString();
-                    userModel.point = Convert.ToInt32(dtblUser.Rows[0][4].ToString());
-                    userModel.type = dtblUser.Rows[0][5].ToString();
+                    Session["userID"] = dtblUser.Rows[0][0].ToString();
+                    Session["name"] = dtblUser.Rows[0][1].ToString();
+                    Session["point"] = Convert.ToInt32(dtblUser.Rows[0][4].ToString());
+                    Session["type"] = dtblUser.Rows[0][5].ToString();
 
                     return RedirectToAction("Index", "Home");
                 }
-                // Email match nut Password not match
+                // Email match but Password not match
                 else
                 {
                     TempData["message"] = "Password not match";

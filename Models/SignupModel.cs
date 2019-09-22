@@ -7,7 +7,7 @@ using System.Web;
 
 namespace CpEditorial.Models
 {
-    public class SignupModel
+    public class SignupModel 
     {
         public string name { get; set; }
         public string email { get; set; }

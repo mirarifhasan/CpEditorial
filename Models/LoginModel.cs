@@ -5,7 +5,7 @@ using System.Web;
 
 namespace CpEditorial.Models
 {
-    public class UserModel
+    public class LoginModel
     {
         public string userID { get; set; }
         public string name { get; set; }
