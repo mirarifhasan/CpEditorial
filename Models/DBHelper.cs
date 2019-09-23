@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 
@@ -8,10 +10,28 @@ namespace CpEditorial.Models
     public class DBHelper
     {
         public string connectionString = @"Data Source = DESKTOP-02U52QL\SQLEXPRESS; Initial Catalog = cpEditorial; Integrated Security=True";
-
-        public string getConnectionString()
+        
+        public DataTable getTable(string sql)
         {
-            return connectionString;
+            var dtbl = new DataTable();
+            using (var sqlCon = new SqlConnection(connectionString))
+            {
+                sqlCon.Open();
+                var sqlDa = new SqlDataAdapter(sql, sqlCon);
+                sqlDa.Fill(dtbl);
+                return dtbl;
+            }
         }
+
+        public void setTable(string sql)
+        {
+            using (var sqlCon = new SqlConnection(connectionString))
+            {
+                sqlCon.Open();
+                var sqlCmd = new SqlCommand(sql, sqlCon);
+                sqlCmd.ExecuteNonQuery();
+            }
+        }
+
     }
 }

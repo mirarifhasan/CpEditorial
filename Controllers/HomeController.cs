@@ -10,8 +10,6 @@ namespace CpEditorial.Controllers
 {
     public class HomeController : Controller
     {
-        string connectionString = new DBHelper().getConnectionString();
-
         // GET: HomePage
         public ActionResult Index()
         {
@@ -31,16 +29,8 @@ namespace CpEditorial.Controllers
         [HttpPost]
         public ActionResult AddContact(ContactModel contactModel)
         {
-            using (var sqlCon = new SqlConnection(connectionString))
-            {
-                sqlCon.Open();
-                string query = "INSERT INTO Contact VALUES (@Name, @Email, @Message)";
-                var sqlCmd = new SqlCommand(query, sqlCon);
-                sqlCmd.Parameters.AddWithValue("@Name", contactModel.name);
-                sqlCmd.Parameters.AddWithValue("@Email", contactModel.email);
-                sqlCmd.Parameters.AddWithValue("@Message", contactModel.message);
-                sqlCmd.ExecuteNonQuery();
-            }
+            string sql = "INSERT INTO Contact VALUES ("+ contactModel.name + ", "+ contactModel.email + ", "+ contactModel.message + ")";
+            new DBHelper().setTable(sql);
 
             return RedirectToAction("Index", "Home");
         }

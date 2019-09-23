@@ -11,8 +11,6 @@ namespace CpEditorial.Controllers
 {
     public class RegisterController : Controller
     {
-        string connectionString = new DBHelper().getConnectionString();
-
         // GET: Register
         public ActionResult Index()
         {
@@ -40,27 +38,17 @@ namespace CpEditorial.Controllers
         {
             // Check email registered or not
             var dtblUser = new DataTable();
-            using (var sqlCon = new SqlConnection(connectionString))
-            {
-                sqlCon.Open();
-                string query = "select * from [User] where Email = @email";
-                var sqlDa = new SqlDataAdapter(query, sqlCon);
-                sqlDa.SelectCommand.Parameters.AddWithValue("@email", loginModel.email);
-                sqlDa.Fill(dtblUser);
-            }
+            string query = "select * from [User] where Email = "+ loginModel.email;
+            dtblUser = new DBHelper().getTable(query);
+
+            
             //Ture - Found email in database
             if (dtblUser.Rows.Count == 1)
             {
                 dtblUser.Clear();
-                using (var sqlCon = new SqlConnection(connectionString))
-                {
-                    sqlCon.Open();
-                    string query = "select * from [User] where Email = @email and Password = @password";
-                    var sqlDa = new SqlDataAdapter(query, sqlCon);
-                    sqlDa.SelectCommand.Parameters.AddWithValue("@email", loginModel.email);
-                    sqlDa.SelectCommand.Parameters.AddWithValue("@password", loginModel.password);
-                    sqlDa.Fill(dtblUser);
-                }
+                query = "select * from [User] where Email = "+ loginModel.email + " and Password = "+ loginModel.password;
+                dtblUser = new DBHelper().getTable(query);
+                
                 // If email and password both match
                 if (dtblUser.Rows.Count == 1)
                 {
@@ -105,14 +93,9 @@ namespace CpEditorial.Controllers
 
             // Check the email already exist or not
             var dtblUser = new DataTable();
-            using (var sqlCon = new SqlConnection(connectionString))
-            {
-                sqlCon.Open();
-                string query = "select * from [User] where Email = @email";
-                var sqlDa = new SqlDataAdapter(query, sqlCon);
-                sqlDa.SelectCommand.Parameters.AddWithValue("@email", signupModel.email);
-                sqlDa.Fill(dtblUser);
-            }
+            string query = "select * from [User] where Email = " + signupModel.email;
+            dtblUser = new DBHelper().getTable(query);
+
             if(dtblUser.Rows.Count == 1)
             {
                 TempData["message"] = "Email already registered";
@@ -120,16 +103,9 @@ namespace CpEditorial.Controllers
             }
 
             // Insert the User
-            using (var sqlCon = new SqlConnection(connectionString))
-            {
-                sqlCon.Open();
-                string query = "INSERT INTO [User] VALUES (@Name, @Email, @Password, '0', 'User')";
-                var sqlCmd = new SqlCommand(query, sqlCon);
-                sqlCmd.Parameters.AddWithValue("@Name", signupModel.name);
-                sqlCmd.Parameters.AddWithValue("@Email", signupModel.email);
-                sqlCmd.Parameters.AddWithValue("@Password", signupModel.password);
-                sqlCmd.ExecuteNonQuery();
-            }
+            query = "INSERT INTO [User] VALUES ("+ signupModel.name + ", "+ signupModel.email + ", "+ signupModel.password + ", '0', 'User')";
+            new DBHelper().setTable(query);
+            
             return RedirectToAction("Index", "Home");
         }
         
