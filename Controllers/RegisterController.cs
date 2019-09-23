@@ -27,7 +27,7 @@ namespace CpEditorial.Controllers
         public ActionResult Logout()
         {
             Session.Remove("userID");
-            Session.Remove("name");
+            Session.Remove("userName");
             Session.Remove("point");
             Session.Remove("type");
             return RedirectToAction("Index", "Home");
@@ -38,7 +38,7 @@ namespace CpEditorial.Controllers
         {
             // Check email registered or not
             var dtblUser = new DataTable();
-            string query = "select * from [User] where Email = "+ loginModel.email;
+            string query = "select * from [User] where Email = '"+ loginModel.email + "'";
             dtblUser = new DBHelper().getTable(query);
 
             
@@ -46,14 +46,15 @@ namespace CpEditorial.Controllers
             if (dtblUser.Rows.Count == 1)
             {
                 dtblUser.Clear();
-                query = "select * from [User] where Email = "+ loginModel.email + " and Password = "+ loginModel.password;
+                query = "select * from [User] where Email = '"+ loginModel.email + "' and Password = '"+ loginModel.password + "'";
                 dtblUser = new DBHelper().getTable(query);
                 
                 // If email and password both match
                 if (dtblUser.Rows.Count == 1)
                 {
                     Session["userID"] = dtblUser.Rows[0][0].ToString();
-                    Session["name"] = dtblUser.Rows[0][1].ToString();
+                    Session["userName"] = dtblUser.Rows[0][1].ToString();
+                    Session["email"] = dtblUser.Rows[0][2].ToString();
                     Session["point"] = Convert.ToInt32(dtblUser.Rows[0][4].ToString());
                     Session["type"] = dtblUser.Rows[0][5].ToString();
 
@@ -93,7 +94,7 @@ namespace CpEditorial.Controllers
 
             // Check the email already exist or not
             var dtblUser = new DataTable();
-            string query = "select * from [User] where Email = " + signupModel.email;
+            string query = "select * from [User] where Email = '" + signupModel.email + "'";
             dtblUser = new DBHelper().getTable(query);
 
             if(dtblUser.Rows.Count == 1)
@@ -103,9 +104,18 @@ namespace CpEditorial.Controllers
             }
 
             // Insert the User
-            query = "INSERT INTO [User] VALUES ("+ signupModel.name + ", "+ signupModel.email + ", "+ signupModel.password + ", '0', 'User')";
+            query = "INSERT INTO [User] VALUES ('"+ signupModel.userName + "', '"+ signupModel.email + "', '"+ signupModel.password + "', 0, 'User')";
             new DBHelper().setTable(query);
-            
+
+            query = "SELECT UserID from [User] WHERE Email = '" + signupModel.email + "'";
+            dtblUser.Clear();
+            dtblUser = new DBHelper().getTable(query);
+
+            Session["userID"] = dtblUser.Rows[0][0].ToString();
+            Session["userName"] = signupModel.userName;
+            Session["point"] = 0;
+            Session["type"] = "User";
+
             return RedirectToAction("Index", "Home");
         }
         
