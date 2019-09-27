@@ -55,9 +55,13 @@
                                 <label for="ojSite">Online Judge</label> <br />
                                 <select class="form-control" id="ojSite" name="OJSite">
                                     <option value="" disabled selected>Select OJ Name</option>
-                                    <option value="volvo">UVa</option>
-                                    <option value="saab">Hacker Rank</option>
-                                    @*it will render from database*@
+                                    @{ 
+                                        for (int i=0; i<Model.ojList.Count; i++)
+                                        {
+                                            var id = Model.ojList[i].id;
+                                            <option value = "@id" > @Model.ojList[i].value </option>
+                                        }
+                                    }
                                 </select>
                             </div>
                         </div>
@@ -74,9 +78,13 @@
                                 <label for="tag1">Tag 1 (Required)</label> <br />
                                 <select class="form-control" id="tag" name="TagSite" required>
                                     <option value="" disabled selected>Select Tag</option>
-                                    <option value="volvo">String</option>
-                                    <option value="saab">Tree</option>
-                                    @*it will render from database*@
+                                    @{ 
+                                        for (int i=0; i<Model.tagList.Count; i++)
+                                        {
+                                            var id = Model.tagList[i].id;
+                                            <option value = "@id" > @Model.tagList[i].value </option>
+                                        }
+                                    }
                                 </select>
                             </div>
                         </div>
