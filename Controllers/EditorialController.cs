@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CpEditorial.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,7 +12,8 @@ namespace CpEditorial.Controllers
         // GET: Post
         public ActionResult PostForm()
         {
-            return View();
+            PostFormModel postEditorialModel = new PostFormModel();
+            return View(postEditorialModel); // Return all tag and OJ list in a big outer list
         }
 
         public ActionResult ViewEditorial()

@@ -128,6 +128,8 @@
     </Compile>
     <Compile Include="Models\ContactModel.cs" />
     <Compile Include="Models\DBHelper.cs" />
+    <Compile Include="Models\OJTagModel.cs" />
+    <Compile Include="Models\PostFormModel.cs" />
     <Compile Include="Models\SignupModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

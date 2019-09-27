@@ -1,4 +1,4 @@
-﻿
+﻿@model CpEditorial.Models.PostFormModel
 @{
     Layout = null;
 }
@@ -70,26 +70,14 @@
                             </div>
 
                             @* Tags *@
-                            <div style="display:flex;">
-                                <div class="pl-0 col-md-6">
-                                    <label for="tag1">Tag 1 (Required)</label> <br />
-                                    <select class="form-control" id="tag1" name="OJSite" required>
-                                        <option value="" disabled selected>Select problem type</option>
-                                        <option value="volvo">String</option>
-                                        <option value="saab">Tree</option>
-                                        @*it will render from database*@
-                                    </select>
-                                </div>
-
-                                <div class="pl-0 col-md-6">
-                                    <label for="tag2">Tag 2</label> <br />
-                                    <select class="form-control" id="tag2" name="OJSite">
-                                        <option value="" disabled selected>Select problem type</option>
-                                        <option value="volvo">String</option>
-                                        <option value="saab">Tree</option>
-                                        @*it will render from database*@
-                                    </select>
-                                </div>
+                            <div class="pl-0 col-md-6">
+                                <label for="tag1">Tag 1 (Required)</label> <br />
+                                <select class="form-control" id="tag" name="TagSite" required>
+                                    <option value="" disabled selected>Select Tag</option>
+                                    <option value="volvo">String</option>
+                                    <option value="saab">Tree</option>
+                                    @*it will render from database*@
+                                </select>
                             </div>
                         </div>
 
@@ -98,9 +86,9 @@
                         <a onclick="hideFunction('hideRQOption', 'hideRQ')" id="hideRQOption" href="#hideRQOption">More details..</a>
                         <p id="hideRQ" style="display:none;">
                             Problem statements often contains some tricky lines that can confuse anyone and it can also have
-                            some minor requirements that many people can miss. And so it will be much easier for readers to 
-                            understand your solution if you state the problem statement in simpler and straightforward language 
-                            and/or point out the minor requirements that people can miss. You can skip this part if the question 
+                            some minor requirements that many people can miss. And so it will be much easier for readers to
+                            understand your solution if you state the problem statement in simpler and straightforward language
+                            and/or point out the minor requirements that people can miss. You can skip this part if the question
                             is already simple enough.
                         </p>
                         <textarea class="form-control" id="rephrasedQuestion" rows="5"></textarea>
@@ -139,8 +127,7 @@
 
 
     <script>
-        function hideFunction(IDOption, textID)
-        {
+        function hideFunction(IDOption, textID) {
             var x = document.getElementById(textID);
 
             if (x.style.display === "none") {
