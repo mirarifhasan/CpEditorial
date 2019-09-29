@@ -1,4 +1,6 @@
-﻿
+﻿@*@model CpEditorial.Models.HomeIndexModel*@
+@model System.Data.DataTable
+
 @{
     Layout = null;
 }
@@ -57,6 +59,24 @@
                             <div class="tab-content" id="myTabContent">
 
                                 <div class="tab-pane fade show active" id="world-tab-1" role="tabpanel" aria-labelledby="tab1">
+                                    <!-- Abdullah, start coding from here -->
+                                    @for (int i = 0; i < Model.Rows.Count; i++)
+                                    {
+                                        <!-- Single Blog Post -->
+                                        <div class="single-blog-post post-style-4 d-flex align-items-center">
+                                            <!-- Post Content -->
+                                            <div class="post-content">
+                                                <a href="#" class="headline">
+                                                    <h5>@Model.Rows[i][2]</h5>
+                                                </a>
+                                                <p>@Model.Rows[i][3]</p>
+                                                <!-- Post Meta -->
+                                                <div class="post-meta">
+                                                    <p><a href="#" class="post-author">Katy Liu</a> on <a href="#" class="post-date">Sep 29, 2017 at 9:48 am</a></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
                                     <!-- Single Blog Post -->
                                     <div class="single-blog-post post-style-4 d-flex align-items-center">
                                         <!-- Post Content -->

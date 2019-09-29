@@ -1,6 +1,7 @@
 ﻿using CpEditorial.Models;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
@@ -13,7 +14,10 @@ namespace CpEditorial.Controllers
         // GET: HomePage
         public ActionResult Index()
         {
-            return View();
+            var dtblUser = new DataTable();
+            string query = "select top 10 editorialid, userid, problemid, description from editorial";
+            dtblUser = new DBHelper().getTable(query);
+            return View(dtblUser);
         }
 
         public ActionResult About()
