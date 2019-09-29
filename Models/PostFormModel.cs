@@ -43,5 +43,14 @@ namespace CpEditorial.Models
             }
         }
 
+        // Form fields
+        public string problemName { get; set; } 
+        public string problemUrl { get; set; } 
+        public int ojId { get; set; } 
+        public int tagId { get; set; } 
+        public string rephrase { get; set; } 
+        public string solution { get; set; } 
+        public string details { get; set; } 
+
     }
 }

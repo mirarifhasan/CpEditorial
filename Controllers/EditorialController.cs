@@ -16,6 +16,16 @@ namespace CpEditorial.Controllers
             return View(postEditorialModel); // Return all tag and OJ list in a big outer list
         }
 
+        [HttpPost]
+        public ActionResult AddEditorial(PostFormModel postFormModel)
+        {
+            var p = postFormModel.problemUrl;
+            var c = postFormModel.tagId;
+            OJTagModel selectedTag = postFormModel.tagList.Find(Model => Model.tagId);
+
+            return RedirectToAction("Index", "Home");
+        }
+
         public ActionResult ViewEditorial()
         {
             return View();

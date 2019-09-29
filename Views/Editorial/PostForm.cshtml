@@ -13,13 +13,10 @@
     <link href="~/Content/Site.css" rel="stylesheet">
     <script src="https://cdn.ckeditor.com/4.12.1/standard/ckeditor.js"></script>
 
-    <style>
-    </style>
 </head>
 <body>
     @{
         Html.RenderPartial("NavigationBar");
-        /* Note to myself: header font: 40px, text font: 21px*/
     }
 
     <div class="container">
@@ -41,25 +38,26 @@
                     you can follow
                     <a href="https://discuss.codechef.com/t/what-makes-a-good-codechef-editorial/2774">this blog</a>.
                 </p>
-                <form>
+                @using (Html.BeginForm("AddEditorial", "Editorial"))
+                {
                     <div class="postEditorialForm">
 
                         @*Problen Name & Online judge selection*@
                         <div style="display:flex;">
                             <div class="pl-0 col-md-6">
                                 <label for="problemName">Problem Name</label> <br />
-                                <input class="form-control" id="problemName" type="text" required>
+                                @Html.TextBoxFor(Model => Model.problemName, new { @class = "form-control", @required = true })
                             </div>
 
                             <div class="pl-0 col-md-6">
                                 <label for="ojSite">Online Judge</label> <br />
-                                <select class="form-control" id="ojSite" name="OJSite">
+                                <select class="form-control" id="ojSite" name="@Model=>Model.ojId" required>
                                     <option value="" disabled selected>Select OJ Name</option>
-                                    @{ 
-                                        for (int i=0; i<Model.ojList.Count; i++)
+                                    @{
+                                        for (int i = 0; i < Model.ojList.Count; i++)
                                         {
                                             var id = Model.ojList[i].id;
-                                            <option value = "@id" > @Model.ojList[i].value </option>
+                                            <option value="@id"> @Model.ojList[i].value </option>
                                         }
                                     }
                                 </select>
@@ -70,19 +68,19 @@
                         <div style="display:flex;">
                             <div class="pl-0 col-md-6">
                                 <label for="problemURL">Problem URL</label> <br />
-                                <input class="form-control" id="problemURL" type="text" required>
+                                @Html.TextBoxFor(Model => Model.problemUrl, new { @class = "form-control", @required = true })
                             </div>
 
                             @* Tags *@
                             <div class="pl-0 col-md-6">
                                 <label for="tag1">Tag 1 (Required)</label> <br />
-                                <select class="form-control" id="tag" name="TagSite" required>
+                                <select class="form-control" id="tag" name="@Model=>Model.tagId" required>
                                     <option value="" disabled selected>Select Tag</option>
-                                    @{ 
-                                        for (int i=0; i<Model.tagList.Count; i++)
+                                    @{
+                                        for (int i = 0; i < Model.tagList.Count; i++)
                                         {
                                             var id = Model.tagList[i].id;
-                                            <option value = "@id" > @Model.tagList[i].value </option>
+                                            <option value="@id"> @Model.tagList[i].value </option>
                                         }
                                     }
                                 </select>
@@ -99,7 +97,7 @@
                             and/or point out the minor requirements that people can miss. You can skip this part if the question
                             is already simple enough.
                         </p>
-                        <textarea class="form-control" id="rephrasedQuestion" rows="5"></textarea>
+                        @Html.TextAreaFor(Model => Model.rephrase, new { @class = "form-control", @rows = 7, @required = true })
 
                         @* Explanation of solution *@
                         <label for="quickExplanation">Give a quick explanation of your solution</label>
@@ -110,7 +108,7 @@
                             how to get the whole thing, all in one picture. However, if the solution
                             is small enough, you can write just the solution in this section.
                         </p>
-                        <textarea class="form-control" id="quickExplanation" rows="7"></textarea>
+                        @Html.TextAreaFor(Model => Model.solution, new { @class = "form-control", @rows = 7, @required = true })
 
                         @* Extra details *@
                         <label for="detailedExplanation">Give a detailed explanation if necessary</label>
@@ -119,11 +117,11 @@
                             If your solution is quite large, use this section
                             to provide the detailed explanation of your solution.
                         </p>
-                        <textarea class="form-control" id="detailedExplanation" rows="9"></textarea>
+                        @Html.TextAreaFor(Model => Model.details, new { @class = "form-control", @rows = 7, @required = true })
 
                         <button type="submit" class="btn world-btn">Submit</button>
                     </div>
-                </form>
+                }
             </div>
         </div>
     </div>
