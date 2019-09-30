@@ -19,6 +19,7 @@ namespace CpEditorial.Controllers
         [HttpPost]
         public ActionResult AddEditorial(PostFormModel postFormModel)
         {
+            DateTime now = DateTime.UtcNow;
             var p = postFormModel.problemUrl;
             var c = postFormModel.tagId;
             OJTagModel selectedTag = postFormModel.tagList.Find(Model => Model.tagId);
@@ -26,9 +27,13 @@ namespace CpEditorial.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        [HttpGet]
         public ActionResult ViewEditorial()
         {
-            return View();
+            int editorialId = Convert.ToInt32(Request.QueryString["id"]);
+            EditorialModel editorialModel = new EditorialModel(editorialId);
+            
+            return View(editorialModel);
         }
     }
 }
