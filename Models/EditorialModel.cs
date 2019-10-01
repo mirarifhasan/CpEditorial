@@ -25,19 +25,6 @@ namespace CpEditorial.Models
         public int DownVote { get; set; }
 
         public int UserID { get; set; }
-        public string userName { get; set; }
-
-        // Constractor
-        public EditorialModel(int id)
-        {
-            DataTable dtbl = new DBHelper().getTable("select * from Editorial where EditorialID = " + id);
-
-            UserID = Convert.ToInt32(dtbl.Rows[0][1]);
-
-
-        }
-
-
-
+        public string UserName { get; set; }
     }
 }

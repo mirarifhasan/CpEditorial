@@ -31,9 +31,9 @@ namespace CpEditorial.Controllers
         public ActionResult ViewEditorial()
         {
             int editorialId = Convert.ToInt32(Request.QueryString["id"]);
-            EditorialModel editorialModel = new EditorialModel(editorialId);
+            ViewEditorial viewEditorial = new ViewEditorial(editorialId);
             
-            return View(editorialModel);
+            return View(viewEditorial);
         }
     }
 }
