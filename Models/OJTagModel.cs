@@ -9,6 +9,5 @@ namespace CpEditorial.Models
     {
         public int id { get; set; }
         public string value { get; set; }
-        public bool tagId { get; internal set; }
     }
 }

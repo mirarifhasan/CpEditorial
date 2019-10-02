@@ -19,10 +19,8 @@ namespace CpEditorial.Controllers
         [HttpPost]
         public ActionResult AddEditorial(PostFormModel postFormModel)
         {
-            DateTime now = DateTime.UtcNow;
-            var p = postFormModel.problemUrl;
-            var c = postFormModel.tagId;
-            OJTagModel selectedTag = postFormModel.tagList.Find(Model => Model.tagId);
+            postFormModel.DateTime = Convert.ToString(DateTime.UtcNow);
+            postFormModel.UserID = Convert.ToInt32(Session["userID"]);
 
             return RedirectToAction("Index", "Home");
         }

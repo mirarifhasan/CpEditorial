@@ -9,7 +9,6 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Post an editorial</title>
-    <link href="~/Content/bootstrap.css" rel="stylesheet">
     <link href="~/Content/Site.css" rel="stylesheet">
     <script src="https://cdn.ckeditor.com/4.12.1/standard/ckeditor.js"></script>
 
@@ -45,50 +44,32 @@
                         @*Problen Name & Online judge selection*@
                         <div style="display:flex;">
                             <div class="pl-0 col-md-6">
-                                <label for="problemName">Problem Name</label> <br />
-                                @Html.TextBoxFor(Model => Model.problemName, new { @class = "form-control", @required = true })
+                                <label for="ProblemTitle">Problem Title</label> <br />
+                                @Html.TextBoxFor(Model => Model.ProblemTitle, new { @class = "form-control", @required = true })
                             </div>
 
                             <div class="pl-0 col-md-6">
-                                <label for="ojSite">Online Judge</label> <br />
-                                <select class="form-control" id="ojSite" name="@Model=>Model.ojId" required>
-                                    <option value="" disabled selected>Select OJ Name</option>
-                                    @{
-                                        for (int i = 0; i < Model.ojList.Count; i++)
-                                        {
-                                            var id = Model.ojList[i].id;
-                                            <option value="@id"> @Model.ojList[i].value </option>
-                                        }
-                                    }
-                                </select>
+                                <label for="OJID">Online Judge</label> <br />
+                                @Html.DropDownListFor(model => model.OJID, new SelectList(Model.ojList, "id", "value"), "Select OJ",new {@class = "from-control"})
                             </div>
                         </div>
 
                         @* Problem URL & Tags *@
                         <div style="display:flex;">
                             <div class="pl-0 col-md-6">
-                                <label for="problemURL">Problem URL</label> <br />
-                                @Html.TextBoxFor(Model => Model.problemUrl, new { @class = "form-control", @required = true })
+                                <label for="ProblemCode">Problem Code (If have any)</label> <br />
+                                @Html.TextBoxFor(Model => Model.ProblemCode, new { @class = "form-control" })
                             </div>
 
                             @* Tags *@
                             <div class="pl-0 col-md-6">
-                                <label for="tag1">Tag 1 (Required)</label> <br />
-                                <select class="form-control" id="tag" name="@Model=>Model.tagId" required>
-                                    <option value="" disabled selected>Select Tag</option>
-                                    @{
-                                        for (int i = 0; i < Model.tagList.Count; i++)
-                                        {
-                                            var id = Model.tagList[i].id;
-                                            <option value="@id"> @Model.tagList[i].value </option>
-                                        }
-                                    }
-                                </select>
+                                <label for="TagID">Tag (Required)</label> <br />
+                                @Html.DropDownListFor(model => model.TagID, new SelectList(Model.tagList, "id", "value"), "Select Tag", new { @class = "from-control" })
                             </div>
                         </div>
 
                         @* Rephrase Question *@
-                        <label for="rephrasedQuestion">Would you like to rephrase the question? </label>
+                        <label for="Rephrase">Would you like to rephrase the question? </label>
                         <a onclick="hideFunction('hideRQOption', 'hideRQ')" id="hideRQOption" href="#hideRQOption">More details..</a>
                         <p id="hideRQ" style="display:none;">
                             Problem statements often contains some tricky lines that can confuse anyone and it can also have
@@ -97,10 +78,10 @@
                             and/or point out the minor requirements that people can miss. You can skip this part if the question
                             is already simple enough.
                         </p>
-                        @Html.TextAreaFor(Model => Model.rephrase, new { @class = "form-control", @rows = 7, @required = true })
+                        @Html.TextAreaFor(Model => Model.Rephrase, new { @class = "form-control", @rows = 7, @required = true })
 
                         @* Explanation of solution *@
-                        <label for="quickExplanation">Give a quick explanation of your solution</label>
+                        <label for="Solution">Give a quick explanation of your solution</label>
                         <a onclick="hideFunction('hideESOption', 'hideES')" id="hideESOption" href="#hideESOption">More details..</a>
                         <p id="hideES" style="display:none;">
                             It is always nice to see the entire solution at one stretch.
@@ -108,16 +89,16 @@
                             how to get the whole thing, all in one picture. However, if the solution
                             is small enough, you can write just the solution in this section.
                         </p>
-                        @Html.TextAreaFor(Model => Model.solution, new { @class = "form-control", @rows = 7, @required = true })
+                        @Html.TextAreaFor(Model => Model.Solution, new { @class = "form-control", @rows = 7, @required = true })
 
                         @* Extra details *@
-                        <label for="detailedExplanation">Give a detailed explanation if necessary</label>
+                        <label for="Details">Give a detailed explanation if necessary</label>
                         <a onclick="hideFunction('hideDEOption', 'hideDE')" id="hideDEOption" href="#hideDEOption">More details..</a>
                         <p id="hideDE" style="display:none;">
                             If your solution is quite large, use this section
                             to provide the detailed explanation of your solution.
                         </p>
-                        @Html.TextAreaFor(Model => Model.details, new { @class = "form-control", @rows = 7, @required = true })
+                        @Html.TextAreaFor(Model => Model.Details, new { @class = "form-control", @rows = 7, @required = true })
 
                         <button type="submit" class="btn world-btn">Submit</button>
                     </div>

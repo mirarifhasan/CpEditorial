@@ -23,6 +23,9 @@ namespace CpEditorial.Models
         public string DateTime { get; set; }
         public int UpVote { get; set; }
         public int DownVote { get; set; }
+        public string Rephrase { get; set; }
+        public string Solution { get; set; }
+        public string Details { get; set; }
 
         public int UserID { get; set; }
         public string UserName { get; set; }
