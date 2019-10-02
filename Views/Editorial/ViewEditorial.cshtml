@@ -27,11 +27,20 @@
                     <div class="single-blog-content mb-100">
 
                         <!-- Post Meta -->
-                        <div class="post-meta">
-                            <h3>@Model.ProblemTitle</h3>
-                            <p><a href="#" class="post-author">@Model.UserName</a> on @Model.DateTime</p>
-                        </div>
+                        <div class="post-meta" style="display:flex;">
+                            @* Vote button *@
+                            <div style="margin-right:20px;">
+                                <div class="triangle-up"></div>
+                                <p style="text-align:center; padding:5px;">5</p>
+                                <div class="triangle-down"></div>
+                            </div>
 
+                            @* Title *@
+                            <div>
+                                <h3>@Model.ProblemTitle</h3>
+                                <p><a href="#" class="post-author">@Model.UserName</a> on @Model.DateTime</p>
+                            </div>
+                        </div>
                         <!-- Post Content -->
                         <div class="post-content">
 

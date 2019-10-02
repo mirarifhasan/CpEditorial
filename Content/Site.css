@@ -828,6 +828,22 @@ img {
 
 
 /* Single editorial page CSS start */
+.triangle-up {
+    width: 0;
+    height: 0;
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-bottom: 30px solid #555;
+}
+
+.triangle-down {
+    width: 0;
+    height: 0;
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-top: 30px solid #555;
+}
+
 .single-blog-post {
     position: relative;
     z-index: 1;

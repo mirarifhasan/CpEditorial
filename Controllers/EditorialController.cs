@@ -12,6 +12,8 @@ namespace CpEditorial.Controllers
         // GET: Post
         public ActionResult PostForm()
         {
+            if(Session["UserID"] == null) return Content("<script language='javascript' type='text/javascript'>alert('Login to continue');</script>");
+
             PostFormModel postEditorialModel = new PostFormModel();
             return View(postEditorialModel); // Return all tag and OJ list in a big outer list
         }
