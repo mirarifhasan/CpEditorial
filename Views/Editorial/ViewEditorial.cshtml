@@ -1,4 +1,4 @@
-﻿@model CpEditorial.Models.ViewEditorial
+﻿@model CpEditorial.Models.ViewEditorialModel
 @{
     Layout = null;
 }
@@ -29,7 +29,7 @@
                         <!-- Post Meta -->
                         <div class="post-meta">
                             <h3>@Model.ProblemTitle</h3>
-                            <p><a href="#" class="post-author">@Model.UserName</a> on Sept 29, 2017 at 9:48 am</p>
+                            <p><a href="#" class="post-author">@Model.UserName</a> on @Model.DateTime</p>
                         </div>
 
                         <!-- Post Content -->

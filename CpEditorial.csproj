@@ -133,7 +133,7 @@
     <Compile Include="Models\PostFormModel.cs" />
     <Compile Include="Models\SignupModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
-    <Compile Include="Models\ViewEditorial.cs" />
+    <Compile Include="Models\ViewEditorialModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
