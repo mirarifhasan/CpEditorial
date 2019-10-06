@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace CpEditorial.Models
 {
-    public class PostFormModel
+    public class PostFormModel : EditorialModel
     {
         public List<OJTagModel> tagList = new List<OJTagModel>();
         public List<OJTagModel> ojList = new List<OJTagModel>();
@@ -42,15 +43,6 @@ namespace CpEditorial.Models
                 ojList.Add(ojTagModel);
             }
         }
-
-        // Form fields
-        public string problemName { get; set; } 
-        public string problemUrl { get; set; } 
-        public int ojId { get; set; } 
-        public int tagId { get; set; } 
-        public string rephrase { get; set; } 
-        public string solution { get; set; } 
-        public string details { get; set; } 
 
     }
 }

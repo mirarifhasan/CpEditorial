@@ -14,7 +14,7 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="~/Home/Index">Home <span class="sr-only">(current)</span></a>
                             </li>
-                            @if (Session["userID"] == null)
+                            @if (Session["userID"] != null)
                             {
                                 <li class="nav-item">
                                     <a class="nav-link" href="~/Editorial/PostForm">Post</a>
