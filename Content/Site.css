@@ -407,7 +407,7 @@ img {
 
 
 /* Search bar */
-#search-wrapper {
+/*#search-wrapper {
     display: inline-block;
     position: relative;
 }
@@ -540,7 +540,7 @@ img {
     #search-wrapper #close-icon.closing:after {
         -webkit-animation: cross-2-out 0.25s linear 0.2s forwards;
         animation: cross-2-out 0.25s linear 0.2s forwards;
-    }
+    }*/
 
 @-webkit-keyframes lens-out {
     0% {

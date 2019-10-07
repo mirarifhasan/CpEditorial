@@ -123,6 +123,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\EditorialController.cs" />
     <Compile Include="Controllers\RegisterController.cs" />
+    <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -132,6 +133,7 @@
     <Compile Include="Models\EditorialModel.cs" />
     <Compile Include="Models\OJTagModel.cs" />
     <Compile Include="Models\PostFormModel.cs" />
+    <Compile Include="Models\SearchModel.cs" />
     <Compile Include="Models\SignupModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\ViewEditorialModel.cs" />
@@ -225,6 +227,7 @@
     <Content Include="Views\Register\LogIn.cshtml" />
     <Content Include="Views\Register\SignUp.cshtml" />
     <Content Include="Views\Editorial\ViewEditorial.cshtml" />
+    <Content Include="Views\Search\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
