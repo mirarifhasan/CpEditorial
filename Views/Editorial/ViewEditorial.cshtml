@@ -37,18 +37,18 @@
 
                             @* Title *@
                             <div>
-                                <h3>@Model.ProblemTitle</h3>
-                                <p><a href="#" class="post-author">@Model.UserName</a> on @Model.DateTime</p>
+                                <h3>@Model.problem.title</h3>
+                                <p><a href="#" class="post-author">@Model.user.userName</a> on @Model.editorial.dateOfPublishing</p>
                             </div>
                         </div>
                         <!-- Post Content -->
                         <div class="post-content">
 
-                            <h6>@Model.Description</h6>
+                            <h6>@Model.editorial.description</h6>
 
                             <!-- Post Tags -->
                             <ul class="post-tags">
-                                <li><a href="#">@Model.TagName</a></li>
+                                <li><a href="#">@Model.tag.text</a></li>
                             </ul>
                         </div>
 

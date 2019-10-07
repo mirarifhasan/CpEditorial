@@ -54,7 +54,7 @@ namespace CpEditorial.Models
     public class User
     {
         int userId;
-        string userName;
+        public string userName { get; set; }
         string email;
         string password;
         int point;
@@ -63,7 +63,7 @@ namespace CpEditorial.Models
         public User(int userId)
         {
             this.userId = userId;
-            string query = "select * from user table where userid = " + userId;
+            string query = "select * from [user] where userid = " + userId;
             DataTable dataTable = new DBHelper().getTable(query);
             int i = 1;
             this.userName = Convert.ToString(dataTable.Rows[0][i++]);
@@ -73,6 +73,7 @@ namespace CpEditorial.Models
             this.userType = Convert.ToString(dataTable.Rows[0][i++]);
         }
     }
+
     /*
     CREATE TABLE Feedback (
     FeedbackId int IDENTITY(2001, 1) PRIMARY KEY,
@@ -100,6 +101,7 @@ namespace CpEditorial.Models
             this.message = Convert.ToString(dataTable.Rows[0][i++]);
         }
     }
+
     /*
     CREATE TABLE OnlineJudge (
     OJID int IDENTITY(3001, 1) PRIMARY KEY,
@@ -127,7 +129,7 @@ namespace CpEditorial.Models
     public class Tag
     {
         int tagId;
-        string text;
+        public string text { get; set; }
         public Tag(int tagId)
         {
             this.tagId = tagId;
@@ -138,19 +140,19 @@ namespace CpEditorial.Models
     }
 
     /*
-CREATE TABLE Problem (
+    CREATE TABLE Problem (
     ProblemID int IDENTITY(5001, 1) PRIMARY KEY,
     OJID int FOREIGN KEY REFERENCES OnlineJudge(OJId),
     Title varchar (30) NOT NULL,
     ProblemCode varchar (20) NULL
-);
-*/
+    );
+    */
 
     public class Problem
     {
         int problemId;
         int ojId;
-        string title;
+        public string title { get; set; }
         string problemCode;
         public Problem(int problemId)
         {
@@ -178,16 +180,16 @@ CREATE TABLE Problem (
     */
     public class Editorial
     {
-        int editorialId;
-        int userId;
-        int problemId;
-        int tagId;
-        string description;
+        public int editorialId { get; set; }
+        public int userId { get; set; }
+        public int problemId { get; set; }
+        public int tagId { get; set; }
+        public string description { get; set; }
         int upvote;
         int downvote;
-        string dateOfPublishing;
+        public string dateOfPublishing { get; set; }
 
-        public Editorial (int editorialId)
+        public Editorial(int editorialId)
         {
             this.editorialId = editorialId;
             string query = "select * from editorial where editorialid = " + editorialId;
@@ -202,5 +204,4 @@ CREATE TABLE Problem (
             this.dateOfPublishing = Convert.ToString(dataTable.Rows[0][i++]);
         }
     }
-
 }

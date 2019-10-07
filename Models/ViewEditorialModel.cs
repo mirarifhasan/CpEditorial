@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -6,23 +7,21 @@ using System.Web;
 
 namespace CpEditorial.Models
 {
-    public class ViewEditorialModel : EditorialModel
+    public class ViewEditorialModel : DbSchema
     {
-        DataTable ediTbl = new DataTable();
-
-        public ViewEditorialModel(int editorialID)
+        public Editorial editorial;
+        public User user;
+        public Tag tag;
+        public Problem problem;
+        public OnlineJudge OnlineJudge;
+        public ArrayList tagList;
+        public ViewEditorialModel(int editorialId)
         {
-            string sql = "select * from Editorial, [User], Tag, Problem, OnlineJudge where Editorial.EditorialID="+ editorialID + " and Editorial.UserID=[User].UserID and Editorial.TagID=Tag.TagID and Editorial.ProblemID=Problem.ProblemID and Problem.OJID=OnlineJudge.OJID";
-            ediTbl = new DBHelper().getTable(sql);
-
-            ProblemTitle = Convert.ToString(ediTbl.Rows[0][18]);
-            Description = Convert.ToString(ediTbl.Rows[0][4]);
-            TagName = Convert.ToString(ediTbl.Rows[0][15]);
-            UserName = Convert.ToString(ediTbl.Rows[0][9]);
-            TagID = Convert.ToInt32(ediTbl.Rows[0][3]);
-            DateTime = Convert.ToString(ediTbl.Rows[0][7]);
+            tagList = new ArrayList();
+            editorial = GetEditorial(editorialId);
+            user = GetUser(editorial.userId);
+            tag = GetTag(editorial.tagId); //todo: change the implementation later
+            problem = GetProblem(editorial.problemId);
         }
-
-        
     }
 }
