@@ -1,0 +1,131 @@
+﻿@model CpEditorial.Models.ProfileModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Profile</title>
+    <link href="~/Content/Site.css" rel="stylesheet">
+    <script src="https://cdn.ckeditor.com/4.12.1/standard/ckeditor.js"></script>
+
+</head>
+<body>
+    @{
+        Html.RenderPartial("NavigationBar");
+    }
+
+    <div class="row" style="margin:130px 30px 80px 30px;">
+
+        <div class="col-md-3" style="text-align:center;">
+            <img src="~/Image/Icon/profileicon.png" height="140" width="140" />
+            <h5 style="margin-top:30px;">Name</h5>
+            <p>Point gain: 15</p>
+        </div>
+
+        <div class="col-md-9">
+            @* Bookmark part *@
+            @if (Model.bookmarkList.Count > 0)
+            {
+                <div class="bigBlock">
+                    <h4>Bookmark</h4>
+
+                    <div class="tab-content" id="myTabContent">
+                        <div class="tab-pane fade show active" id="world-tab-1" role="tabpanel" aria-labelledby="tab1">
+                            <!-- Bokmarked editorials -->
+                            @for (int i = 0; i < Model.bookmarkList.Count; i++)
+                            {
+                                <!-- Single Blog Post -->
+                                <div class="single-blog-post post-style-4 d-flex align-items-center">
+                                    <!-- Post Content -->
+                                    <a href="../Editorial/ViewEditorial?id=@Model.bookmarkList[i].EditorialID" class="headline">
+                                        <div class="post-content">
+                                            <h5>@Model.bookmarkList[i].ProblemTitle</h5>
+                                            <p style="height:50px;">@Model.bookmarkList[i].Description</p>
+                                            <!-- Post Meta -->
+                                            <div class="post-meta">
+                                                <!--<p><a href="#" class="post-author">Katy Liu</a> on <a href="#" class="post-date">Sep 29, 2017 at 9:48 am</a></p>-->
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            }
+
+            @* User posted editorial *@
+            @if (Model.myEditorialList.Count > 0)
+            {
+                <div class="bigBlock">
+                    <h4>My Editorial</h4>
+
+                    <div class="tab-content" id="myTabContent">
+                        <div class="tab-pane fade show active" id="world-tab-1" role="tabpanel" aria-labelledby="tab1">
+                            <!-- Bokmarked editorials -->
+                            @for (int i = 0; i < Model.myEditorialList.Count; i++)
+                            {
+                                <!-- Single Blog Post -->
+                                <div class="single-blog-post post-style-4 d-flex align-items-center">
+                                    <!-- Post Content -->
+                                    <a href="../Editorial/ViewEditorial?id=@Model.myEditorialList[i].EditorialID" class="headline">
+                                        <div class="post-content">
+                                            <h5>@Model.myEditorialList[i].ProblemTitle</h5>
+                                            <p style="height:50px;">@Model.myEditorialList[i].Description</p>
+                                            <!-- Post Meta -->
+                                            <div class="post-meta">
+                                                <!--<p><a href="#" class="post-author">Katy Liu</a> on <a href="#" class="post-date">Sep 29, 2017 at 9:48 am</a></p>-->
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            }
+
+            @* Involved by comment on editorial *@
+            @if (Model.InvolvmentEditorialList.Count > 0)
+            {
+                <div class="bigBlock">
+                    <h4>Involvement</h4>
+                    <div class="tab-content" id="myTabContent">
+                        <div class="tab-pane fade show active" id="world-tab-1" role="tabpanel" aria-labelledby="tab1">
+                            <!-- Bokmarked editorials -->
+                            @for (int i = 0; i < Model.InvolvmentEditorialList.Count; i++)
+                            {
+                                <!-- Single Blog Post -->
+                                <div class="single-blog-post post-style-4 d-flex align-items-center">
+                                    <!-- Post Content -->
+                                    <a href="../Editorial/ViewEditorial?id=@Model.InvolvmentEditorialList[i].EditorialID" class="headline">
+                                        <div class="post-content">
+                                            <h5>@Model.InvolvmentEditorialList[i].ProblemTitle</h5>
+                                            <p style="height:50px;">@Model.InvolvmentEditorialList[i].Description</p>
+                                            <!-- Post Meta -->
+                                            <div class="post-meta">
+                                                <!--<p><a href="#" class="post-author">Katy Liu</a> on <a href="#" class="post-date">Sep 29, 2017 at 9:48 am</a></p>-->
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+
+    </div>
+
+    @*Footer*@
+    @{
+        Html.RenderPartial("Footer");
+    }
+
+</body>
+</html>

@@ -122,6 +122,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\EditorialController.cs" />
+    <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Controllers\RegisterController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Global.asax.cs">
@@ -133,6 +134,7 @@
     <Compile Include="Models\EditorialModel.cs" />
     <Compile Include="Models\OJTagModel.cs" />
     <Compile Include="Models\PostFormModel.cs" />
+    <Compile Include="Models\ProfileModel.cs" />
     <Compile Include="Models\SearchModel.cs" />
     <Compile Include="Models\SignupModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
@@ -154,6 +156,7 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Image\Icon\profileicon.png" />
     <Content Include="Image\Logo\logo.png" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
@@ -228,6 +231,7 @@
     <Content Include="Views\Register\SignUp.cshtml" />
     <Content Include="Views\Editorial\ViewEditorial.cshtml" />
     <Content Include="Views\Search\Index.cshtml" />
+    <Content Include="Views\Profile\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
