@@ -7,21 +7,24 @@ using System.Web;
 
 namespace CpEditorial.Models
 {
-    public class ViewEditorialModel : DbSchema
+    public class ViewEditorialModel : EditorialModel
     {
-        public Editorial editorial;
-        public User user;
-        public Tag tag;
-        public Problem problem;
-        public OnlineJudge OnlineJudge;
-        public ArrayList tagList;
-        public ViewEditorialModel(int editorialId)
+        DataTable ediTbl = new DataTable();
+
+        public ViewEditorialModel(int editorialID)
         {
-            tagList = new ArrayList();
-            editorial = GetEditorial(editorialId);
-            user = GetUser(editorial.userId);
-            tag = GetTag(editorial.tagId); //todo: change the implementation later
-            problem = GetProblem(editorial.problemId);
+            string sql = "select * from Editorial, [User], Tag, Problem, OnlineJudge where Editorial.EditorialID=" + editorialID + " and Editorial.UserID=[User].UserID and Editorial.TagID=Tag.TagID and Editorial.ProblemID=Problem.ProblemID and Problem.OJID=OnlineJudge.OJID";
+            ediTbl = new DBHelper().getTable(sql);
+
+            ProblemTitle = Convert.ToString(ediTbl.Rows[0][20]);
+            Rephrase = Convert.ToString(ediTbl.Rows[0][4]);
+            Solution = Convert.ToString(ediTbl.Rows[0][5]);
+            Details = Convert.ToString(ediTbl.Rows[0][6]);
+            TagName = Convert.ToString(ediTbl.Rows[0][17]);
+            UserName = Convert.ToString(ediTbl.Rows[0][11]);
+            TagID = Convert.ToInt32(ediTbl.Rows[0][3]);
+            DateOfPublishing = Convert.ToString(ediTbl.Rows[0][9]);
         }
+
     }
 }

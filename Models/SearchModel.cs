@@ -18,7 +18,7 @@ namespace CpEditorial.Models
         public SearchModel() { }
         public SearchModel(string sTitle)
         {
-            string query = "select top 10 Editorial.EditorialID, Editorial.UpVote, Editorial.DownVote, Editorial.description, Problem.Title from Editorial, Problem, [User] where Editorial.ProblemID=Problem.ProblemID AND Editorial.UserID=[User].UserID and problem.title like '%" + sTitle + "%'";
+            string query = "select top 10 Editorial.EditorialID, Editorial.UpVote, Editorial.DownVote, Editorial.solution, Problem.Title from Editorial, Problem, [User] where Editorial.ProblemID=Problem.ProblemID AND Editorial.UserID=[User].UserID and problem.title like '%" + sTitle + "%'";
             DataTable searchTable = new DBHelper().getTable(query);
 
             // Adding all rows in list
@@ -26,7 +26,7 @@ namespace CpEditorial.Models
             {
                 editorialModel = new EditorialModel();
                 editorialModel.EditorialID = Convert.ToInt32(searchTable.Rows[i][0].ToString());
-                editorialModel.Description = searchTable.Rows[i][3].ToString();
+                editorialModel.Solution = searchTable.Rows[i][3].ToString();
                 editorialModel.ProblemTitle = searchTable.Rows[i][4].ToString();
 
                 searchList.Add(editorialModel);

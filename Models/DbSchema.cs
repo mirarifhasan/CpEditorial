@@ -198,10 +198,10 @@ namespace CpEditorial.Models
             this.userId = Convert.ToInt32(dataTable.Rows[0][i++]);
             this.problemId = Convert.ToInt32(dataTable.Rows[0][i++]);
             this.tagId = Convert.ToInt32(dataTable.Rows[0][i++]);
-            this.description = Convert.ToString(dataTable.Rows[0][i++]);
-            this.upvote = Convert.ToInt32(dataTable.Rows[0][i++]);
-            this.downvote = Convert.ToInt32(dataTable.Rows[0][i++]);
-            this.dateOfPublishing = Convert.ToString(dataTable.Rows[0][i++]);
+            //this.description = Convert.ToString(dataTable.Rows[0][i++]);
+            //this.upvote = Convert.ToInt32(dataTable.Rows[0][i++]);
+            //this.downvote = Convert.ToInt32(dataTable.Rows[0][i++]);
+            //this.dateOfPublishing = Convert.ToString(dataTable.Rows[0][i++]);
         }
     }
 }

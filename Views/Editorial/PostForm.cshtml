@@ -100,7 +100,7 @@
                         </p>
                         @Html.TextAreaFor(Model => Model.Details, new { @class = "form-control", @rows = 7, @required = true })
 
-                        <button type="submit" class="btn world-btn">Submit</button>
+                        <button type="submit" class="btn world-btn">@ViewBag.buttonName</button>
                     </div>
                 }
             </div>

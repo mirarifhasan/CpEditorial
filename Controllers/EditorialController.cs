@@ -14,16 +14,27 @@ namespace CpEditorial.Controllers
         {
             if(Session["UserID"] == null) return Content("<script language='javascript' type='text/javascript'>alert('Login to continue');</script>");
 
-            PostFormModel postEditorialModel = new PostFormModel();
+            int editorialId = 0;
+            editorialId = Convert.ToInt32(Request.QueryString["eid"]);
+
+            PostFormModel postEditorialModel;
+            if (editorialId == 0) {
+                postEditorialModel = new PostFormModel();
+                ViewBag.buttonName = "Submit";
+            }
+            else {
+                postEditorialModel = new PostFormModel(editorialId);
+                ViewBag.buttonName = "Update";
+            }
+
             return View(postEditorialModel); // Return all tag and OJ list in a big outer list
         }
 
         [HttpPost]
         public ActionResult AddEditorial(PostFormModel postFormModel)
         {
-            postFormModel.DateTime = Convert.ToString(DateTime.UtcNow);
+            postFormModel.DateOfPublishing = Convert.ToString(DateTime.UtcNow);
             postFormModel.UserID = Convert.ToInt32(Session["userID"]);
-            postFormModel.Description = postFormModel.Rephrase + "</br>" + postFormModel.Solution + "\n\n" + postFormModel.Details;
             
             // Finding ProblemID 
             string subSql="";
@@ -53,7 +64,7 @@ namespace CpEditorial.Controllers
             }
 
             //Insert editorial in table
-            sql = "insert into editorial values ("+postFormModel.UserID+", "+postFormModel.ProblemID+", "+postFormModel.TagID+", '"+postFormModel.Description+"', 0, 0, '"+postFormModel.DateTime+"')";
+            sql = "insert into editorial values ("+postFormModel.UserID+", "+postFormModel.ProblemID+", "+postFormModel.TagID+", '"+postFormModel.Rephrase+"', '" +postFormModel.Solution+ "', '"+postFormModel.Details+"', 0, 0, '"+postFormModel.DateOfPublishing+"')";
             new DBHelper().setTable(sql);
 
 
@@ -63,10 +74,13 @@ namespace CpEditorial.Controllers
         [HttpGet]
         public ActionResult ViewEditorial()
         {
-            int editorialId = Convert.ToInt32(Request.QueryString["id"]);
-            ViewEditorialModel viewEditorial = new ViewEditorialModel(editorialId);
-            
-            return View(viewEditorial);
+            int editorialId = 0;
+            editorialId = Convert.ToInt32(Request.QueryString["id"]);
+
+            if (editorialId == 0) return Content("<script language='javascript' type='text/javascript'>alert('URL not correct');</script>");
+
+            ViewEditorialModel viewEditorialModel = new ViewEditorialModel(editorialId);
+            return View(viewEditorialModel);
         }
     }
 }

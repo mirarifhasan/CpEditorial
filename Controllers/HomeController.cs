@@ -14,7 +14,7 @@ namespace CpEditorial.Controllers
         // GET: HomePage
         public ActionResult Index()
         {
-            string query = "select top 10 Editorial.EditorialID, Editorial.UpVote, Editorial.DownVote, Editorial.description, Problem.Title from Editorial, Problem, [User] where Editorial.ProblemID=Problem.ProblemID AND Editorial.UserID=[User].UserID;";
+            string query = "select top 10 Editorial.EditorialID, Editorial.UpVote, Editorial.DownVote, Editorial.Solution, Problem.Title from Editorial, Problem, [User] where Editorial.ProblemID=Problem.ProblemID AND Editorial.UserID=[User].UserID;";
             DataTable dtblUser = new DBHelper().getTable(query);
             return View(dtblUser);
         }
