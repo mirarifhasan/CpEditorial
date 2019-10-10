@@ -78,7 +78,7 @@
                             and/or point out the minor requirements that people can miss. You can skip this part if the question
                             is already simple enough.
                         </p>
-                        @Html.TextAreaFor(Model => Model.Rephrase, new { @class = "form-control", @rows = 7, @required = true })
+                        @Html.TextAreaFor(Model => Model.Rephrase, new { @class = "form-control", @rows = 7 })
 
                         @* Explanation of solution *@
                         <label for="Solution">Give a quick explanation of your solution</label>
@@ -98,7 +98,7 @@
                             If your solution is quite large, use this section
                             to provide the detailed explanation of your solution.
                         </p>
-                        @Html.TextAreaFor(Model => Model.Details, new { @class = "form-control", @rows = 7, @required = true })
+                        @Html.TextAreaFor(Model => Model.Details, new { @class = "form-control", @rows = 7 })
 
                         <button type="submit" class="btn world-btn">@ViewBag.buttonName</button>
                     </div>

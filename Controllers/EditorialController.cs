@@ -20,10 +20,13 @@ namespace CpEditorial.Controllers
             PostFormModel postEditorialModel;
             if (editorialId == 0) {
                 postEditorialModel = new PostFormModel();
+                Session["mode"] = "new";
                 ViewBag.buttonName = "Submit";
             }
             else {
                 postEditorialModel = new PostFormModel(editorialId);
+                Session["mode"] = "update";
+                Session["eid"] = editorialId;
                 ViewBag.buttonName = "Update";
             }
 
@@ -33,15 +36,61 @@ namespace CpEditorial.Controllers
         [HttpPost]
         public ActionResult AddEditorial(PostFormModel postFormModel)
         {
-            postFormModel.DateOfPublishing = Convert.ToString(DateTime.UtcNow);
-            postFormModel.UserID = Convert.ToInt32(Session["userID"]);
+            if (Session["mode"].ToString() == "new")
+            {
+                postFormModel.DateOfPublishing = Convert.ToString(DateTime.UtcNow);
+                postFormModel.UserID = Convert.ToInt32(Session["userID"]);
+
+                // Finding ProblemID 
+                string subSql = "";
+                if (postFormModel.ProblemCode != null)
+                    subSql = " and Code='" + postFormModel.ProblemCode + "'";
+
+                string sql = "select ProblemID from Problem where OJID = " + postFormModel.OJID + " and Title ='" + postFormModel.ProblemTitle + "'" + subSql;
+                var res = new DBHelper().getTable(sql);
+
+                // If problemID already exist, otherwise 'else' part to generate problemID
+                if (res.Rows.Count == 1)
+                    postFormModel.ProblemID = Convert.ToInt32(res.Rows[0][0]);
+                else
+                {
+                    if (postFormModel.ProblemCode == null) subSql = ", NULL";
+                    else subSql = ", '" + postFormModel.ProblemCode + "'";
+                    sql = "insert into Problem values (" + postFormModel.OJID + ", '" + postFormModel.ProblemTitle + "'" + subSql + ")";
+                    new DBHelper().setTable(sql);
+
+                    subSql = "";
+                    if (postFormModel.ProblemCode != null)
+                        subSql = " and Code='" + postFormModel.ProblemCode + "'";
+
+                    sql = "select ProblemID from Problem where OJID = " + postFormModel.OJID + " and Title ='" + postFormModel.ProblemTitle + "'" + subSql;
+                    res = new DBHelper().getTable(sql);
+                    postFormModel.ProblemID = Convert.ToInt32(res.Rows[0][0]);
+                }
+
+                //Insert editorial in table
+                sql = "insert into editorial values (" + postFormModel.UserID + ", " + postFormModel.ProblemID + ", " + postFormModel.TagID + ", '" + postFormModel.Rephrase + "', '" + postFormModel.Solution + "', '" + postFormModel.Details + "', 0, 0, '" + postFormModel.DateOfPublishing + "')";
+                new DBHelper().setTable(sql);
+            }
+            else if(Session["mode"].ToString() == "update")
+            {
+                getProblemID(postFormModel);
+
+                string sql = "update Editorial set ProblemID="+postFormModel.ProblemID+", TagID="+postFormModel.TagID+", Rephrase='"+postFormModel.Rephrase+"', Solution='"+postFormModel.Solution+"', Details='"+postFormModel.Details+"' where EditorialID="+Session["eid"];
+                new DBHelper().setTable(sql);
+            }
+            return RedirectToAction("Index", "Home");
             
+        }
+
+        protected void getProblemID(PostFormModel postFormModel)
+        {
             // Finding ProblemID 
-            string subSql="";
+            string subSql = "";
             if (postFormModel.ProblemCode != null)
                 subSql = " and Code='" + postFormModel.ProblemCode + "'";
-            
-            string sql = "select ProblemID from Problem where OJID = " + postFormModel.OJID + " and Title ='" + postFormModel.ProblemTitle+ "'" + subSql;
+
+            string sql = "select ProblemID from Problem where OJID = " + postFormModel.OJID + " and Title ='" + postFormModel.ProblemTitle + "'" + subSql;
             var res = new DBHelper().getTable(sql);
 
             // If problemID already exist, otherwise 'else' part to generate problemID
@@ -50,8 +99,8 @@ namespace CpEditorial.Controllers
             else
             {
                 if (postFormModel.ProblemCode == null) subSql = ", NULL";
-                else subSql = ", '"+postFormModel.ProblemCode+"'";
-                sql = "insert into Problem values ("+postFormModel.OJID+", '"+postFormModel.ProblemTitle+"'"+subSql+")";
+                else subSql = ", '" + postFormModel.ProblemCode + "'";
+                sql = "insert into Problem values (" + postFormModel.OJID + ", '" + postFormModel.ProblemTitle + "'" + subSql + ")";
                 new DBHelper().setTable(sql);
 
                 subSql = "";
@@ -62,13 +111,6 @@ namespace CpEditorial.Controllers
                 res = new DBHelper().getTable(sql);
                 postFormModel.ProblemID = Convert.ToInt32(res.Rows[0][0]);
             }
-
-            //Insert editorial in table
-            sql = "insert into editorial values ("+postFormModel.UserID+", "+postFormModel.ProblemID+", "+postFormModel.TagID+", '"+postFormModel.Rephrase+"', '" +postFormModel.Solution+ "', '"+postFormModel.Details+"', 0, 0, '"+postFormModel.DateOfPublishing+"')";
-            new DBHelper().setTable(sql);
-
-
-            return RedirectToAction("Index", "Home");
         }
 
         [HttpGet]
