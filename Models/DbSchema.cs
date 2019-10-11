@@ -349,5 +349,43 @@ namespace CpEditorial.Models
             this.downvote = Convert.ToInt32(dtable.Rows[0][i++]);
             this.dateOfPublishing = Convert.ToString(dtable.Rows[0][i++]);
         }
+
+
     }
+
+    //    CREATE TABLE Report(
+    //        ReportID int IDENTITY(9001, 1) PRIMARY KEY,
+    //        UserID int FOREIGN KEY REFERENCES[User](UserID),
+    //	PostID int NOT NULL,
+    //	PostType varchar(10) NOT NULL,
+    //   Text text NOT NULL
+    //);
+
+    public class Report
+    {
+        public int reportId { get; set; }
+        public int userId { get; set; }
+        public int postId { get; set; }
+        public string postType { get; set; }
+        public string text { get; set; }
+
+        public Report(int reportId)
+        {
+            this.reportId = reportId;
+            string query = "Select * from report where reportId = " + reportId;
+
+            DataTable dtable = new DBHelper().getTable(query);
+
+            int i = 1;
+
+            userId = Convert.ToInt32(dtable.Rows[0][i++]);
+            postId = Convert.ToInt32(dtable.Rows[0][i++]);
+            postType = Convert.ToString(dtable.Rows[0][i++]);
+            text = Convert.ToString(dtable.Rows[0][i++]);
+            
+        }
+
+    }
+
+   
 }
