@@ -35,7 +35,7 @@ namespace CpEditorial.Models
                 {
                     replyList.Add(dSchema.GetRepliesOfComment(c.commentId));
                 }
-                catch (System.NullReferenceException e)
+                catch (System.NullReferenceException)
                 {
                     replyList.Add(new List<Comment>());
                 }
