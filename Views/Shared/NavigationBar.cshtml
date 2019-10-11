@@ -19,20 +19,14 @@
                                 <li class="nav-item">
                                     <a class="nav-link" href="~/Editorial/PostForm">Post</a>
                                 </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href='~/Profile/Index?uid=@Session["userID"]'>My Account</a>
+                                </li>
                             }
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Group</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Account</a>
-                            </li>
                             @if (Session["userID"] == null)
                             {
                                 <li class="nav-item">
-                                    <a class="nav-link" href="~/Register/SignUp">SignUp</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="~/Register/LogIn">Login</a>
+                                    <a class="nav-link" href="~/Register/Login">Login</a>
                                 </li>
                             }
                             else
@@ -44,15 +38,18 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="~/Home/Contact">Contact</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="~/Search">Search</a>
+                            </li>
                         </ul>
                         <!-- Search Form  -->
-                        <div id="search-wrapper">
+                        @*<div id="search-wrapper">
                             <form action="#">
                                 <input type="text" id="search" placeholder="Search something...">
                                 <div id="close-icon"></div>
                                 <input class="d-none" type="submit" value="">
                             </form>
-                        </div>
+                        </div>*@
                     </div>
                 </nav>
             </div>

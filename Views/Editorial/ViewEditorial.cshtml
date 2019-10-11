@@ -38,13 +38,15 @@
                             @* Title *@
                             <div>
                                 <h3>@Model.ProblemTitle</h3>
-                                <p><a href="#" class="post-author">@Model.UserName</a> on @Model.DateTime</p>
+                                <p><a href="#" class="post-author">@Model.UserName</a> on @Model.DateOfPublishing</p>
                             </div>
                         </div>
                         <!-- Post Content -->
                         <div class="post-content">
 
-                            <h6>@Model.Description</h6>
+                            <h6>@Model.Rephrase</h6> <br />
+                            <h6>@Model.Solution</h6> <br />
+                            <h6>@Model.Details</h6> 
 
                             <!-- Post Tags -->
                             <ul class="post-tags">

@@ -19,8 +19,7 @@ namespace CpEditorial.Models
         public string ProblemCode { get; set; }
 
         public int EditorialID { get; set; }
-        public string Description { get; set; }
-        public string DateTime { get; set; }
+        public string DateOfPublishing { get; set; }
         public int UpVote { get; set; }
         public int DownVote { get; set; }
         public string Rephrase { get; set; }
