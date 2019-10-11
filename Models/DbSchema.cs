@@ -51,6 +51,7 @@ namespace CpEditorial.Models
         public List<Comment> GetCommentsOfEditorial(int editorialId)
         {
             List<Comment> commentList = new List<Comment>();
+            //string query = "select commentid from comment where editorialid = " + editorialId + " and parentid = 0";
             string query = "select commentid from comment where editorialid = " + editorialId;
             DataTable dataTable = new DBHelper().getTable(query);
             for (int i = 0; i < dataTable.Rows.Count; i++)

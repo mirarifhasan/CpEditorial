@@ -79,7 +79,6 @@
                             </form>
                         </div>
                         @{
-                            //foreach (var comment in Model.commentList)
                             for (int i = 0; i < Model.commentList.Count; i++)
                             {
                                 <div class="col-12 col-lg-12 ml-0">
@@ -97,31 +96,22 @@
                                                     </div>
                                                     <p>@Model.commentList[i].text</p>
                                                 </div>
-                                                <ol class="children">
-                                                    <li class="single_comment_area">
-                                                        <!-- Comment Content -->
-                                                        <div class="comment-content">
-                                                            <!-- Comment Meta -->
-                                                            <div class="comment-meta d-flex align-items-center justify-content-between">
-                                                                <p><a href="#" class="post-author">Reply username</a> on <a href="#" class="post-date">Sep 29, 2017 at 9:48 am</a></p>
+                                                <!-- Reply section -->
+                                                @for (int j = 0; j < Model.replyList[i].Count; j++)
+                                                {
+                                                    <ol class="children">
+                                                        <li class="single_comment_area">
+                                                            <!-- Comment Content -->
+                                                            <div class="comment-content">
+                                                                <!-- Comment Meta -->
+                                                                <div class="comment-meta d-flex align-items-center justify-content-between">
+                                                                    <p><a href="#" class="post-author">@Model.user.getUserNameOnly(Model.replyList[i][j].userId)</a> on <a href="#" class="post-date">@Model.replyList[i][j].dateOfPublishing</a></p>
+                                                                </div>
+                                                                <p>@Model.replyList[i][j].text</p>
                                                             </div>
-                                                            <p>The replied message...</p>
-                                                        </div>
-                                                    </li>
-                                                </ol>
-                                            </li>
-
-                                            <!-- Single Comment Area -->
-                                            <li class="single_comment_area">
-                                                <!-- Comment Content -->
-                                                <div class="comment-content">
-                                                    <!-- Comment Meta -->
-                                                    <div class="comment-meta d-flex align-items-center justify-content-between">
-                                                        <p><a href="#" class="post-author">Katy Liu</a> on <a href="#" class="post-date">Sep 29, 2017 at 9:48 am</a></p>
-                                                        <a href="#" class="comment-reply btn world-btn">Reply</a>
-                                                    </div>
-                                                    <p>Pick the yellow peach that looks like a sunset with its red, orange, and pink coat skin, peel it off with your teeth. Sink them into unripened...</p>
-                                                </div>
+                                                        </li>
+                                                    </ol>
+                                                }
                                             </li>
                                         </ol>
                                     </div>
@@ -129,50 +119,6 @@
                             }
                         }
                         @*<a onclick="hideFunction('hideRQOption', 'hideRQ')" id="hideRQOption" href="#hideRQOption">More details..</a>*@
-                        <div class="col-12 col-lg-12 ml-0">
-                            <!-- Comment Area Start -->
-                            <div class="comment_area clearfix mt-70">
-                                <ol>
-                                    <!-- Single Comment Area -->
-                                    <li class="single_comment_area">
-                                        <!-- Comment Content -->
-                                        <div class="comment-content">
-                                            <!-- Comment Meta -->
-                                            <div class="comment-meta d-flex align-items-center justify-content-between">
-                                                <p><a href="#" class="post-author">Commenter name</a> on <a href="#" class="post-date">Sep 29, 2017 at 9:48 am</a></p>
-                                                <Button href="#" class="btn world-btn">Reply</Button>
-                                            </div>
-                                            <p>The posted comment...</p>
-                                        </div>
-                                        <ol class="children">
-                                            <li class="single_comment_area">
-                                                <!-- Comment Content -->
-                                                <div class="comment-content">
-                                                    <!-- Comment Meta -->
-                                                    <div class="comment-meta d-flex align-items-center justify-content-between">
-                                                        <p><a href="#" class="post-author">Reply username</a> on <a href="#" class="post-date">Sep 29, 2017 at 9:48 am</a></p>
-                                                    </div>
-                                                    <p>The replied message...</p>
-                                                </div>
-                                            </li>
-                                        </ol>
-                                    </li>
-
-                                    <!-- Single Comment Area -->
-                                    <li class="single_comment_area">
-                                        <!-- Comment Content -->
-                                        <div class="comment-content">
-                                            <!-- Comment Meta -->
-                                            <div class="comment-meta d-flex align-items-center justify-content-between">
-                                                <p><a href="#" class="post-author">Katy Liu</a> on <a href="#" class="post-date">Sep 29, 2017 at 9:48 am</a></p>
-                                                <a href="#" class="comment-reply btn world-btn">Reply</a>
-                                            </div>
-                                            <p>Pick the yellow peach that looks like a sunset with its red, orange, and pink coat skin, peel it off with your teeth. Sink them into unripened...</p>
-                                        </div>
-                                    </li>
-                                </ol>
-                            </div>
-                        </div>
 
 
 

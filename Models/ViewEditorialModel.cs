@@ -18,6 +18,7 @@ namespace CpEditorial.Models
         public OnlineJudge onlineJudge { get; set; }
 
         public List<Comment> commentList { get; }
+        public List<List<Comment>> replyList { get; set; }
         public ViewEditorialModel(int editorialID)
         {
             editorial = dSchema.GetEditorial(editorialID);
@@ -25,7 +26,20 @@ namespace CpEditorial.Models
             editorialTags = dSchema.GetEditorialTags(editorial.editorialId);
             user = dSchema.GetUser(editorial.userId);
             onlineJudge = dSchema.GetOnlineJudge(problem.ojId);
+
             commentList = dSchema.GetCommentsOfEditorial(editorial.editorialId);
+            replyList = new List<List<Comment>>();
+            foreach (Comment c in commentList)
+            {
+                try
+                {
+                    replyList.Add(dSchema.GetRepliesOfComment(c.commentId));
+                }
+                catch (System.NullReferenceException e)
+                {
+                    replyList.Add(new List<Comment>());
+                }
+            }
         }
     }
     //public class ViewEditorialModel : EditorialModel
