@@ -98,6 +98,13 @@ namespace CpEditorial.Controllers
 
             if (editorialId == 0) return Content("<script language='javascript' type='text/javascript'>alert('URL not correct');</script>");
 
+            string sql = "select Userid from editorial where editorialid=" + editorialId;
+            var dtbl = new DBHelper().getTable(sql);
+            var uid = Convert.ToInt32(dtbl.Rows[0][0].ToString());
+
+            if (uid != Convert.ToInt32(Session["userID"]))
+                return Redirect("/Warning/Index");
+
             ViewEditorialModel viewEditorialModel = new ViewEditorialModel(editorialId);
             return View(viewEditorialModel);
         }
@@ -105,11 +112,33 @@ namespace CpEditorial.Controllers
         [HttpGet]
         public ActionResult Delete(int id)
         {
-            string sql = "delete from editorial where editorialID="+id;
+            string sql = "select Userid from editorial where editorialid=" + id;
+            var dtbl = new DBHelper().getTable(sql);
+            var uid = Convert.ToInt32(dtbl.Rows[0][0].ToString());
+
+            if(uid != Convert.ToInt32(Session["userID"]))
+                return Redirect("/Warning/Index");
+
+            sql = "delete from editorial where editorialID="+id;
             new DBHelper().setTable(sql);
 
             return Redirect("/Profile/Index?uid="+Session["userID"]);
-            //return RedirectToAction("Index", "Profile");
+        }
+
+        [HttpGet]
+        public ActionResult RemoveBookmark(int id)
+        {
+            string sql = "select Userid from bookmark where bookmarkid=" + id;
+            var dtbl = new DBHelper().getTable(sql);
+            var uid = Convert.ToInt32(dtbl.Rows[0][0].ToString());
+
+            if (uid != Convert.ToInt32(Session["userID"]))
+                return Redirect("/Warning/Index");
+
+            sql = "delete from bookmark where bookmarkid=" + id;
+            new DBHelper().setTable(sql);
+
+            return Redirect("/Profile/Index?uid=" + Session["userID"]);
         }
     }
 }

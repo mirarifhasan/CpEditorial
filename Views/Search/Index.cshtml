@@ -1,5 +1,7 @@
 ﻿@model CpEditorial.Models.SearchModel
 @{
+    /**/
+
     Layout = null;
 }
 
@@ -50,44 +52,44 @@
 
     @if (Model.searchList.Count > 0)
     {
-    <div class="container">
-        <div class="row justify-content-center">
-            <!-- ============= Post Content Area Start ============= -->
-            <div class="col-12 col-lg-8">
-                <div class="post-content-area mb-100">
-                    <!-- Catagory Area -->
-                    <div class="world-catagory-area">
-                        <div class="tab-content" id="myTabContent">
-                            <div class="tab-pane fade show active" id="world-tab-1" role="tabpanel" aria-labelledby="tab1">
-                                <!-- List of last 10 editorials -->
-                                @for (int i = 0; i < Model.searchList.Count; i++)
-                                {
-                                    <!-- Single Blog Post -->
-                                    <div class="single-blog-post post-style-4 d-flex align-items-center">
-                                        <!-- Post Content -->
-                                        <a href="../Editorial/ViewEditorial?id=@Model.searchList[i].EditorialID" class="headline">
-                                            <div class="post-content">
-                                                <h5>@Model.searchList[i].ProblemTitle</h5>
-                                                <p style="height:50px;">@Model.searchList[i].Solution</p>
-                                                <!-- Post Meta -->
-                                                <div class="post-meta">
-                                                    <!--<p><a href="#" class="post-author">Katy Liu</a> on <a href="#" class="post-date">Sep 29, 2017 at 9:48 am</a></p>-->
+        <div class="container">
+            <div class="row justify-content-center">
+                <!-- ============= Post Content Area Start ============= -->
+                <div class="col-12 col-lg-8">
+                    <div class="post-content-area mb-100">
+                        <!-- Catagory Area -->
+                        <div class="world-catagory-area">
+                            <div class="tab-content" id="myTabContent">
+                                <div class="tab-pane fade show active" id="world-tab-1" role="tabpanel" aria-labelledby="tab1">
+                                    <!-- List of last 10 editorials -->
+                                    @for (int i = 0; i < Model.searchList.Count; i++)
+                                    {
+                                        <!-- Single Blog Post -->
+                                        <div class="single-blog-post post-style-4 d-flex align-items-center">
+                                            <!-- Post Content -->
+                                            <a href="../Editorial/ViewEditorial?id=@Model.searchList[i].EditorialID" class="headline">
+                                                <div class="post-content">
+                                                    <h5>@Model.searchList[i].ProblemTitle</h5>
+                                                    <p style="height:50px;">@Model.searchList[i].Solution</p>
+                                                    <!-- Post Meta -->
+                                                    <div class="post-meta">
+                                                        <!--<p><a href="#" class="post-author">Katy Liu</a> on <a href="#" class="post-date">Sep 29, 2017 at 9:48 am</a></p>-->
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </a>
-                                    </div>
-                                }
+                                            </a>
+                                        </div>
+                                    }
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
     }
     else
     {
-        <h5 style="text-align:center;margin-bottom:50px;">No result found</h5>
+        <h5 style="text-align:center;margin-bottom:50px;">@ViewBag.Message</h5>
     }
 
     @*Footer*@

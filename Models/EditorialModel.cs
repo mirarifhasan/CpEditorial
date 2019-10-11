@@ -26,6 +26,8 @@ namespace CpEditorial.Models
         public string Solution { get; set; }
         public string Details { get; set; }
 
+        public int BookMarkID { get; set; }
+
         public int UserID { get; set; }
         public string UserName { get; set; }
     }
