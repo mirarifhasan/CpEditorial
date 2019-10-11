@@ -232,6 +232,7 @@
     <Content Include="Views\Editorial\ViewEditorial.cshtml" />
     <Content Include="Views\Search\Index.cshtml" />
     <Content Include="Views\Profile\Index.cshtml" />
+    <Content Include="Views\Editorial\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

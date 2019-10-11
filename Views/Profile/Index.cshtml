@@ -75,7 +75,7 @@
 
                                         <div class="post-meta" style="display:flex;">
                                             <p style="margin-right:20px;"><a href="/Editorial/PostForm?eid=@Model.myEditorialList[i].EditorialID">Edit</a></p>
-                                            <p><a href="/Editorial/PostForm?eid=@Model.myEditorialList[i].EditorialID">Delete</a></p>
+                                            <p><a href="#" onclick="myFunction('@(Model.myEditorialList[i].EditorialID)')">Delete</a></p>
                                         </div>
                                     </div>
                                 </div>
@@ -116,6 +116,19 @@
     @{
         Html.RenderPartial("Footer");
     }
+
+    <script>
+        function myFunction(eid) {
+            if (confirm('Are you sure about delete this editorial?')) {
+                
+                var a = parseInt(eid);
+                window.location.href = '@Url.Action("Delete", "Editorial")/' + a;
+
+            } else {
+                // Do nothing!
+            }
+        }
+    </script>
 
 </body>
 </html>
