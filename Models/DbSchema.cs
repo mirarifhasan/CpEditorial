@@ -382,10 +382,36 @@ namespace CpEditorial.Models
             postId = Convert.ToInt32(dtable.Rows[0][i++]);
             postType = Convert.ToString(dtable.Rows[0][i++]);
             text = Convert.ToString(dtable.Rows[0][i++]);
-            
+
         }
 
     }
+    //    CREATE TABLE Bookmark(
+    //    BookmarkID int IDENTITY(10001, 1) PRIMARY KEY,
+    //    UserID int FOREIGN KEY REFERENCES[User](UserID),
+    //	EditorialID int FOREIGN KEY REFERENCES Editorial(EditorialID),  
+    //);
 
-   
+    public class Bookmark
+    {
+        public int bookmarkId { get; set; }
+        public int userId { get; set; }
+        public int editorialId { get; set; }
+
+        public Bookmark(int bookmarkId)
+        {
+            this.bookmarkId = bookmarkId;
+            string query = "Select * from Bookmark where bookmarkId = " + bookmarkId;
+
+            DataTable dtable = new DBHelper().getTable(query);
+
+            int i = 1;
+
+            userId = Convert.ToInt32(dtable.Rows[0][i++]);
+            editorialId = Convert.ToInt32(dtable.Rows[0][i++]);
+
+
+        }
+    }
+
 }
