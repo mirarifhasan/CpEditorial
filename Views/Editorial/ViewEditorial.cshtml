@@ -30,10 +30,14 @@
                         <div class="post-meta" style="display:flex;">
                             @* Vote button *@
                             <div style="margin-right:20px;">
-                                <div class="triangle-up"></div>
-                                <p style="text-align:center; padding:5px;">@Model.editorial.upvote</p>
-                                <div style="margin-top:20px;" >
-                                    <a href="#" onclick="vote('d')" class="triangle-down"></a>
+                                <div>
+                                    <a href="/Editorial/Vote?v=upvote&eid=@Model.editorial.editorialId" class="triangle-up"></a>
+                                </div>
+                                
+                                <p style="text-align:center; padding:5px; margin-top:25px;">@(Model.editorial.upvote - Model.editorial.downvote)</p>
+                                
+                                <div style="margin-top:25px;">
+                                    <a href="/Editorial/Vote?v=downvote&eid=@Model.editorial.editorialId" class="triangle-down"></a>
                                 </div>
                             </div>
 
@@ -80,56 +84,51 @@
                                 </div>
                             </form>
                         </div>
-                        @{
-                            for (int i = 0; i < Model.commentList.Count; i++)
-                            {
-                                <div class="col-12 col-lg-12 ml-0">
-                                    <!-- Comment Area Start -->
-                                    <div class="comment_area clearfix mt-70">
-                                        <ol>
-                                            <!-- Single Comment Area -->
-                                            <li class="single_comment_area">
-                                                <!-- Comment Content -->
-                                                <div class="comment-content">
-                                                    <!-- Comment Meta -->
-                                                    <div class="comment-meta d-flex align-items-center justify-content-between">
-                                                        <p><a href="#" class="post-author">@Model.user.getUserNameOnly(Model.commentList[i].userId)</a> on <a href="#" class="post-date">@Model.commentList[i].dateOfPublishing</a></p>
-                                                        <Button href="#" class="btn world-btn">Reply</Button>
-                                                    </div>
-                                                    <p>@Model.commentList[i].text</p>
+                        @for (int i = 0; i < Model.commentList.Count; i++)
+                        {
+                            <div class="col-12 col-lg-12 ml-0">
+                                <!-- Comment Area Start -->
+                                <div class="comment_area clearfix mt-70">
+                                    <ol>
+                                        <!-- Single Comment Area -->
+                                        <li class="single_comment_area">
+                                            <!-- Comment Content -->
+                                            <div class="comment-content">
+                                                <!-- Comment Meta -->
+                                                <div class="comment-meta d-flex align-items-center justify-content-between">
+                                                    <p><a href="#" class="post-author">@Model.user.getUserNameOnly(Model.commentList[i].userId)</a> on <a href="#" class="post-date">@Model.commentList[i].dateOfPublishing</a></p>
+                                                    <Button href="#" class="btn world-btn">Reply</Button>
                                                 </div>
-                                                <!-- Reply section -->
-                                                @*<a onclick="hideFunction('hideRQOption', 'hideRQ')" id="hideRQOption" href="#hideRQOption">More details..</a>*@
-                                                @if (Model.replyList[i].Count > 0)
-                                                {
-                                                    <a onclick="hideFunction('hideRQOption', 'hideDE')" id="hideRQOption" href="#hideRQOption">View @Model.replyList[i].Count replies</a>
-                                                    <div id="hideDE" style="display:none;">
-                                                        @for (int j = 0; j < Model.replyList[i].Count; j++)
-                                                        {
-                                                            <ol class="children">
-                                                                <li class="single_comment_area">
-                                                                    <!-- Comment Content -->
-                                                                    <div class="comment-content">
-                                                                        <!-- Comment Meta -->
-                                                                        <div class="comment-meta d-flex align-items-center justify-content-between">
-                                                                            <p><a href="#" class="post-author">@Model.user.getUserNameOnly(Model.replyList[i][j].userId)</a> on <a href="#" class="post-date">@Model.replyList[i][j].dateOfPublishing</a></p>
-                                                                        </div>
-                                                                        <p>@Model.replyList[i][j].text</p>
+                                                <p>@Model.commentList[i].text</p>
+                                            </div>
+                                            <!-- Reply section -->
+                                            @*<a onclick="hideFunction('hideRQOption', 'hideRQ')" id="hideRQOption" href="#hideRQOption">More details..</a>*@
+                                            @if (Model.replyList[i].Count > 0)
+                                            {
+                                                <a onclick="hideFunction('hideRQOption', 'hideDE')" id="hideRQOption" href="#hideRQOption">View @Model.replyList[i].Count replies</a>
+                                                <div id="hideDE" style="display:none;">
+                                                    @for (int j = 0; j < Model.replyList[i].Count; j++)
+                                                    {
+                                                        <ol class="children">
+                                                            <li class="single_comment_area">
+                                                                <!-- Comment Content -->
+                                                                <div class="comment-content">
+                                                                    <!-- Comment Meta -->
+                                                                    <div class="comment-meta d-flex align-items-center justify-content-between">
+                                                                        <p><a href="#" class="post-author">@Model.user.getUserNameOnly(Model.replyList[i][j].userId)</a> on <a href="#" class="post-date">@Model.replyList[i][j].dateOfPublishing</a></p>
                                                                     </div>
-                                                                </li>
-                                                            </ol>
-                                                        }
-                                                    </div>
-                                                }
-                                            </li>
-                                        </ol>
-                                    </div>
+                                                                    <p>@Model.replyList[i][j].text</p>
+                                                                </div>
+                                                            </li>
+                                                        </ol>
+                                                    }
+                                                </div>
+                                            }
+                                        </li>
+                                    </ol>
                                 </div>
-                            }
+                            </div>
                         }
-                        @*<a onclick="hideFunction('hideRQOption', 'hideRQ')" id="hideRQOption" href="#hideRQOption">More details..</a>*@
-
-
 
                     </div>
                 </div>
@@ -234,12 +233,7 @@
 
             document.getElementById(OptionDiv).style.display = "none";
         }
-
-        function vote(c) {
-            if (c == 'd') {
-                window.location.href = '@Url.Action("ViewEditorial", "Editorial")/' + a;
-            }
-        }
+        
     </script>
 
 </body>

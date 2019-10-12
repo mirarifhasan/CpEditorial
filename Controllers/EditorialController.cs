@@ -109,7 +109,22 @@ namespace CpEditorial.Controllers
             new DBHelper().setTable(sql);
 
             return Redirect("/Profile/Index?uid="+Session["userID"]);
-            //return RedirectToAction("Index", "Profile");
+        }
+
+        [HttpGet]
+        public ActionResult Vote()
+        {
+            string c = Request.QueryString["v"];
+            int eid = Convert.ToInt32(Request.QueryString["eid"]);
+
+            if (Session["userID"] == null)
+                return Redirect("/Register/LogIn");
+
+            string sql = "update editorial set "+c+" = "+c+"+1 where editorialid="+eid;
+
+            new DBHelper().setTable(sql);
+
+            return Redirect("/Editorial/ViewEditorial?id=" + eid);
         }
     }
 }
