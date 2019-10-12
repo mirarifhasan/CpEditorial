@@ -101,6 +101,8 @@ namespace CpEditorial.Controllers
 
             if (editorialId == 0) return Content("<script language='javascript' type='text/javascript'>alert('URL not correct');</script>");
 
+            if (TempData["message"] != null) ViewBag.Error = TempData["message"];
+
             ViewEditorialModel viewEditorialModel = new ViewEditorialModel(editorialId);
             return View(viewEditorialModel);
         }
@@ -121,11 +123,29 @@ namespace CpEditorial.Controllers
             int eid = Convert.ToInt32(Request.QueryString["eid"]);
 
             if (Session["userID"] == null)
-                return Redirect("/Register/LogIn");
+            {
+                TempData["message"] = "Login first";
+                return Redirect("/Editorial/ViewEditorial?id=" + eid);
+            }
 
-            string sql = "select votetype from votetrack where userID=" + Session["userID"] + " and editorialID=" + eid;
+            string sql;
+
+            // Post owner can't vote on his own post
+            sql = "select userid from editorial where editorialid=" + eid;
             DataTable dtbl = new DBHelper().getTable(sql);
+
             if (dtbl.Rows.Count > 0)
+
+            if ( Convert.ToInt32(dtbl.Rows[0][0].ToString()) == Convert.ToInt32(Session["userID"]) ) {
+                TempData["message"] = "You can not vote on your own post";
+                return Redirect("/Editorial/ViewEditorial?id=" + eid);
+            }
+
+            // Delete records if already voted but now want to change vote
+            dtbl.Clear();
+            sql = "select votetype from votetrack where userID=" + Session["userID"] + " and editorialID=" + eid;
+            dtbl = new DBHelper().getTable(sql);
+            if(dtbl.Rows.Count > 0)
             {
                 sql = "delete from votetrack where userID=" + Session["userID"] + " and editorialID=" + eid;
                 new DBHelper().setTable(sql);
@@ -134,6 +154,9 @@ namespace CpEditorial.Controllers
             }
 
             if (dtbl.Rows.Count == 0 || dtbl.Rows[0][0].ToString() != c)
+
+            // Adding new vote
+            if(dtbl.Rows.Count == 0 || dtbl.Rows[0][0].ToString() != c )
             {
                 sql = "update editorial set " + c + " = " + c + "+1 where editorialid=" + eid;
                 new DBHelper().setTable(sql);
@@ -148,7 +171,7 @@ namespace CpEditorial.Controllers
         public ActionResult PostComment(ViewEditorialModel model)
         {
 
-            return RedirectToAction("Index", "Home");
+            //return RedirectToAction("Index", "Home");
 
             if (Session["UserID"] == null)
                 return Content("<script language='javascript' type='text/javascript'>alert('Login to continue');</script>");

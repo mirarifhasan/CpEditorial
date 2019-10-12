@@ -253,6 +253,13 @@
         Html.RenderPartial("Footer");
     }
 
+    @if (ViewBag.Error != null)
+    {
+        <script>
+            alert("@ViewBag.Error");
+        </script>
+    }
+
     <script>
         function hideFunction(OptionDiv, ReplyDiv) {
             var x = document.getElementById(ReplyDiv);
