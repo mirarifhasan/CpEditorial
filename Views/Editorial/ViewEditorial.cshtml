@@ -233,6 +233,18 @@
 
             document.getElementById(OptionDiv).style.display = "none";
         }
+
+        @*var eid = parseInt(window.location.search.split('id=')[1]);
+        console.log(eid);
+
+        if (@Session["userID"] != null) {
+            var sql = "select votetype from votetrack where userID=" +@Session["userID"]+" and editorialID=" + eid;
+            console.log(sql);
+
+            @{ 
+                
+            }
+        }*@
         
     </script>
 

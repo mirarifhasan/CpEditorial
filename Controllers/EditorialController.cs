@@ -1,6 +1,7 @@
 ﻿using CpEditorial.Models;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -120,9 +121,23 @@ namespace CpEditorial.Controllers
             if (Session["userID"] == null)
                 return Redirect("/Register/LogIn");
 
-            string sql = "update editorial set "+c+" = "+c+"+1 where editorialid="+eid;
+            string sql = "select votetype from votetrack where userID=" + Session["userID"] + " and editorialID=" + eid;
+            DataTable dtbl = new DBHelper().getTable(sql);
+            if(dtbl.Rows.Count > 0)
+            {
+                sql = "delete from votetrack where userID="+Session["userID"]+" and editorialID="+eid;
+                new DBHelper().setTable(sql);
+                sql = "update editorial set "+dtbl.Rows[0][0]+" = "+dtbl.Rows[0][0]+"-1 where editorialID="+eid;
+                new DBHelper().setTable(sql);
+            }
 
-            new DBHelper().setTable(sql);
+            if(dtbl.Rows.Count == 0 || dtbl.Rows[0][0].ToString() != c )
+            {
+                sql = "update editorial set " + c + " = " + c + "+1 where editorialid=" + eid;
+                new DBHelper().setTable(sql);
+                sql = "insert into votetrack values (" + Session["userID"] + ", " + eid + ", '" + c + "')";
+                new DBHelper().setTable(sql);
+            }
 
             return Redirect("/Editorial/ViewEditorial?id=" + eid);
         }
