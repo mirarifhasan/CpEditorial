@@ -13,18 +13,20 @@ namespace CpEditorial.Controllers
         // GET: Post
         public ActionResult PostForm()
         {
-            if(Session["UserID"] == null) return Content("<script language='javascript' type='text/javascript'>alert('Login to continue');</script>");
+            if (Session["UserID"] == null) return Content("<script language='javascript' type='text/javascript'>alert('Login to continue');</script>");
 
             int editorialId = 0;
             editorialId = Convert.ToInt32(Request.QueryString["eid"]);
 
             PostFormModel postEditorialModel;
-            if (editorialId == 0) {
+            if (editorialId == 0)
+            {
                 postEditorialModel = new PostFormModel();
                 Session["mode"] = "new";
                 ViewBag.buttonName = "Submit";
             }
-            else {
+            else
+            {
                 postEditorialModel = new PostFormModel(editorialId);
                 Session["mode"] = "update";
                 Session["eid"] = editorialId;
@@ -49,11 +51,11 @@ namespace CpEditorial.Controllers
                 string sql = "insert into editorial values (" + postFormModel.UserID + ", " + postFormModel.ProblemID + ", " + postFormModel.TagID + ", '" + postFormModel.Rephrase + "', '" + postFormModel.Solution + "', '" + postFormModel.Details + "', 0, 0, '" + postFormModel.DateOfPublishing + "')";
                 new DBHelper().setTable(sql);
             }
-            else if(Session["mode"].ToString() == "update")
+            else if (Session["mode"].ToString() == "update")
             {
                 getProblemID(postFormModel);
 
-                string sql = "update Editorial set ProblemID="+postFormModel.ProblemID+", TagID="+postFormModel.TagID+", Rephrase='"+postFormModel.Rephrase+"', Solution='"+postFormModel.Solution+"', Details='"+postFormModel.Details+"' where EditorialID="+Session["eid"];
+                string sql = "update Editorial set ProblemID=" + postFormModel.ProblemID + ", TagID=" + postFormModel.TagID + ", Rephrase='" + postFormModel.Rephrase + "', Solution='" + postFormModel.Solution + "', Details='" + postFormModel.Details + "' where EditorialID=" + Session["eid"];
                 Session.Remove("eid");
                 new DBHelper().setTable(sql);
             }
@@ -106,10 +108,10 @@ namespace CpEditorial.Controllers
         [HttpGet]
         public ActionResult Delete(int id)
         {
-            string sql = "delete from editorial where editorialID="+id;
+            string sql = "delete from editorial where editorialID=" + id;
             new DBHelper().setTable(sql);
 
-            return Redirect("/Profile/Index?uid="+Session["userID"]);
+            return Redirect("/Profile/Index?uid=" + Session["userID"]);
         }
 
         [HttpGet]
@@ -123,15 +125,15 @@ namespace CpEditorial.Controllers
 
             string sql = "select votetype from votetrack where userID=" + Session["userID"] + " and editorialID=" + eid;
             DataTable dtbl = new DBHelper().getTable(sql);
-            if(dtbl.Rows.Count > 0)
+            if (dtbl.Rows.Count > 0)
             {
-                sql = "delete from votetrack where userID="+Session["userID"]+" and editorialID="+eid;
+                sql = "delete from votetrack where userID=" + Session["userID"] + " and editorialID=" + eid;
                 new DBHelper().setTable(sql);
-                sql = "update editorial set "+dtbl.Rows[0][0]+" = "+dtbl.Rows[0][0]+"-1 where editorialID="+eid;
+                sql = "update editorial set " + dtbl.Rows[0][0] + " = " + dtbl.Rows[0][0] + "-1 where editorialID=" + eid;
                 new DBHelper().setTable(sql);
             }
 
-            if(dtbl.Rows.Count == 0 || dtbl.Rows[0][0].ToString() != c )
+            if (dtbl.Rows.Count == 0 || dtbl.Rows[0][0].ToString() != c)
             {
                 sql = "update editorial set " + c + " = " + c + "+1 where editorialid=" + eid;
                 new DBHelper().setTable(sql);
@@ -140,6 +142,40 @@ namespace CpEditorial.Controllers
             }
 
             return Redirect("/Editorial/ViewEditorial?id=" + eid);
+        }
+
+        [HttpPost]
+        public ActionResult PostComment(ViewEditorialModel model)
+        {
+
+            return RedirectToAction("Index", "Home");
+
+            if (Session["UserID"] == null)
+                return Content("<script language='javascript' type='text/javascript'>alert('Login to continue');</script>");
+
+            string command;
+            model.comment.parentId = 0;
+
+            if (model.comment.parentId == 0)
+            {
+                command = "INSERT INTO Comment (UserID, EditorialID, Text)" +
+                    "VALUES (" +
+                    model.user.userId + ", " +
+                    model.editorial.editorialId + ", " +
+                    model.comment.text + ")";
+                new DBHelper().setTable(command);
+            }
+            else
+            {
+                command = "INSERT INTO Comment (UserID, EditorialID, ParentId, Text)" +
+                    "VALUES (" +
+                    model.user.userId + ", " +
+                    model.editorial.editorialId + ", " +
+                    model.comment.parentId + ", " +
+                    model.comment.text + ")";
+                new DBHelper().setTable(command);
+            }
+            return Redirect("/Editorial/ViewEditorial?id=" + model.editorial.editorialId);
         }
     }
 }

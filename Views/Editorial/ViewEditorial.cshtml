@@ -33,9 +33,9 @@
                                 <div>
                                     <a href="/Editorial/Vote?v=upvote&eid=@Model.editorial.editorialId" class="triangle-up"></a>
                                 </div>
-                                
+
                                 <p style="text-align:center; padding:5px; margin-top:25px;">@(Model.editorial.upvote - Model.editorial.downvote)</p>
-                                
+
                                 <div style="margin-top:25px;">
                                     <a href="/Editorial/Vote?v=downvote&eid=@Model.editorial.editorialId" class="triangle-down"></a>
                                 </div>
@@ -68,22 +68,49 @@
 
                         @*==== Comment section ====*@
                         @*Post a comment*@
+
                         <div class="post-a-comment-area mt-50">
                             <!-- Contact Form -->
-                            <form action="#" method="post">
-                                <div class="row">
+                            <div class="row">
+                                @using (Html.BeginForm("PostComment", "Editorial"))
+                                {
+
                                     <div class="col-12">
                                         <div class="group">
                                             <label for="message">Enter your comment</label>
-                                            <textarea name="message" id="message" required></textarea>
+                                            @Html.TextBoxFor(Model => Model.comment.text, new { @class = "form-control", @required = true })
+                                            @*@{
+                                                    Model.comment.parentId = 0;
+                                                }*@
                                         </div>
                                     </div>
                                     <div class="col-12">
                                         <button type="submit" class="btn world-btn">Post comment</button>
                                     </div>
-                                </div>
-                            </form>
+
+                                }
+                            </div>
                         </div>
+
+
+                        @*
+                            <div class="post-a-comment-area mt-50">
+                                <!-- Contact Form -->
+                                <form action="#" method="post">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="group">
+                                                <label for="message">Enter your comment</label>
+                                                <textarea name="message" id="message" required></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <button type="submit" class="btn world-btn">Post comment</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        *@
                         @for (int i = 0; i < Model.commentList.Count; i++)
                         {
                             <div class="col-12 col-lg-12 ml-0">
@@ -241,11 +268,11 @@
             var sql = "select votetype from votetrack where userID=" +@Session["userID"]+" and editorialID=" + eid;
             console.log(sql);
 
-            @{ 
-                
+            @{
+
             }
         }*@
-        
+
     </script>
 
 </body>

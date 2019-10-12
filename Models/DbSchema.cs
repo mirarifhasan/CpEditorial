@@ -96,7 +96,7 @@ namespace CpEditorial.Models
 
     public class User
     {
-        int userId;
+        public int userId { get; set; }
         public string userName { get; set; }
         string email;
         string password;
@@ -313,6 +313,10 @@ namespace CpEditorial.Models
         public int downvote { get; set; }
         public string dateOfPublishing { get; set; }
 
+        public Comment()
+        {
+
+        }
         public Comment(int commentId)
         {
             this.commentId = commentId;

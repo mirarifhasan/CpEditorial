@@ -16,7 +16,7 @@ namespace CpEditorial.Models
         public EditorialTags editorialTags { get; set; }
         public User user { get; set; }
         public OnlineJudge onlineJudge { get; set; }
-
+        public Comment comment { get; set; }
         public List<Comment> commentList { get; }
         public List<List<Comment>> replyList { get; set; }
         public ViewEditorialModel(int editorialID)
@@ -26,6 +26,7 @@ namespace CpEditorial.Models
             editorialTags = dSchema.GetEditorialTags(editorial.editorialId);
             user = dSchema.GetUser(editorial.userId);
             onlineJudge = dSchema.GetOnlineJudge(problem.ojId);
+            comment = new Comment();
 
             commentList = dSchema.GetCommentsOfEditorial(editorial.editorialId);
             replyList = new List<List<Comment>>();
