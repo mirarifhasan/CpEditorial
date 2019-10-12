@@ -25,6 +25,9 @@ namespace CpEditorial.Controllers
             }
             else {
                 postEditorialModel = new PostFormModel(editorialId);
+
+                if (postEditorialModel.ProblemTitle == null) return RedirectToAction("Index", "Warning");
+
                 Session["mode"] = "update";
                 Session["eid"] = editorialId;
                 ViewBag.buttonName = "Update";

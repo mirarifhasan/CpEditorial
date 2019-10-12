@@ -25,13 +25,17 @@ namespace CpEditorial.Models
             string sql = "select * from editorial, [user], Problem, OnlineJudge, Tag where Editorial.EditorialID="+ editorialId + " and Editorial.TagID=Tag.TagID and Editorial.ProblemID=Problem.ProblemID and Editorial.UserID=[User].UserID and Problem.OJID=OnlineJudge.OJID";
             DataTable dtbl = new DBHelper().getTable(sql);
 
-            EditorialID = editorialId;
-            ProblemTitle = dtbl.Rows[0][18].ToString();
-            OJID = Convert.ToInt32(dtbl.Rows[0][17].ToString());
-            TagID = Convert.ToInt32(dtbl.Rows[0][3].ToString());
-            Rephrase = dtbl.Rows[0][4].ToString();
-            Solution = dtbl.Rows[0][5].ToString();
-            Details = dtbl.Rows[0][6].ToString();
+            if (Convert.ToInt32(dtbl.Rows.Count) == 0) { }
+            else
+            {
+                EditorialID = editorialId;
+                ProblemTitle = dtbl.Rows[0][18].ToString();
+                OJID = Convert.ToInt32(dtbl.Rows[0][17].ToString());
+                TagID = Convert.ToInt32(dtbl.Rows[0][3].ToString());
+                Rephrase = dtbl.Rows[0][4].ToString();
+                Solution = dtbl.Rows[0][5].ToString();
+                Details = dtbl.Rows[0][6].ToString();
+            }
         }
 
         private void loadList()
