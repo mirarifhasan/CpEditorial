@@ -51,8 +51,7 @@ namespace CpEditorial.Models
         public List<Comment> GetCommentsOfEditorial(int editorialId)
         {
             List<Comment> commentList = new List<Comment>();
-            //string query = "select commentid from comment where editorialid = " + editorialId + " and parentid = 0";
-            string query = "select commentid from comment where editorialid = " + editorialId;
+            string query = "select commentid from comment where editorialid = " + editorialId + " and parentid is null";
             DataTable dataTable = new DBHelper().getTable(query);
             for (int i = 0; i < dataTable.Rows.Count; i++)
             {
@@ -325,11 +324,11 @@ namespace CpEditorial.Models
             {
                 this.editorialId = Convert.ToInt32(dtable.Rows[0][i++]);
             }
-            catch (System.FormatException e)
+            catch (System.FormatException)
             {
                 this.editorialId = 0;
             }
-            catch (System.InvalidCastException e)
+            catch (System.InvalidCastException)
             {
                 this.editorialId = 0;
             }
@@ -337,11 +336,11 @@ namespace CpEditorial.Models
             {
                 this.parentId = Convert.ToInt32(dtable.Rows[0][i++]);
             }
-            catch (System.FormatException e)
+            catch (System.FormatException)
             {
                 this.parentId = 0;
             }
-            catch (System.InvalidCastException e)
+            catch (System.InvalidCastException)
             {
                 this.parentId = 0;
             }
@@ -410,9 +409,6 @@ namespace CpEditorial.Models
 
             userId = Convert.ToInt32(dtable.Rows[0][i++]);
             editorialId = Convert.ToInt32(dtable.Rows[0][i++]);
-
-
         }
     }
-
 }
