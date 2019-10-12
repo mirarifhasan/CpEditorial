@@ -31,8 +31,10 @@
                             @* Vote button *@
                             <div style="margin-right:20px;">
                                 <div class="triangle-up"></div>
-                                <p style="text-align:center; padding:5px;">5</p>
-                                <div class="triangle-down"></div>
+                                <p style="text-align:center; padding:5px;">@Model.editorial.upvote</p>
+                                <div style="margin-top:20px;" >
+                                    <a href="#" onclick="vote('d')" class="triangle-down"></a>
+                                </div>
                             </div>
 
                             @* Title *@
@@ -97,20 +99,27 @@
                                                     <p>@Model.commentList[i].text</p>
                                                 </div>
                                                 <!-- Reply section -->
-                                                @for (int j = 0; j < Model.replyList[i].Count; j++)
+                                                @*<a onclick="hideFunction('hideRQOption', 'hideRQ')" id="hideRQOption" href="#hideRQOption">More details..</a>*@
+                                                @if (Model.replyList[i].Count > 0)
                                                 {
-                                                    <ol class="children">
-                                                        <li class="single_comment_area">
-                                                            <!-- Comment Content -->
-                                                            <div class="comment-content">
-                                                                <!-- Comment Meta -->
-                                                                <div class="comment-meta d-flex align-items-center justify-content-between">
-                                                                    <p><a href="#" class="post-author">@Model.user.getUserNameOnly(Model.replyList[i][j].userId)</a> on <a href="#" class="post-date">@Model.replyList[i][j].dateOfPublishing</a></p>
-                                                                </div>
-                                                                <p>@Model.replyList[i][j].text</p>
-                                                            </div>
-                                                        </li>
-                                                    </ol>
+                                                    <a onclick="hideFunction('hideRQOption', 'hideDE')" id="hideRQOption" href="#hideRQOption">View @Model.replyList[i].Count replies</a>
+                                                    <div id="hideDE" style="display:none;">
+                                                        @for (int j = 0; j < Model.replyList[i].Count; j++)
+                                                        {
+                                                            <ol class="children">
+                                                                <li class="single_comment_area">
+                                                                    <!-- Comment Content -->
+                                                                    <div class="comment-content">
+                                                                        <!-- Comment Meta -->
+                                                                        <div class="comment-meta d-flex align-items-center justify-content-between">
+                                                                            <p><a href="#" class="post-author">@Model.user.getUserNameOnly(Model.replyList[i][j].userId)</a> on <a href="#" class="post-date">@Model.replyList[i][j].dateOfPublishing</a></p>
+                                                                        </div>
+                                                                        <p>@Model.replyList[i][j].text</p>
+                                                                    </div>
+                                                                </li>
+                                                            </ol>
+                                                        }
+                                                    </div>
                                                 }
                                             </li>
                                         </ol>
@@ -217,6 +226,21 @@
     @{
         Html.RenderPartial("Footer");
     }
+
+    <script>
+        function hideFunction(OptionDiv, ReplyDiv) {
+            var x = document.getElementById(ReplyDiv);
+            x.style.display = "block";
+
+            document.getElementById(OptionDiv).style.display = "none";
+        }
+
+        function vote(c) {
+            if (c == 'd') {
+                window.location.href = '@Url.Action("ViewEditorial", "Editorial")/' + a;
+            }
+        }
+    </script>
 
 </body>
 </html>

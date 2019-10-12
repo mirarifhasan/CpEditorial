@@ -324,11 +324,11 @@ namespace CpEditorial.Models
             {
                 this.editorialId = Convert.ToInt32(dtable.Rows[0][i++]);
             }
-            catch (System.FormatException e)
+            catch (System.FormatException)
             {
                 this.editorialId = 0;
             }
-            catch (System.InvalidCastException e)
+            catch (System.InvalidCastException)
             {
                 this.editorialId = 0;
             }
@@ -336,11 +336,11 @@ namespace CpEditorial.Models
             {
                 this.parentId = Convert.ToInt32(dtable.Rows[0][i++]);
             }
-            catch (System.FormatException e)
+            catch (System.FormatException)
             {
                 this.parentId = 0;
             }
-            catch (System.InvalidCastException e)
+            catch (System.InvalidCastException)
             {
                 this.parentId = 0;
             }
@@ -409,9 +409,6 @@ namespace CpEditorial.Models
 
             userId = Convert.ToInt32(dtable.Rows[0][i++]);
             editorialId = Convert.ToInt32(dtable.Rows[0][i++]);
-
-
         }
     }
-
 }
