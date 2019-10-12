@@ -121,7 +121,10 @@ namespace CpEditorial.Controllers
             int eid = Convert.ToInt32(Request.QueryString["eid"]);
 
             if (Session["userID"] == null)
-                return Redirect("/Register/LogIn");
+            {
+                TempData["message"] = "Login first";
+                return Redirect("/Editorial/ViewEditorial?id=" + eid);
+            }
 
             string sql;
 
