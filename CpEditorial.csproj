@@ -120,12 +120,14 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\EditorialController.cs" />
     <Compile Include="Controllers\RegisterController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Account.cs" />
     <Compile Include="Models\ContactModel.cs" />
     <Compile Include="Models\DBHelper.cs" />
     <Compile Include="Models\OJTagModel.cs" />
@@ -222,6 +224,7 @@
     <Content Include="Views\Register\LogIn.cshtml" />
     <Content Include="Views\Register\SignUp.cshtml" />
     <Content Include="Views\Editorial\ViewEditorial.cshtml" />
+    <Content Include="Views\Account\Account.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

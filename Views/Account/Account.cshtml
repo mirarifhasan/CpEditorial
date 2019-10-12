@@ -1,0 +1,102 @@
+﻿@model CpEditorial.Models.Account
+
+
+
+
+@{
+    ViewBag.Title = "Account";
+}
+
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Post an editorial</title>
+    <link href="~/Content/bootstrap.css" rel="stylesheet">
+    <link href="~/Content/Site.css" rel="stylesheet">
+    <script src="https://cdn.ckeditor.com/4.12.1/standard/ckeditor.js"></script>
+
+</head>
+<body>
+    @{
+        Html.RenderPartial("NavigationBar");
+    }
+
+    <div class="container">
+
+        <div class="row">
+
+            <div class="col-sm-4">
+                <div style="margin-top :40px ">
+                   
+                    <div>
+                        <label style="font-size:20px">Name : </label>
+                        @foreach (var item in Model.UserInfo)
+                        {
+                            @Html.DisplayFor(m => item.UserName)
+                        }
+
+                    </div>
+                    <div>
+                        <label style="font-size:20px">Email : </label>
+                        <input />
+                    </div>
+                    <div>
+                        <label style="font-size:20px">User Type : </label>
+                        <input />
+                    </div>
+                    <div>
+                        <label for="prop" style="font-size:20px">Profession:</label>
+                        <input />
+                    </div>
+
+                    <div>
+                        <label for="point" style="font-size:20px">Point:</label>
+                        <input />
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-sm-4">
+                <h6>Your Posts</h6>
+                <textarea style="width : 250px ;height : 100px; margin:auto"> </textarea><br />
+                <textarea style="width : 250px ;height : 100px; margin:auto"> </textarea><br />
+                <textarea style="width : 250px ;height : 100px; margin:auto"> </textarea><br />
+            </div>
+
+            <div class="col-sm-4">
+                <a href="#" class="notification">
+                    <span style="color:white">Notification</span>
+                    <span class="badge">1</span>
+                </a>
+                <div style="margin-left : 30px ; margin-top :10px ">
+                    <label>Flag Posts : </label>
+                    <br />
+                    <ul style="list-style-type:disc">
+                        <li>Editorial : 1</li>
+                        <li>Editorial : 2</li>
+                        <li>Editorial : 3</li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div></div>
+
+
+    @*Footer*@
+    @{
+        Html.RenderPartial("Footer");
+    }
+
+
+</body>
+</html>
+
+

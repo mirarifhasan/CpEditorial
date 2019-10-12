@@ -9,7 +9,7 @@ namespace CpEditorial.Models
 {
     public class DBHelper
     {
-        public string connectionString = @"Data Source = DESKTOP-02U52QL\SQLEXPRESS; Initial Catalog = CpEditorial; Integrated Security=True";
+        public string connectionString = @"Data Source = DESKTOP-1TLCT0C\SQLEXPRESS1; Initial Catalog = CpEditorial; Integrated Security=True";
         
         public DataTable getTable(string sql)
         {
