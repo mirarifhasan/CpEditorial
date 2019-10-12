@@ -33,9 +33,9 @@
                                 <div>
                                     <a href="/Editorial/Vote?v=upvote&eid=@Model.editorial.editorialId" class="triangle-up"></a>
                                 </div>
-                                
+
                                 <p style="text-align:center; padding:5px; margin-top:25px;">@(Model.editorial.upvote - Model.editorial.downvote)</p>
-                                
+
                                 <div style="margin-top:25px;">
                                     <a href="/Editorial/Vote?v=downvote&eid=@Model.editorial.editorialId" class="triangle-down"></a>
                                 </div>
@@ -226,6 +226,13 @@
         Html.RenderPartial("Footer");
     }
 
+    @if (ViewBag.Error != null)
+    {
+        <script>
+            alert("@ViewBag.Error");
+        </script>
+    }
+
     <script>
         function hideFunction(OptionDiv, ReplyDiv) {
             var x = document.getElementById(ReplyDiv);
@@ -233,18 +240,6 @@
 
             document.getElementById(OptionDiv).style.display = "none";
         }
-
-        @*var eid = parseInt(window.location.search.split('id=')[1]);
-        console.log(eid);
-
-        if (@Session["userID"] != null) {
-            var sql = "select votetype from votetrack where userID=" +@Session["userID"]+" and editorialID=" + eid;
-            console.log(sql);
-
-            @{ 
-                
-            }
-        }*@
         
     </script>
 
