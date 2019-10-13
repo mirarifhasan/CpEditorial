@@ -36,22 +36,23 @@ namespace CpEditorial.Models
             }
 
 
-            sql = "select Bookmark.EditorialID, Editorial.Solution, Problem.Title from Editorial, Problem, Bookmark where Bookmark.UserID="+userID+" and Editorial.EditorialID=Bookmark.EditorialID and Editorial.ProblemID=Problem.ProblemID";
+            sql = "select bookmark.bookmarkid, Bookmark.EditorialID, Editorial.Solution, Problem.Title from Editorial, Problem, Bookmark where Bookmark.UserID="+userID+" and Editorial.EditorialID=Bookmark.EditorialID and Editorial.ProblemID=Problem.ProblemID";
             dtbl.Clear();
             dtbl = new DBHelper().getTable(sql);
             
             for (int i = 0; i < dtbl.Rows.Count; i++)
             {
                 editorialModel = new EditorialModel();
-                editorialModel.EditorialID = Convert.ToInt32(dtbl.Rows[i][0].ToString());
-                editorialModel.ProblemTitle = dtbl.Rows[i][2].ToString();
-                editorialModel.Solution = dtbl.Rows[i][1].ToString();
+                editorialModel.EditorialID = Convert.ToInt32(dtbl.Rows[i][1].ToString());
+                editorialModel.ProblemTitle = dtbl.Rows[i][3].ToString();
+                editorialModel.Solution = dtbl.Rows[i][2].ToString();
+                editorialModel.BookMarkID = Convert.ToInt32(dtbl.Rows[i][0].ToString());
 
                 bookmarkList.Add(editorialModel);
             }
 
 
-            sql = "select Editorial.EditorialID, Editorial.Solution, Problem.Title from Editorial, Problem, Comment where Comment.UserID="+userID+" and Editorial.EditorialID=Comment.EditorialID and Editorial.ProblemID=Problem.ProblemID";
+            sql = "select Editorial.EditorialID, Editorial.Solution, Problem.Title from Editorial, Problem where Editorial.EditorialID=(select distinct EditorialID from Comment where UserID="+userID+") and Editorial.ProblemID=Problem.ProblemID";
             dtbl.Clear();
             dtbl = new DBHelper().getTable(sql);
 

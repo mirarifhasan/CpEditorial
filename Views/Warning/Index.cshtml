@@ -1,0 +1,41 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Profile</title>
+    <link href="~/Content/Site.css" rel="stylesheet">
+    <script src="https://cdn.ckeditor.com/4.12.1/standard/ckeditor.js"></script>
+
+</head>
+<body>
+    @{
+        Html.RenderPartial("NavigationBar");
+    }
+
+    <div class="container">
+        <div class="row">
+            <div style="margin:300px auto 160px auto; display:flex; text-align:center;">
+                <div  style="margin:auto; margin-right:30px;">
+                    <img src="~/Image/Icon/wrongImo.png" height="100" width="100" />
+                </div>
+
+                <div  style="margin:auto;">
+                    <h4>Something went wrong</h4>
+                    <p><a href="/Home/Index">Go to home page</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    @*Footer*@
+    @{
+        Html.RenderPartial("Footer");
+    }
+
+</body>
+</html>

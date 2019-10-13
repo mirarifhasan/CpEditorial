@@ -28,6 +28,9 @@ namespace CpEditorial.Controllers
             else
             {
                 postEditorialModel = new PostFormModel(editorialId);
+
+                if (postEditorialModel.ProblemTitle == null) return RedirectToAction("Index", "Warning");
+
                 Session["mode"] = "update";
                 Session["eid"] = editorialId;
                 ViewBag.buttonName = "Update";
@@ -102,6 +105,7 @@ namespace CpEditorial.Controllers
             if (editorialId == 0) return Content("<script language='javascript' type='text/javascript'>alert('URL not correct');</script>");
 
             if (TempData["message"] != null) ViewBag.Error = TempData["message"];
+
 
             ViewEditorialModel viewEditorialModel = new ViewEditorialModel(editorialId);
             return View(viewEditorialModel);
@@ -181,6 +185,22 @@ namespace CpEditorial.Controllers
             new DBHelper().setTable(command);
             int eid = Convert.ToInt32(Session["editorialId"]);
             return Redirect("/Editorial/ViewEditorial?id=" + eid);
+        }
+
+        [HttpGet]
+        public ActionResult RemoveBookmark(int id)
+        {
+            string sql = "select Userid from bookmark where bookmarkid=" + id;
+            var dtbl = new DBHelper().getTable(sql);
+            var uid = Convert.ToInt32(dtbl.Rows[0][0].ToString());
+
+            if (uid != Convert.ToInt32(Session["userID"]))
+                return Redirect("/Warning/Index");
+
+            sql = "delete from bookmark where bookmarkid=" + id;
+            new DBHelper().setTable(sql);
+
+            return Redirect("/Profile/Index?uid=" + Session["userID"]);
         }
     }
 }

@@ -13,8 +13,11 @@ namespace CpEditorial.Controllers
         public ActionResult Index()
         {
             int userID = Convert.ToInt32(Request.QueryString["uid"]);
+
+            if (userID != Convert.ToInt32(Session["userID"]))
+                return Redirect("/Warning/Index");
+
             ProfileModel profileModel = new ProfileModel(userID);
-            
             return View(profileModel);
         }
     }

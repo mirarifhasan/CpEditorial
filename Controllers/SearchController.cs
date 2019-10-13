@@ -24,6 +24,7 @@ namespace CpEditorial.Controllers
             else
             {
                 SearchModel searchModel = new SearchModel(sTitle);
+                ViewBag.Message = "No result found";
                 return View(searchModel);
             }
         }

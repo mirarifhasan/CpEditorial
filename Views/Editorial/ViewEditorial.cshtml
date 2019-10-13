@@ -72,13 +72,13 @@
                             <!-- Contact Form -->
                             <div class="row">
                                 @{
-                                        Session["editorialId"] = Model.editorial.editorialId;
-                                        using (Html.BeginForm("PostComment", "Editorial"))
-                                        {
+                                    Session["editorialId"] = Model.editorial.editorialId;
+                                    using (Html.BeginForm("PostComment", "Editorial"))
+                                    {
                                         <div class="col-12">
                                             <div class="group">
                                                 <label for="message">Enter your comment</label>
-                                                <textarea name="message" id="message" required></textarea>
+                                                <textarea name="message" id="message" cols="45" required></textarea>
                                             </div>
                                         </div>
                                         <div class="col-12">
@@ -89,25 +89,6 @@
                             </div>
                         </div>
 
-
-                        @*
-                            <div class="post-a-comment-area mt-50">
-                                <!-- Contact Form -->
-                                <form action="#" method="post">
-                                    <div class="row">
-                                        <div class="col-12">
-                                            <div class="group">
-                                                <label for="message">Enter your comment</label>
-                                                <textarea name="message" id="message" required></textarea>
-                                            </div>
-                                        </div>
-                                        <div class="col-12">
-                                            <button type="submit" class="btn world-btn">Post comment</button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        *@
                         @for (int i = 0; i < Model.commentList.Count; i++)
                         {
                             <div class="col-12 col-lg-12 ml-0">
@@ -265,17 +246,6 @@
             document.getElementById(OptionDiv).style.display = "none";
         }
 
-        @*var eid = parseInt(window.location.search.split('id=')[1]);
-        console.log(eid);
-
-        if (@Session["userID"] != null) {
-            var sql = "select votetype from votetrack where userID=" +@Session["userID"]+" and editorialID=" + eid;
-            console.log(sql);
-
-            @{
-
-            }
-        }*@
 
     </script>
 

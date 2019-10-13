@@ -45,7 +45,7 @@
                                         </a>
 
                                         <div class="post-meta" style="display:flex;">
-                                            <p style="margin-right:20px;"><a href="/Editorial/PostForm?eid=@Model.myEditorialList[i].EditorialID">Remove</a></p>
+                                            <p style="margin-right:20px;"><a href="#" onclick="remove('@Model.bookmarkList[i].BookMarkID')">Remove</a></p>
                                         </div>
                                     </div>
                                 </div>
@@ -126,6 +126,15 @@
 
             } else {
                 // Do nothing!
+            }
+        }
+
+        function remove(bid) {
+            if (confirm('Are you sure about delete this editorial?')) {
+                
+                var a = parseInt(bid);
+                window.location.href = '@Url.Action("RemoveBookmark", "Editorial")/' + a;
+
             }
         }
     </script>
