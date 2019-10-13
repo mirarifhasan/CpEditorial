@@ -68,26 +68,23 @@
 
                         @*==== Comment section ====*@
                         @*Post a comment*@
-
                         <div class="post-a-comment-area mt-50">
                             <!-- Contact Form -->
                             <div class="row">
-                                @using (Html.BeginForm("PostComment", "Editorial"))
-                                {
-
-                                    <div class="col-12">
-                                        <div class="group">
-                                            <label for="message">Enter your comment</label>
-                                            @Html.TextBoxFor(Model => Model.comment.text, new { @class = "form-control", @required = true })
-                                            @*@{
-                                                    Model.comment.parentId = 0;
-                                                }*@
+                                @{
+                                        Session["editorialId"] = Model.editorial.editorialId;
+                                        using (Html.BeginForm("PostComment", "Editorial"))
+                                        {
+                                        <div class="col-12">
+                                            <div class="group">
+                                                <label for="message">Enter your comment</label>
+                                                <textarea name="message" id="message" required></textarea>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-12">
-                                        <button type="submit" class="btn world-btn">Post comment</button>
-                                    </div>
-
+                                        <div class="col-12">
+                                            <button type="submit" class="btn world-btn">Post comment</button>
+                                        </div>
+                                    }
                                 }
                             </div>
                         </div>

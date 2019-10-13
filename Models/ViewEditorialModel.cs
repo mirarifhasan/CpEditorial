@@ -19,6 +19,15 @@ namespace CpEditorial.Models
         public Comment comment { get; set; }
         public List<Comment> commentList { get; }
         public List<List<Comment>> replyList { get; set; }
+        public ViewEditorialModel()
+        {
+            editorial = new Editorial();
+            problem = new Problem();
+            editorialTags = new EditorialTags();
+            user = new User();
+            onlineJudge = new OnlineJudge();
+            comment = new Comment();
+        }
         public ViewEditorialModel(int editorialID)
         {
             editorial = dSchema.GetEditorial(editorialID);

@@ -103,6 +103,7 @@ namespace CpEditorial.Models
         int point;
         string userType;
 
+        public User() { }
         public User(int userId)
         {
             this.userId = userId;
@@ -139,6 +140,7 @@ namespace CpEditorial.Models
         string email;
         string message;
 
+        public Feedback() { }
         public Feedback(int feedbackId)
         {
             this.feedbackId = feedbackId;
@@ -160,6 +162,7 @@ namespace CpEditorial.Models
     {
         int ojId;
         string ojName;
+        public OnlineJudge() { }
         public OnlineJudge(int ojId)
         {
             this.ojId = ojId;
@@ -179,6 +182,7 @@ namespace CpEditorial.Models
     {
         int tagId;
         public string text { get; set; }
+        public Tag() { }
         public Tag(int tagId)
         {
             this.tagId = tagId;
@@ -204,6 +208,7 @@ namespace CpEditorial.Models
 
         public string title { get; set; }
         string problemCode;
+        public Problem() { }
         public Problem(int problemId)
         {
             this.problemId = problemId;
@@ -242,6 +247,7 @@ namespace CpEditorial.Models
         public int upvote { get; set; }
         public int downvote { get; set; }
         public string dateOfPublishing { get; set; }
+        public Editorial() {}
 
         public Editorial(int editorialId)
         {
@@ -271,6 +277,7 @@ namespace CpEditorial.Models
         public List<Tag> tagList { get; }
         public int editorialId { get; set; }
 
+        public EditorialTags() { }
         public EditorialTags(int editorialId)
         {
             this.tagList = new List<Tag>();

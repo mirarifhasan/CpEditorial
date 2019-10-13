@@ -168,37 +168,19 @@ namespace CpEditorial.Controllers
         }
 
         [HttpPost]
-        public ActionResult PostComment(ViewEditorialModel model)
+        public ActionResult PostComment(string message)
         {
 
             //return RedirectToAction("Index", "Home");
 
             if (Session["UserID"] == null)
                 return Content("<script language='javascript' type='text/javascript'>alert('Login to continue');</script>");
-
-            string command;
-            model.comment.parentId = 0;
-
-            if (model.comment.parentId == 0)
-            {
-                command = "INSERT INTO Comment (UserID, EditorialID, Text)" +
-                    "VALUES (" +
-                    model.user.userId + ", " +
-                    model.editorial.editorialId + ", " +
-                    model.comment.text + ")";
-                new DBHelper().setTable(command);
-            }
-            else
-            {
-                command = "INSERT INTO Comment (UserID, EditorialID, ParentId, Text)" +
-                    "VALUES (" +
-                    model.user.userId + ", " +
-                    model.editorial.editorialId + ", " +
-                    model.comment.parentId + ", " +
-                    model.comment.text + ")";
-                new DBHelper().setTable(command);
-            }
-            return Redirect("/Editorial/ViewEditorial?id=" + model.editorial.editorialId);
+            string command = "insert into comment (userid, editorialid, text) values (" +
+                Session["UserID"] + ", " +
+                Session["editorialId"] + ", '" + message + "')";
+            new DBHelper().setTable(command);
+            int eid = Convert.ToInt32(Session["editorialId"]);
+            return Redirect("/Editorial/ViewEditorial?id=" + eid);
         }
     }
 }
