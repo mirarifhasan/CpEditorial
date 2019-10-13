@@ -71,7 +71,7 @@ namespace CpEditorial.Controllers
             // Finding ProblemID 
             string subSql = "";
             if (postFormModel.ProblemCode != null)
-                subSql = " and Code='" + postFormModel.ProblemCode + "'";
+                subSql = " and ProblemCode='" + postFormModel.ProblemCode + "'";
 
             string sql = "select ProblemID from Problem where OJID = " + postFormModel.OJID + " and Title ='" + postFormModel.ProblemTitle + "'" + subSql;
             var res = new DBHelper().getTable(sql);
@@ -88,7 +88,7 @@ namespace CpEditorial.Controllers
 
                 subSql = "";
                 if (postFormModel.ProblemCode != null)
-                    subSql = " and Code='" + postFormModel.ProblemCode + "'";
+                    subSql = " and ProblemCode='" + postFormModel.ProblemCode + "'";
 
                 sql = "select ProblemID from Problem where OJID = " + postFormModel.OJID + " and Title ='" + postFormModel.ProblemTitle + "'" + subSql;
                 res = new DBHelper().getTable(sql);
