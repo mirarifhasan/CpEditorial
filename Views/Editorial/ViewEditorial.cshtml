@@ -27,7 +27,7 @@
 
                         <!-- Post Meta -->
                         <div class="post-meta" style="display:flex;">
-                            
+                            <!-- vote -->
                             <div style="margin-right:20px;">
                                 <div>
                                     <a href="/Editorial/Vote?v=upvote&eid=@Model.editorial.editorialId" class="triangle-up"></a>
@@ -35,6 +35,7 @@
 
                                 <p style="text-align:center; padding:5px; margin-top:25px;">@(Model.editorial.upvote - Model.editorial.downvote)</p>
 
+                                <p>Status : @Model.voteStatus</p>
                                 <div style="margin-top:25px;">
                                     <a href="/Editorial/Vote?v=downvote&eid=@Model.editorial.editorialId" class="triangle-down"></a>
                                 </div>

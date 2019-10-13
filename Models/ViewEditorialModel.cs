@@ -11,31 +11,60 @@ namespace CpEditorial.Models
     {
         DbSchema dSchema = new DbSchema();
 
+        public int voteStatus { get; set; } // 0 = no vote,  1 = upvote,  2 = downvote
         public Editorial editorial { get; set; }
         public Problem problem { get; set; }
         public EditorialTags editorialTags { get; set; }
         public User user { get; set; }
         public OnlineJudge onlineJudge { get; set; }
         public Comment comment { get; set; }
-        public List<Comment> commentList { get; }
+        public List<Comment> commentList { get; set; }
         public List<List<Comment>> replyList { get; set; }
-        public ViewEditorialModel()
-        {
-            editorial = new Editorial();
-            problem = new Problem();
-            editorialTags = new EditorialTags();
-            user = new User();
-            onlineJudge = new OnlineJudge();
-            comment = new Comment();
-        }
+        //public ViewEditorialModel()
+        //{
+        //    editorial = new Editorial();
+        //    problem = new Problem();
+        //    editorialTags = new EditorialTags();
+        //    user = new User();
+        //    onlineJudge = new OnlineJudge();
+        //    comment = new Comment();
+        //}
         public ViewEditorialModel(int editorialID)
+        {
+            Initialize(editorialID);
+            voteStatus = 0;
+        }
+
+        public ViewEditorialModel(int editorialID, int userID)
+        {
+            Initialize(editorialID);
+            string query = "select votetype from votetrack where userid = " + userID + " and editorialid = " + editorialID;
+            DataTable dTable = new DBHelper().getTable(query);
+            if (dTable.Rows.Count == 0)
+            {
+                voteStatus = 0;
+            }
+            else
+            {
+                if (Convert.ToString(dTable.Rows[0][0]) == "upvote")
+                {
+                    voteStatus = 1;
+                }
+                else
+                {
+                    voteStatus = 2;
+                }
+            }
+        }
+
+        void Initialize(int editorialID)
         {
             editorial = dSchema.GetEditorial(editorialID);
             problem = dSchema.GetProblem(editorial.problemId);
             editorialTags = dSchema.GetEditorialTags(editorial.editorialId);
             user = dSchema.GetUser(editorial.userId);
             onlineJudge = dSchema.GetOnlineJudge(problem.ojId);
-            comment = new Comment();
+            //comment = new Comment();
 
             commentList = dSchema.GetCommentsOfEditorial(editorial.editorialId);
             replyList = new List<List<Comment>>();
