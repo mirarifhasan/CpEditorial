@@ -10,9 +10,15 @@ namespace CpEditorial.Models
     public class ContactModel
     {
         public string name { get; set; }
-        
         public string email { get; set; }
-        
         public string message { get; set; }
+
+        public ContactModel()
+        {
+
+            name = HttpContext.Current.Session["username"].ToString();
+            email = HttpContext.Current.Session["email"].ToString();
+        }
+
     }
 }

@@ -1,6 +1,7 @@
 ﻿using CpEditorial.Models;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -12,18 +13,20 @@ namespace CpEditorial.Controllers
         // GET: Post
         public ActionResult PostForm()
         {
-            if(Session["UserID"] == null) return Content("<script language='javascript' type='text/javascript'>alert('Login to continue');</script>");
+            if (Session["UserID"] == null) return Content("<script language='javascript' type='text/javascript'>alert('Login to continue');</script>");
 
             int editorialId = 0;
             editorialId = Convert.ToInt32(Request.QueryString["eid"]);
 
             PostFormModel postEditorialModel;
-            if (editorialId == 0) {
+            if (editorialId == 0)
+            {
                 postEditorialModel = new PostFormModel();
                 Session["mode"] = "new";
                 ViewBag.buttonName = "Submit";
             }
-            else {
+            else
+            {
                 postEditorialModel = new PostFormModel(editorialId);
 
                 if (postEditorialModel.ProblemTitle == null) return RedirectToAction("Index", "Warning");
@@ -51,11 +54,11 @@ namespace CpEditorial.Controllers
                 string sql = "insert into editorial values (" + postFormModel.UserID + ", " + postFormModel.ProblemID + ", " + postFormModel.TagID + ", '" + postFormModel.Rephrase + "', '" + postFormModel.Solution + "', '" + postFormModel.Details + "', 0, 0, '" + postFormModel.DateOfPublishing + "')";
                 new DBHelper().setTable(sql);
             }
-            else if(Session["mode"].ToString() == "update")
+            else if (Session["mode"].ToString() == "update")
             {
                 getProblemID(postFormModel);
 
-                string sql = "update Editorial set ProblemID="+postFormModel.ProblemID+", TagID="+postFormModel.TagID+", Rephrase='"+postFormModel.Rephrase+"', Solution='"+postFormModel.Solution+"', Details='"+postFormModel.Details+"' where EditorialID="+Session["eid"];
+                string sql = "update Editorial set ProblemID=" + postFormModel.ProblemID + ", TagID=" + postFormModel.TagID + ", Rephrase='" + postFormModel.Rephrase + "', Solution='" + postFormModel.Solution + "', Details='" + postFormModel.Details + "' where EditorialID=" + Session["eid"];
                 Session.Remove("eid");
                 new DBHelper().setTable(sql);
             }
@@ -101,12 +104,8 @@ namespace CpEditorial.Controllers
 
             if (editorialId == 0) return Content("<script language='javascript' type='text/javascript'>alert('URL not correct');</script>");
 
-            string sql = "select Userid from editorial where editorialid=" + editorialId;
-            var dtbl = new DBHelper().getTable(sql);
-            var uid = Convert.ToInt32(dtbl.Rows[0][0].ToString());
+            if (TempData["message"] != null) ViewBag.Error = TempData["message"];
 
-            if (uid != Convert.ToInt32(Session["userID"]))
-                return Redirect("/Warning/Index");
 
             ViewEditorialModel viewEditorialModel = new ViewEditorialModel(editorialId);
             return View(viewEditorialModel);
@@ -115,17 +114,77 @@ namespace CpEditorial.Controllers
         [HttpGet]
         public ActionResult Delete(int id)
         {
-            string sql = "select Userid from editorial where editorialid=" + id;
-            var dtbl = new DBHelper().getTable(sql);
-            var uid = Convert.ToInt32(dtbl.Rows[0][0].ToString());
-
-            if(uid != Convert.ToInt32(Session["userID"]))
-                return Redirect("/Warning/Index");
-
-            sql = "delete from editorial where editorialID="+id;
+            string sql = "delete from editorial where editorialID=" + id;
             new DBHelper().setTable(sql);
 
-            return Redirect("/Profile/Index?uid="+Session["userID"]);
+            return Redirect("/Profile/Index?uid=" + Session["userID"]);
+        }
+
+        [HttpGet]
+        public ActionResult Vote()
+        {
+            string c = Request.QueryString["v"];
+            int eid = Convert.ToInt32(Request.QueryString["eid"]);
+
+            if (Session["userID"] == null)
+            {
+                TempData["message"] = "Login first";
+                return Redirect("/Editorial/ViewEditorial?id=" + eid);
+            }
+
+            string sql;
+
+            // Post owner can't vote on his own post
+            sql = "select userid from editorial where editorialid=" + eid;
+            DataTable dtbl = new DBHelper().getTable(sql);
+
+            if (dtbl.Rows.Count > 0)
+
+            if ( Convert.ToInt32(dtbl.Rows[0][0].ToString()) == Convert.ToInt32(Session["userID"]) ) {
+                TempData["message"] = "You can not vote on your own post";
+                return Redirect("/Editorial/ViewEditorial?id=" + eid);
+            }
+
+            // Delete records if already voted but now want to change vote
+            dtbl.Clear();
+            sql = "select votetype from votetrack where userID=" + Session["userID"] + " and editorialID=" + eid;
+            dtbl = new DBHelper().getTable(sql);
+            if(dtbl.Rows.Count > 0)
+            {
+                sql = "delete from votetrack where userID=" + Session["userID"] + " and editorialID=" + eid;
+                new DBHelper().setTable(sql);
+                sql = "update editorial set " + dtbl.Rows[0][0] + " = " + dtbl.Rows[0][0] + "-1 where editorialID=" + eid;
+                new DBHelper().setTable(sql);
+            }
+
+            if (dtbl.Rows.Count == 0 || dtbl.Rows[0][0].ToString() != c)
+
+            // Adding new vote
+            if(dtbl.Rows.Count == 0 || dtbl.Rows[0][0].ToString() != c )
+            {
+                sql = "update editorial set " + c + " = " + c + "+1 where editorialid=" + eid;
+                new DBHelper().setTable(sql);
+                sql = "insert into votetrack values (" + Session["userID"] + ", " + eid + ", '" + c + "')";
+                new DBHelper().setTable(sql);
+            }
+
+            return Redirect("/Editorial/ViewEditorial?id=" + eid);
+        }
+
+        [HttpPost]
+        public ActionResult PostComment(string message)
+        {
+
+            //return RedirectToAction("Index", "Home");
+
+            if (Session["UserID"] == null)
+                return Content("<script language='javascript' type='text/javascript'>alert('Login to continue');</script>");
+            string command = "insert into comment (userid, editorialid, text) values (" +
+                Session["UserID"] + ", " +
+                Session["editorialId"] + ", '" + message + "')";
+            new DBHelper().setTable(command);
+            int eid = Convert.ToInt32(Session["editorialId"]);
+            return Redirect("/Editorial/ViewEditorial?id=" + eid);
         }
 
         [HttpGet]
