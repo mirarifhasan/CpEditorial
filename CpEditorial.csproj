@@ -157,6 +157,7 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Image\Banner\a.jpg" />
     <Content Include="Image\Icon\profileicon.png" />
     <Content Include="Image\Icon\wrongImo.png" />
     <Content Include="Image\Logo\logo.png" />

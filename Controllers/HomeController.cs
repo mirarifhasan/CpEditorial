@@ -26,6 +26,10 @@ namespace CpEditorial.Controllers
 
         public ActionResult Contact()
         {
+            if (Session["userName"] != null) {
+                ContactModel contactModel = new ContactModel();
+                return View(contactModel);
+            }
             return View();
         }
         
