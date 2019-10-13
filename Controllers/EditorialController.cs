@@ -107,7 +107,15 @@ namespace CpEditorial.Controllers
             if (TempData["message"] != null) ViewBag.Error = TempData["message"];
 
 
-            ViewEditorialModel viewEditorialModel = new ViewEditorialModel(editorialId);
+            ViewEditorialModel viewEditorialModel;// = new ViewEditorialModel(editorialId);
+            if(Session["userid"]==null)
+            {
+                viewEditorialModel = new ViewEditorialModel(editorialId);
+            }
+            else
+            {
+                viewEditorialModel = new ViewEditorialModel(editorialId, Convert.ToInt32(Session["userid"]));
+            }
             return View(viewEditorialModel);
         }
 
