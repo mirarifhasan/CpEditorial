@@ -18,7 +18,6 @@
         Html.RenderPartial("NavigationBar");
     }
 
-
     <div class="main-content-wrapper section-padding-100">
         <div class="container">
             <div class="row justify-content-center">
@@ -28,7 +27,7 @@
 
                         <!-- Post Meta -->
                         <div class="post-meta" style="display:flex;">
-                            @* Vote button *@
+                            
                             <div style="margin-right:20px;">
                                 <div>
                                     <a href="/Editorial/Vote?v=upvote&eid=@Model.editorial.editorialId" class="triangle-up"></a>
@@ -41,8 +40,7 @@
                                 </div>
                             </div>
 
-                            @* Title *@
-                            <div>
+                            <div style="margin-top:25px;">
                                 <h3>@Model.problem.title</h3>
                                 <p><a href="#" class="post-author">@Model.user.userName</a> on @Model.editorial.dateOfPublishing</p>
                             </div>
