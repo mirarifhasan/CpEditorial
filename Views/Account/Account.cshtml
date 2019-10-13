@@ -33,30 +33,21 @@
                 <div style="margin-top :40px ">
                    
                     <div>
-                        <label style="font-size:20px">Name : </label>
-                        @foreach (var item in Model.UserInfo)
-                        {
-                            @Html.DisplayFor(m => item.UserName)
-                        }
-
-                    </div>
-                    <div>
-                        <label style="font-size:20px">Email : </label>
-                        <input />
-                    </div>
-                    <div>
-                        <label style="font-size:20px">User Type : </label>
-                        <input />
-                    </div>
-                    <div>
-                        <label for="prop" style="font-size:20px">Profession:</label>
-                        <input />
+                        <h5 style="margin-top:30px;"> Name :  @Session["userName"]</h5>
                     </div>
 
                     <div>
-                        <label for="point" style="font-size:20px">Point:</label>
-                        <input />
+                        <h5>Email : @Model.Email </h5>
                     </div>
+
+                    <div>
+                        <h5>User Type : @Model.UserType </h5>
+                    </div>
+
+                    <div>
+                        <h5> Point gain: @Model.Point </h5>
+                    </div>
+
                 </div>
             </div>
 
