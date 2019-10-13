@@ -11,7 +11,7 @@ namespace CpEditorial.Models
     {
         // Ishan - DESKTOP-02U52QL\SQLEXPRESS
         // Abdullah - DESKTOP-PHFPMV9
-        public string connectionString = @"Data Source = DESKTOP-02U52QL\SQLEXPRESS; Initial Catalog = CpEditorial; Integrated Security=True";
+        public string connectionString = @"Data Source = DESKTOP-PHFPMV9; Initial Catalog = CpEditorial; Integrated Security=True";
         
         public DataTable getTable(string sql)
         {

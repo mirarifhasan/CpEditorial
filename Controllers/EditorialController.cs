@@ -140,16 +140,16 @@ namespace CpEditorial.Controllers
 
             if (dtbl.Rows.Count > 0)
 
-            if ( Convert.ToInt32(dtbl.Rows[0][0].ToString()) == Convert.ToInt32(Session["userID"]) ) {
-                TempData["message"] = "You can not vote on your own post";
-                return Redirect("/Editorial/ViewEditorial?id=" + eid);
-            }
+                if (Convert.ToInt32(dtbl.Rows[0][0].ToString()) == Convert.ToInt32(Session["userID"])) {
+                    TempData["message"] = "You can not vote on your own post";
+                    return Redirect("/Editorial/ViewEditorial?id=" + eid);
+                }
 
             // Delete records if already voted but now want to change vote
             dtbl.Clear();
             sql = "select votetype from votetrack where userID=" + Session["userID"] + " and editorialID=" + eid;
             dtbl = new DBHelper().getTable(sql);
-            if(dtbl.Rows.Count > 0)
+            if (dtbl.Rows.Count > 0)
             {
                 sql = "delete from votetrack where userID=" + Session["userID"] + " and editorialID=" + eid;
                 new DBHelper().setTable(sql);
@@ -159,24 +159,22 @@ namespace CpEditorial.Controllers
 
             if (dtbl.Rows.Count == 0 || dtbl.Rows[0][0].ToString() != c)
 
-            // Adding new vote
-            if(dtbl.Rows.Count == 0 || dtbl.Rows[0][0].ToString() != c )
-            {
-                sql = "update editorial set " + c + " = " + c + "+1 where editorialid=" + eid;
-                new DBHelper().setTable(sql);
-                sql = "insert into votetrack values (" + Session["userID"] + ", " + eid + ", '" + c + "')";
-                new DBHelper().setTable(sql);
-            }
+                // Adding new vote
+                if (dtbl.Rows.Count == 0 || dtbl.Rows[0][0].ToString() != c)
+                {
+                    sql = "update editorial set " + c + " = " + c + "+1 where editorialid=" + eid;
+                    new DBHelper().setTable(sql);
+                    sql = "insert into votetrack values (" + Session["userID"] + ", " + eid + ", '" + c + "')";
+                    new DBHelper().setTable(sql);
+                }
 
-            return Redirect("/Editorial/ViewEditorial?id=" + eid);
+            //return View(new ViewEditorialModel(eid, Convert.ToInt32(Session["userid"])));
+            return Redirect("/Editorial/ViewEditorial?id=" + eid + "&userId=" + Convert.ToString(Session["userid"]));
         }
 
         [HttpPost]
         public ActionResult PostComment(string message)
         {
-
-            //return RedirectToAction("Index", "Home");
-
             if (Session["UserID"] == null)
                 return Content("<script language='javascript' type='text/javascript'>alert('Login to continue');</script>");
             string command = "insert into comment (userid, editorialid, text) values (" +
