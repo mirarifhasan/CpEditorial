@@ -27,16 +27,16 @@
 
                         <!-- Post Meta -->
                         <div class="post-meta" style="display:flex;">
-                            
+                            <!-- vote -->
                             <div style="margin-right:20px;">
                                 <div>
-                                    <a href="/Editorial/Vote?v=upvote&eid=@Model.editorial.editorialId" class="triangle-up"></a>
+                                    <a href="/Editorial/Vote?v=upvote&eid=@Model.editorial.editorialId" class="triangle-up" id="upV"></a>
                                 </div>
 
                                 <p style="text-align:center; padding:5px; margin-top:25px;">@(Model.editorial.upvote - Model.editorial.downvote)</p>
 
                                 <div style="margin-top:25px;">
-                                    <a href="/Editorial/Vote?v=downvote&eid=@Model.editorial.editorialId" class="triangle-down"></a>
+                                    <a href="/Editorial/Vote?v=downvote&eid=@Model.editorial.editorialId" class="triangle-down" id="downV"></a>
                                 </div>
                             </div>
 
@@ -244,6 +244,13 @@
             document.getElementById(OptionDiv).style.display = "none";
         }
 
+        var voteColor = @Model.voteStatus;
+        if (voteColor == 1) {
+            document.getElementById("upV").style.borderBottom = "30px solid #51BBA8";
+        }
+        else if (voteColor == 2) {
+            document.getElementById("downV").style.borderTop = "30px solid #FF2E38";
+        }
 
     </script>
 
