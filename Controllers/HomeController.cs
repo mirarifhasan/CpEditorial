@@ -36,7 +36,7 @@ namespace CpEditorial.Controllers
         [HttpPost]
         public ActionResult AddContact(ContactModel contactModel)
         {
-            string sql = "INSERT INTO Contact VALUES ('"+ contactModel.name + "', '"+ contactModel.email + "', '"+ contactModel.message + "')";
+            string sql = "INSERT INTO Feedback VALUES ('"+ contactModel.name + "', '"+ contactModel.email + "', '"+ contactModel.message + "')";
             new DBHelper().setTable(sql);
 
             return RedirectToAction("Index", "Home");

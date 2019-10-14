@@ -174,6 +174,7 @@ namespace CpEditorial.Controllers
                     new DBHelper().setTable(sql);
                     sql = "insert into votetrack values (" + Session["userID"] + ", " + eid + ", '" + c + "')";
                     new DBHelper().setTable(sql);
+                    //sql = "update [user] set point=point+3 where userid=1001";
                 }
 
             //return View(new ViewEditorialModel(eid, Convert.ToInt32(Session["userid"])));
