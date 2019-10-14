@@ -129,6 +129,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AdminModel.cs" />
     <Compile Include="Models\ContactModel.cs" />
     <Compile Include="Models\DBHelper.cs" />
     <Compile Include="Models\DbSchema.cs" />
@@ -237,6 +238,7 @@
     <Content Include="Views\Search\Index.cshtml" />
     <Content Include="Views\Profile\Index.cshtml" />
     <Content Include="Views\Warning\Index.cshtml" />
+    <Content Include="Views\Profile\Admin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

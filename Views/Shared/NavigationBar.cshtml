@@ -22,6 +22,12 @@
                                 <li class="nav-item">
                                     <a class="nav-link" href='~/Profile/Index?uid=@Session["userID"]'>My Account</a>
                                 </li>
+                                if (@Session["type"].Equals("Admin"))
+                                {
+                                    <li class="nav-item">
+                                        <a class="nav-link" href='~/Profile/Admin?uid=@Session["userID"]'>Admin</a>
+                                    </li>
+                                }
                             }
                             @if (Session["userID"] == null)
                             {

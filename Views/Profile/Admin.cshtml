@@ -1,0 +1,94 @@
+﻿@model CpEditorial.Models.AdminModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Profile</title>
+    <link href="~/Content/Site.css" rel="stylesheet">
+    <script src="https://cdn.ckeditor.com/4.12.1/standard/ckeditor.js"></script>
+
+</head>
+<body>
+    @{
+        Html.RenderPartial("NavigationBar");
+    }
+
+    <div class="row" style="margin:130px 30px 80px 30px;">
+
+        <div class="col-md-3" style="text-align:center;">
+            <img src="~/Image/Icon/profileicon.png" height="140" width="140" />
+            <h5 style="margin-top:30px;">@Session["userName"]</h5>
+            <p>Point gain: @Model.Point</p>
+        </div>
+
+        <div class="col-md-9">
+            @* Bookmark part *@
+            @if (Model.approvalList.Count > 0)
+            {
+                <div class="bigBlock">
+                    <h4>Approval Pending</h4>
+
+                    <div class="tab-content" id="myTabContent">
+                        <div class="tab-pane fade show active" id="world-tab-1" role="tabpanel" aria-labelledby="tab1">
+                            @for (int i = 0; i < Model.approvalList.Count; i++)
+                            {
+                                <div class="single-blog-post post-style-4 d-flex align-items-center">
+                                    <div class="post-content">
+                                        <a href="../Editorial/ViewEditorial?id=@Model.approvalList[i].EditorialID" class="headline">
+                                            <h5>@Model.approvalList[i].ProblemTitle</h5>
+                                            <p style="height:50px;">@Model.approvalList[i].Solution</p>
+                                        </a>
+
+                                        <div class="post-meta" style="display:flex;">
+                                            <p style="margin-right:20px;"><a href="#" onclick="myFunction('@Model.approvalList[i].EditorialID')">Remove</a></p>
+                                            <p style="margin-right:20px;"><a href="#" onclick="approve('@Model.approvalList[i].EditorialID')">Approved</a></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <h3>No more pending editorial</h3>
+            }
+
+        </div>
+
+    </div>
+
+    @*Footer*@
+    @{
+        Html.RenderPartial("Footer");
+    }
+
+    <script>
+        function myFunction(eid) {
+            if (confirm('Are you sure about delete this editorial?')) {
+
+                var a = parseInt(eid);
+                window.location.href = '@Url.Action("Delete", "Editorial")/' + a;
+
+            }
+        }
+
+        function approve(eid) {
+            if (confirm('Are you sure about delete this editorial?')) {
+
+                var a = parseInt(eid);
+                window.location.href = '@Url.Action("Approve", "Editorial")/' + a;
+
+            }
+        }
+
+    </script>
+
+</body>
+</html>

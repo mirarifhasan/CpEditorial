@@ -20,5 +20,17 @@ namespace CpEditorial.Controllers
             ProfileModel profileModel = new ProfileModel(userID);
             return View(profileModel);
         }
+
+        public ActionResult Admin()
+        {
+            int userID = Convert.ToInt32(Request.QueryString["uid"]);
+
+            if (userID != Convert.ToInt32(Session["userID"]) && !Session["type"].Equals("Admin"))
+                return Redirect("/Warning/Index");
+
+            AdminModel adminModel = new AdminModel(userID);
+
+            return View(adminModel);
+        }
     }
 }

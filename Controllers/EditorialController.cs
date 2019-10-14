@@ -122,7 +122,11 @@ namespace CpEditorial.Controllers
         [HttpGet]
         public ActionResult Delete(int id)
         {
-            string sql = "delete from editorial where editorialID=" + id;
+            string sql = "delete from EditorialTags where editorialID=" + id;
+            new DBHelper().setTable(sql);
+            sql = "delete from bookmark where editorialID=" + id;
+            new DBHelper().setTable(sql);
+            sql = "delete from Editorial where EditorialID=" + id;
             new DBHelper().setTable(sql);
 
             return Redirect("/Profile/Index?uid=" + Session["userID"]);
@@ -165,7 +169,7 @@ namespace CpEditorial.Controllers
                 new DBHelper().setTable(sql);
             }
 
-            if (dtbl.Rows.Count == 0 || dtbl.Rows[0][0].ToString() != c)
+            //if (dtbl.Rows.Count == 0 || dtbl.Rows[0][0].ToString() != c)
 
                 // Adding new vote
                 if (dtbl.Rows.Count == 0 || dtbl.Rows[0][0].ToString() != c)
@@ -205,6 +209,15 @@ namespace CpEditorial.Controllers
                 return Redirect("/Warning/Index");
 
             sql = "delete from bookmark where bookmarkid=" + id;
+            new DBHelper().setTable(sql);
+
+            return Redirect("/Profile/Index?uid=" + Session["userID"]);
+        }
+
+        [HttpGet]
+        public ActionResult Approve(int id)
+        {
+            string sql = "update editorial set approve='Yes' where editorialid="+id;
             new DBHelper().setTable(sql);
 
             return Redirect("/Profile/Index?uid=" + Session["userID"]);
