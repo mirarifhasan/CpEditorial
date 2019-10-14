@@ -108,7 +108,7 @@ namespace CpEditorial.Controllers
 
 
             ViewEditorialModel viewEditorialModel;// = new ViewEditorialModel(editorialId);
-            if(Session["userid"]==null)
+            if (Session["userid"] == null)
             {
                 viewEditorialModel = new ViewEditorialModel(editorialId);
             }
@@ -131,8 +131,10 @@ namespace CpEditorial.Controllers
         [HttpGet]
         public ActionResult Vote()
         {
-            string c = Request.QueryString["v"];
+            DBHelper dbHelper = new DBHelper();
+            string voteType = Request.QueryString["v"];
             int eid = Convert.ToInt32(Request.QueryString["eid"]);
+            string editorialWriterId = Request.QueryString["euid"];
 
             if (Session["userID"] == null)
             {
@@ -144,40 +146,54 @@ namespace CpEditorial.Controllers
 
             // Post owner can't vote on his own post
             sql = "select userid from editorial where editorialid=" + eid;
-            DataTable dtbl = new DBHelper().getTable(sql);
+            DataTable dtbl = dbHelper.getTable(sql);
 
-            if (dtbl.Rows.Count > 0)
-
-                if (Convert.ToInt32(dtbl.Rows[0][0].ToString()) == Convert.ToInt32(Session["userID"])) {
-                    TempData["message"] = "You can not vote on your own post";
-                    return Redirect("/Editorial/ViewEditorial?id=" + eid);
-                }
+            if (dtbl.Rows.Count > 0 && Convert.ToInt32(dtbl.Rows[0][0].ToString()) == Convert.ToInt32(Session["userID"]))
+            {
+                TempData["message"] = "You can not vote on your own post";
+                return Redirect("/Editorial/ViewEditorial?id=" + eid);
+            }
 
             // Delete records if already voted but now want to change vote
             dtbl.Clear();
             sql = "select votetype from votetrack where userID=" + Session["userID"] + " and editorialID=" + eid;
-            dtbl = new DBHelper().getTable(sql);
+            dtbl = dbHelper.getTable(sql);
             if (dtbl.Rows.Count > 0)
             {
                 sql = "delete from votetrack where userID=" + Session["userID"] + " and editorialID=" + eid;
-                new DBHelper().setTable(sql);
-                sql = "update editorial set " + dtbl.Rows[0][0] + " = " + dtbl.Rows[0][0] + "-1 where editorialID=" + eid;
-                new DBHelper().setTable(sql);
+                dbHelper.setTable(sql);
+                sql = "update editorial set " + Convert.ToString(dtbl.Rows[0][0]) + " = " + Convert.ToString(dtbl.Rows[0][0]) + "-1 where editorialID=" + eid;
+                dbHelper.setTable(sql);
+                if (Convert.ToString(dtbl.Rows[0][0]) == "upvote")
+                {
+                    sql = "update [user] set point=point-3 where userid=" + editorialWriterId;
+                    dbHelper.setTable(sql);
+                }
+                else if (Convert.ToString(dtbl.Rows[0][0]) == "downvote")
+                {
+                    sql = "update [user] set point=point+2 where userid=" + editorialWriterId;
+                    dbHelper.setTable(sql);
+                }
             }
 
-            if (dtbl.Rows.Count == 0 || dtbl.Rows[0][0].ToString() != c)
-
-                // Adding new vote
-                if (dtbl.Rows.Count == 0 || dtbl.Rows[0][0].ToString() != c)
+            // Adding new vote
+            if (dtbl.Rows.Count == 0 || dtbl.Rows[0][0].ToString() != voteType)
+            {
+                sql = "update editorial set " + voteType + " = " + voteType + "+1 where editorialid=" + eid;
+                dbHelper.setTable(sql);
+                sql = "insert into votetrack values (" + Session["userID"] + ", " + eid + ", '" + voteType + "')";
+                dbHelper.setTable(sql);
+                if (voteType == "upvote")
                 {
-                    sql = "update editorial set " + c + " = " + c + "+1 where editorialid=" + eid;
-                    new DBHelper().setTable(sql);
-                    sql = "insert into votetrack values (" + Session["userID"] + ", " + eid + ", '" + c + "')";
-                    new DBHelper().setTable(sql);
-                    //sql = "update [user] set point=point+3 where userid=1001";
+                    sql = "update [user] set point=point+3 where userid=" + editorialWriterId;
                 }
+                else if (voteType == "downvote")
+                {
+                    sql = "update [user] set point=point-2 where userid=" + editorialWriterId;
+                }
+                dbHelper.setTable(sql);
+            }
 
-            //return View(new ViewEditorialModel(eid, Convert.ToInt32(Session["userid"])));
             return Redirect("/Editorial/ViewEditorial?id=" + eid + "&userId=" + Convert.ToString(Session["userid"]));
         }
 

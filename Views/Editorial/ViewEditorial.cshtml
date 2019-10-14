@@ -30,13 +30,13 @@
                             <!-- vote -->
                             <div style="margin-right:20px;">
                                 <div>
-                                    <a href="/Editorial/Vote?v=upvote&eid=@Model.editorial.editorialId" class="triangle-up" id="upV"></a>
+                                    <a href="/Editorial/Vote?v=upvote&eid=@Model.editorial.editorialId&euid=@Model.editorial.userId" class="triangle-up" id="upV"></a>
                                 </div>
 
                                 <p style="text-align:center; padding:5px; margin-top:25px;">@(Model.editorial.upvote - Model.editorial.downvote)</p>
 
                                 <div style="margin-top:25px;">
-                                    <a href="/Editorial/Vote?v=downvote&eid=@Model.editorial.editorialId" class="triangle-down" id="downV"></a>
+                                    <a href="/Editorial/Vote?v=downvote&eid=@Model.editorial.editorialId&euid=@Model.editorial.userId" class="triangle-down" id="downV"></a>
                                 </div>
                             </div>
 
