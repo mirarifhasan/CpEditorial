@@ -53,7 +53,7 @@ namespace CpEditorial.Models
             }
 
 
-            sql = "select Editorial.EditorialID, Editorial.Solution, Problem.Title from Editorial, Problem where Editorial.EditorialID=(select distinct EditorialID from Comment where UserID="+userID+") and Editorial.ProblemID=Problem.ProblemID";
+            sql = "select Editorial.EditorialID, Editorial.Solution, Problem.Title from Editorial, Problem where Editorial.EditorialID in (select distinct EditorialID from Comment where UserID="+userID+") and Editorial.ProblemID=Problem.ProblemID";
             dtbl.Clear();
             dtbl = new DBHelper().getTable(sql);
 

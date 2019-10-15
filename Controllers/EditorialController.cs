@@ -236,7 +236,7 @@ namespace CpEditorial.Controllers
             string sql = "INSERT INTO Comment (UserID, EditorialID, ParentId, Text) VALUES("+uid+","+eid+", "+pid+", '"+text+"');";
             new DBHelper().setTable(sql);
 
-            return RedirectToAction("Index", "Home");
+            return Redirect("/Editorial/ViewEditorial?id="+eid);
         }
 
         [HttpGet]

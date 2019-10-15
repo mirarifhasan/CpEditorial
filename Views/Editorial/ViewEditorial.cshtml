@@ -101,7 +101,10 @@
                                                 <!-- Comment Meta -->
                                                 <div class="comment-meta d-flex align-items-center justify-content-between">
                                                     <p><a href="#" class="post-author">@Model.user.getUserNameOnly(Model.commentList[i].userId)</a> on <a href="#" class="post-date">@Model.commentList[i].dateOfPublishing</a></p>
-                                                    <Button href="#" onclick="replyCmnt('@Model.commentList[i].userId', '@Model.editorial.editorialId', '@Model.commentList[i].commentId')" class="btn world-btn">Reply</Button>
+                                                    @if(Session["userID"] != null)
+                                                    {
+                                                        <Button href="#" onclick="replyCmnt('@Model.commentList[i].userId', '@Model.editorial.editorialId', '@Model.commentList[i].commentId')" class="btn world-btn">Reply</Button>
+                                                    }
                                                 </div>
                                                 <p>@Model.commentList[i].text</p>
                                             </div>
@@ -181,9 +184,10 @@
         }
 
         function replyCmnt(uid, eid, pid) {
+            
             var text = prompt("Enter your reply:");
-
-            window.location.href = "/Editorial/PostReply?eid=" + eid + "&text=" + text + "&uid=" + uid + "&pid=" + pid;
+            if (text != null) window.location.href = "/Editorial/PostReply?eid=" + eid + "&text=" + text + "&uid=" + uid + "&pid=" + pid;
+            
         }
 
     </script>
