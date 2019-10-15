@@ -71,7 +71,7 @@
 
     <script>
         function myFunction(eid) {
-            if (confirm('Are you sure about delete this editorial?')) {
+            if (confirm('Are you sure about deleting this editorial?')) {
 
                 var a = parseInt(eid);
                 window.location.href = '@Url.Action("Delete", "Editorial")/' + a;
@@ -80,7 +80,7 @@
         }
 
         function approve(eid) {
-            if (confirm('Are you sure about delete this editorial?')) {
+            if (confirm('Are you sure about approving this editorial?')) {
 
                 var a = parseInt(eid);
                 window.location.href = '@Url.Action("Approve", "Editorial")/' + a;

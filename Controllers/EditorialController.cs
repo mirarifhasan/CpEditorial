@@ -51,7 +51,12 @@ namespace CpEditorial.Controllers
                 getProblemID(postFormModel);
 
                 //Insert editorial in table
-                string sql = "insert into editorial values (" + postFormModel.UserID + ", " + postFormModel.ProblemID + ", " + postFormModel.TagID + ", '" + postFormModel.Rephrase + "', '" + postFormModel.Solution + "', '" + postFormModel.Details + "', 0, 0, '" + postFormModel.DateOfPublishing + "')";
+                //string sql = "insert into editorial values (" + postFormModel.UserID + ", " + postFormModel.ProblemID + ", " + postFormModel.TagID + ", '" + postFormModel.Rephrase + "', '" + postFormModel.Solution + "', '" + postFormModel.Details + "', 0, 0, '" + postFormModel.DateOfPublishing + "')";
+                string sql = "insert into editorial (userid, problemid, tagid, rephrase, solution, details) " +
+                    "values (" + postFormModel.UserID + ", " +
+                    postFormModel.ProblemID + ", " +
+                    postFormModel.TagID + ", '" +
+                    postFormModel.Rephrase + "', '" + postFormModel.Solution + "', '" + postFormModel.Details + "')";
                 new DBHelper().setTable(sql);
             }
             else if (Session["mode"].ToString() == "update")
