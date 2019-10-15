@@ -51,7 +51,7 @@ namespace CpEditorial.Models
         public List<Comment> GetCommentsOfEditorial(int editorialId)
         {
             List<Comment> commentList = new List<Comment>();
-            string query = "select commentid from comment where editorialid = " + editorialId + " and parentid is null";
+            string query = "select commentid from comment where editorialid = " + editorialId + " and parentid=0";
             DataTable dataTable = new DBHelper().getTable(query);
             for (int i = 0; i < dataTable.Rows.Count; i++)
             {
@@ -232,7 +232,8 @@ namespace CpEditorial.Models
     Details text NULL,
     UpVote int DEFAULT 0,
     DownVote int DEFAULT 0,
-    DateOfPublishing datetime DEFAULT GETDATE()
+    DateOfPublishing datetime DEFAULT GETDATE(),
+    Approve varchar(3) DEFAULT 'No',
     );
     */
     public class Editorial
@@ -247,7 +248,8 @@ namespace CpEditorial.Models
         public int upvote { get; set; }
         public int downvote { get; set; }
         public string dateOfPublishing { get; set; }
-        public Editorial() {}
+        public string approve { get; set; }
+        public Editorial() { }
 
         public Editorial(int editorialId)
         {
@@ -264,6 +266,7 @@ namespace CpEditorial.Models
             this.upvote = Convert.ToInt32(dataTable.Rows[0][i++]);
             this.downvote = Convert.ToInt32(dataTable.Rows[0][i++]);
             this.dateOfPublishing = Convert.ToString(dataTable.Rows[0][i++]);
+            this.approve = Convert.ToString(dataTable.Rows[0][i++]);
         }
     }
     /*

@@ -20,15 +20,6 @@ namespace CpEditorial.Models
         public Comment comment { get; set; }
         public List<Comment> commentList { get; set; }
         public List<List<Comment>> replyList { get; set; }
-        //public ViewEditorialModel()
-        //{
-        //    editorial = new Editorial();
-        //    problem = new Problem();
-        //    editorialTags = new EditorialTags();
-        //    user = new User();
-        //    onlineJudge = new OnlineJudge();
-        //    comment = new Comment();
-        //}
         public ViewEditorialModel(int editorialID)
         {
             Initialize(editorialID);
@@ -66,7 +57,7 @@ namespace CpEditorial.Models
             onlineJudge = dSchema.GetOnlineJudge(problem.ojId);
             //comment = new Comment();
 
-            commentList = dSchema.GetCommentsOfEditorial(editorial.editorialId);
+            commentList = dSchema.GetCommentsOfEditorial(editorialID);
             replyList = new List<List<Comment>>();
             foreach (Comment c in commentList)
             {
