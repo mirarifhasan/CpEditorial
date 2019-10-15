@@ -12,6 +12,7 @@ namespace CpEditorial.Models
 
         public List<EditorialModel> bookmarkList = new List<EditorialModel>();
         public List<EditorialModel> myEditorialList = new List<EditorialModel>();
+        public List<EditorialModel> pendingEditorialList = new List<EditorialModel>();
         public List<EditorialModel> InvolvmentEditorialList = new List<EditorialModel>();
 
         public ProfileModel(int userID)
@@ -21,7 +22,7 @@ namespace CpEditorial.Models
             Point = Convert.ToInt32(dtbl.Rows[0][0].ToString());
             dtbl.Clear();
 
-            sql = "select Editorial.EditorialID, Editorial.Solution, Problem.Title from Editorial, Problem where Editorial.UserID="+userID+" and Editorial.ProblemID=Problem.ProblemID";
+            sql = "select Editorial.EditorialID, Editorial.Solution, Problem.Title from Editorial, Problem where editorial.approve='Yes' and Editorial.UserID="+userID+" and Editorial.ProblemID=Problem.ProblemID";
             dtbl = new DBHelper().getTable(sql);
 
             EditorialModel editorialModel;
@@ -66,7 +67,22 @@ namespace CpEditorial.Models
                 InvolvmentEditorialList.Add(editorialModel);
             }
 
-            
+
+            sql = "select Editorial.EditorialID, Editorial.Solution, Problem.Title from Editorial, Problem where editorial.approve='No' and Editorial.UserID=" + userID + " and Editorial.ProblemID=Problem.ProblemID";
+            dtbl.Clear();
+            dtbl = new DBHelper().getTable(sql);
+
+            for (int i = 0; i < dtbl.Rows.Count; i++)
+            {
+                editorialModel = new EditorialModel();
+                editorialModel.EditorialID = Convert.ToInt32(dtbl.Rows[i][0].ToString());
+                editorialModel.ProblemTitle = dtbl.Rows[i][2].ToString();
+                editorialModel.Solution = dtbl.Rows[i][1].ToString();
+
+                pendingEditorialList.Add(editorialModel);
+            }
+
+
         }
 
     }

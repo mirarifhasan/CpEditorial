@@ -111,6 +111,11 @@ namespace CpEditorial.Controllers
 
             if (TempData["message"] != null) ViewBag.Error = TempData["message"];
 
+            //Editorial existing check
+            string sql = "select editorialid from editorial where editorialid="+editorialId+" and (approve='Yes' or userid="+Convert.ToInt32(Session["userID"])+")";
+            DataTable dtbl = new DBHelper().getTable(sql);
+            if (dtbl.Rows.Count == 0) return RedirectToAction("Index", "Warning");
+
 
             ViewEditorialModel viewEditorialModel;// = new ViewEditorialModel(editorialId);
             if (Session["userid"] == null)
