@@ -101,16 +101,15 @@
                                                 <!-- Comment Meta -->
                                                 <div class="comment-meta d-flex align-items-center justify-content-between">
                                                     <p><a href="#" class="post-author">@Model.user.getUserNameOnly(Model.commentList[i].userId)</a> on <a href="#" class="post-date">@Model.commentList[i].dateOfPublishing</a></p>
-                                                    @*<Button href="#" class="btn world-btn">Reply</Button>*@
+                                                    <Button href="#" onclick="replyCmnt('@Model.commentList[i].userId', '@Model.editorial.editorialId', '@Model.commentList[i].commentId')" class="btn world-btn">Reply</Button>
                                                 </div>
                                                 <p>@Model.commentList[i].text</p>
                                             </div>
                                             <!-- Reply section -->
-                                            @*<a onclick="hideFunction('hideRQOption', 'hideRQ')" id="hideRQOption" href="#hideRQOption">More details..</a>*@
                                             @if (Model.replyList[i].Count > 0)
                                             {
-                                                <a onclick="hideFunction('hideRQOption', 'hideDE')" id="hideRQOption" href="#hideRQOption">View @Model.replyList[i].Count replies</a>
-                                                <div id="hideDE" style="display:none;">
+                                                <a onclick="replyBlock('@Model.commentList[i].commentId')" id="replySection" href="#replySection">View @Model.replyList[i].Count replies</a>
+                                                <div id="@Model.commentList[i].commentId" style="display:none;">
                                                     @for (int j = 0; j < Model.replyList[i].Count; j++)
                                                     {
                                                         <ol class="children">
@@ -168,11 +167,9 @@
     }
 
     <script>
-        function hideFunction(OptionDiv, ReplyDiv) {
-            var x = document.getElementById(ReplyDiv);
+        function replyBlock(cid) {
+            var x = document.getElementById(cid);
             x.style.display = "block";
-
-            document.getElementById(OptionDiv).style.display = "none";
         }
 
         var voteColor = @Model.voteStatus;
@@ -181,6 +178,12 @@
         }
         else if (voteColor == 2) {
             document.getElementById("downV").style.borderTop = "30px solid #FF2E38";
+        }
+
+        function replyCmnt(uid, eid, pid) {
+            var text = prompt("Enter your reply:");
+
+            window.location.href = "/Editorial/PostReply?eid=" + eid + "&text=" + text + "&uid=" + uid + "&pid=" + pid;
         }
 
     </script>

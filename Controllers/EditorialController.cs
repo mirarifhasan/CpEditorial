@@ -226,6 +226,20 @@ namespace CpEditorial.Controllers
         }
 
         [HttpGet]
+        public ActionResult PostReply()
+        {
+            int eid = Convert.ToInt32(Request.QueryString["eid"]);
+            int uid = Convert.ToInt32(Request.QueryString["uid"]);
+            int pid = Convert.ToInt32(Request.QueryString["pid"]);
+            string text = Request.QueryString["text"];
+
+            string sql = "INSERT INTO Comment (UserID, EditorialID, ParentId, Text) VALUES("+uid+","+eid+", "+pid+", '"+text+"');";
+            new DBHelper().setTable(sql);
+
+            return RedirectToAction("Index", "Home");
+        }
+
+        [HttpGet]
         public ActionResult RemoveBookmark(int id)
         {
             string sql = "select Userid from bookmark where bookmarkid=" + id;
