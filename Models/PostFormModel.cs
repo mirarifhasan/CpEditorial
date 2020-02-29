@@ -29,7 +29,7 @@ namespace CpEditorial.Models
             else
             {
                 EditorialID = editorialId;
-                ProblemTitle = dtbl.Rows[0][18].ToString();
+                ProblemTitle = dtbl.Rows[0][19].ToString();
                 OJID = Convert.ToInt32(dtbl.Rows[0][17].ToString());
                 TagID = Convert.ToInt32(dtbl.Rows[0][3].ToString());
                 Rephrase = dtbl.Rows[0][4].ToString();
